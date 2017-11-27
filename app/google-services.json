@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "660944855439",
+    "firebase_url": "https://cellular-deck-187204.firebaseio.com",
+    "project_id": "cellular-deck-187204",
+    "storage_bucket": "cellular-deck-187204.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:660944855439:android:7598276a16371beb",
+        "android_client_info": {
+          "package_name": "com.example.rushi.epic_thrillon"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "660944855439-9361e8toj8gtbgnjl2g5ca74mf61fo42.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.rushi.epic_thrillon",
+            "certificate_hash": "6f35bf4994675246aa9749fe453b9e43205725ae"
+          }
+        },
+        {
+          "client_id": "660944855439-qr9nb5kk5h52c4elq7bkgcgr2o7pqa98.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAmLhVxeHeJzBy789CMR8WI-mekCwRf7n8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "660944855439-qr9nb5kk5h52c4elq7bkgcgr2o7pqa98.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

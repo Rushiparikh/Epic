@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Epic-Thrillon</string>
+    <string name="tutorial_button">Get Started</string>
+    <string name="register_button">Register </string>
+    <string name="login_button">Login</string>
+    <string name="register_text">Register Now</string>
+    <string name="first_name_signup">First Name</string>
+    <string name="last_name_signup">Last Name</string>
+    <string name="mobile_number_signup">Mobile Number</string>
+    <string name="password_signup">Password</string>
+    <string name="confirm_password_signup">Confirm Password</string>
+    <string name="t_and_c">By Proceeding you confirmed term and condition</string>
+    <string name="register">Register</string>
+    <string name="already_register_text">Already Register? Login</string>
+    <string name="facebook_app_id">245423285991094</string>
+    <string name="fb_login_protocol_scheme">fb245423285991094</string>
+
+</resources>
