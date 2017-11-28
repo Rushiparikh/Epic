@@ -1,0 +1,59 @@
+<changelist name="second_change" date="1511846279007" recycled="false">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/second_change/shelved.patch" />
+  <option name="DESCRIPTION" value="second change" />
+  <binary>
+    <option name="BEFORE_PATH" value=".gradle/4.1/taskHistory/fileSnapshots.bin" />
+    <option name="AFTER_PATH" value=".gradle/4.1/taskHistory/fileSnapshots.bin" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/second_change/fileSnapshots.bin" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value=".gradle/4.1/fileHashes/fileHashes.lock" />
+    <option name="AFTER_PATH" value=".gradle/4.1/fileHashes/fileHashes.lock" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/second_change/fileHashes.lock" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value=".gradle/4.1/fileHashes/fileHashes.bin" />
+    <option name="AFTER_PATH" value=".gradle/4.1/fileHashes/fileHashes.bin" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/second_change/fileHashes.bin" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value=".gradle/4.1/javaCompile/jarAnalysis.bin" />
+    <option name="AFTER_PATH" value=".gradle/4.1/javaCompile/jarAnalysis.bin" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/second_change/jarAnalysis.bin" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value=".gradle/4.1/taskHistory/taskHistory.lock" />
+    <option name="AFTER_PATH" value=".gradle/4.1/taskHistory/taskHistory.lock" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/second_change/taskHistory.lock" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value=".gradle/4.1/javaCompile/taskJars.bin" />
+    <option name="AFTER_PATH" value=".gradle/4.1/javaCompile/taskJars.bin" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/second_change/taskJars.bin" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value=".gradle/4.1/taskHistory/taskHistory.bin" />
+    <option name="AFTER_PATH" value=".gradle/4.1/taskHistory/taskHistory.bin" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/second_change/taskHistory.bin" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value=".gradle/4.1/javaCompile/javaCompile.lock" />
+    <option name="AFTER_PATH" value=".gradle/4.1/javaCompile/javaCompile.lock" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/second_change/javaCompile.lock" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value=".gradle/4.1/fileHashes/resourceHashesCache.bin" />
+    <option name="AFTER_PATH" value=".gradle/4.1/fileHashes/resourceHashesCache.bin" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/second_change/resourceHashesCache.bin" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value=".gradle/4.1/javaCompile/taskHistory.bin" />
+    <option name="AFTER_PATH" value=".gradle/4.1/javaCompile/taskHistory.bin" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/second_change/taskHistory1.bin" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value=".gradle/4.1/javaCompile/classAnalysis.bin" />
+    <option name="AFTER_PATH" value=".gradle/4.1/javaCompile/classAnalysis.bin" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/second_change/classAnalysis.bin" />
+  </binary>
+</changelist>
