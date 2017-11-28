@@ -61,7 +61,9 @@ public class AskForSignin extends AppCompatActivity {
             @Override
             public void onSuccess(LoginResult loginResult) {
                 Log.e("FUVCKUNGNFHFJFJFKKFL","HRLLL LKLSFSJFKJS F JSH HFKJHSFUHSJ KFHSK");
-                handleFacebookAccessToken(loginResult.getAccessToken());
+                Intent i = new Intent(AskForSignin.this, HomePage.class);
+                i.putExtra("facebook","facebook");
+                startActivity(i);
             }
 
             @Override
