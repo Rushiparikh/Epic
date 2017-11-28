@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "660944855439-ntnfe2hpl8hghsr2tgqn5n2gar0sf8te.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.rushi.epic_thrillon",
+            "certificate_hash": "0b8c922da4af48627afd09590572ff1aca584b71"
+          }
+        },
+        {
           "client_id": "660944855439-9361e8toj8gtbgnjl2g5ca74mf61fo42.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

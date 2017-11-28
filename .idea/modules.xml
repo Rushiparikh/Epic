@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/EpicThrillon.iml" filepath="$PROJECT_DIR$/EpicThrillon.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Epic.iml" filepath="$PROJECT_DIR$/Epic.iml" />
+      <module fileurl="file://E:\1\Epic\EpicThrillon.iml" filepath="E:\1\Epic\EpicThrillon.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
