@@ -23,7 +23,9 @@
         android:layout_above="@+id/register"
         android:layout_centerHorizontal="true"
         android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="41dp" />
+
+        android:layout_marginBottom="41dp"
+         />
 
     <Button
         android:id="@+id/register"
