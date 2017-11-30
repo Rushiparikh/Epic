@@ -111,7 +111,6 @@ public class AskForSignin extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent=new Intent(AskForSignin.this,Register.class);
-                intent.putExtra("Facebook","Facebook");
                 startActivity(intent);
             }
         });
@@ -143,6 +142,11 @@ public class AskForSignin extends AppCompatActivity {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
         mAuth.addAuthStateListener(mAuthStateListener);
+        if(Profile.getCurrentProfile()!=null && AccessToken.getCurrentAccessToken()!=null){
+            Intent i = new Intent(AskForSignin.this, HomePage.class);
+            i.putExtra("facebook","facebook");
+            startActivity(i);
+        }
     }
 
 
