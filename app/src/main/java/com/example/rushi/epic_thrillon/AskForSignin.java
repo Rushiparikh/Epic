@@ -62,7 +62,7 @@ public class AskForSignin extends AppCompatActivity {
             public void onSuccess(LoginResult loginResult) {
                 Log.e("FUVCKUNGNFHFJFJFKKFL","HRLLL LKLSFSJFKJS F JSH HFKJHSFUHSJ KFHSK");
                 Intent i = new Intent(AskForSignin.this, HomePage.class);
-                i.putExtra("facebook","facebook");
+                i.putExtra("Login","facebook");
                 startActivity(i);
             }
 
@@ -83,7 +83,9 @@ public class AskForSignin extends AppCompatActivity {
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 if (firebaseAuth.getCurrentUser() != null) {
                     Intent i = new Intent(AskForSignin.this, HomePage.class);
-                    i.putExtra("Google","Google");
+                    i.putExtra("Login","Google");
+                    i.getExtras().getString("Login");
+
                     startActivity(i);
                 }
             }
@@ -144,9 +146,15 @@ public class AskForSignin extends AppCompatActivity {
         mAuth.addAuthStateListener(mAuthStateListener);
         if(Profile.getCurrentProfile()!=null && AccessToken.getCurrentAccessToken()!=null){
             Intent i = new Intent(AskForSignin.this, HomePage.class);
-            i.putExtra("facebook","facebook");
+            i.putExtra("Login","Facebook");
             startActivity(i);
         }
+    }
+
+    public void onStop() {
+
+        super.onStop();
+        mAuth.removeAuthStateListener(mAuthStateListener);
     }
 
 

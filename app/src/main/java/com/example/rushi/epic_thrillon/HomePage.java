@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -23,7 +24,7 @@ public class HomePage extends AppCompatActivity {
     private TextView tv;
     private FirebaseAuth mAuth;
     private GoogleSignInClient mGoogleSignInClient;
-
+    String Login;
     private FirebaseAuth.AuthStateListener mAuthListener;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,9 +33,10 @@ public class HomePage extends AppCompatActivity {
         lgbtn = (Button) findViewById(R.id.button2);
         tv= (TextView)findViewById(R.id.textView);
         mAuth = FirebaseAuth.getInstance();
+        Intent intent=getIntent();
+        Login=intent.getExtras().getString("Login");
+        Log.e("TAG1",Login);
 
-        final String login_google =getIntent().getStringExtra("Google");
-        final String login_facebook=getIntent().getStringExtra("facebook");
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -48,11 +50,15 @@ public class HomePage extends AppCompatActivity {
             lgbtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if(login_google!=null) {
+
+                    Log.e("Tag2",Login);
+
+                    if(Login.equalsIgnoreCase("Google")) {
+                        Log.e("error","wrong happen");
                         mAuth.signOut();
                         startActivity(new Intent(HomePage.this, AskForSignin.class));
                     }
-                    if(login_facebook!=null){
+                    if(Login.equalsIgnoreCase("Facebook")){
                         LoginManager.getInstance().logOut();
                         startActivity(new Intent(HomePage.this, AskForSignin.class));
                     }

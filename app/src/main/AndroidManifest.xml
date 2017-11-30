@@ -21,9 +21,13 @@
         <activity android:name=".HomePage" />
         <activity android:name=".SwapScreen" />
         <activity android:name=".AskForSignin" />
-        <activity android:name=".Register"></activity>
-        <meta-data android:name="com.facebook.sdk.ApplicationId"
-            android:value="@string/facebook_app_id"/>
+        <activity android:name=".Register" />
+
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
+
+        <activity android:name=".Login"></activity>
     </application>
 
 </manifest>

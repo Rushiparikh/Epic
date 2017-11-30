@@ -14,5 +14,6 @@
     <string name="already_register_text">Already Register? Login</string>
     <string name="facebook_app_id">245423285991094</string>
     <string name="fb_login_protocol_scheme">fb245423285991094</string>
+    <string name="email_signup">Email</string>
 
 </resources>
