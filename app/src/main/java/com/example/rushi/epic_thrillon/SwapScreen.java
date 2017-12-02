@@ -15,7 +15,7 @@ import android.widget.Button;
 public class SwapScreen extends AppCompatActivity {
     private static ViewPager mPager;
     private static int currentPage = 0;
-    private static final Integer[] XMEN= {R.drawable.pic1,R.drawable.pic2,R.drawable.splashicon};
+    private static final Integer[] XMEN= {R.drawable.na1,R.drawable.na2,R.drawable.na3};
     private ArrayList<Integer> XMENArray = new ArrayList<Integer>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {

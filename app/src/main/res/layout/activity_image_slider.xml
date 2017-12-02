@@ -8,6 +8,6 @@
         android:layout_height="fill_parent"
         android:adjustViewBounds="true"
         android:layout_gravity="center"
-        android:src="@drawable/pic1"
+        android:src="@drawable/na1"
         android:scaleType="centerCrop"/>
 </FrameLayout>

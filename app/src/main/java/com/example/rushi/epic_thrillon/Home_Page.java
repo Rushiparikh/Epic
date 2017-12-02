@@ -1,7 +1,9 @@
 package com.example.rushi.epic_thrillon;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -26,6 +28,10 @@ import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.HttpMethod;
 import com.facebook.Profile;
+import com.facebook.login.LoginManager;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.firebase.auth.FirebaseAuth;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -42,6 +48,9 @@ public class Home_Page extends AppCompatActivity
     InputStream is;
     AccessToken accessToken;
     private String email=null;
+    String Login_with;
+    FirebaseAuth mAuth;
+    GoogleSignInAccount acct;
 
 
     @Override
@@ -52,6 +61,12 @@ public class Home_Page extends AppCompatActivity
         setSupportActionBar(toolbar);
         NavigationView mNavigationView=(NavigationView)findViewById(R.id.nav_view);
         View header = mNavigationView.getHeaderView(0);
+         Login_with =  getIntent().getStringExtra("Login");
+        nav_image_view = (ImageView) header.findViewById(R.id.navheader_imageView);
+        nav_textview_name = (TextView) header.findViewById(R.id.navheader_name);
+        nav_textview_email = (TextView) header.findViewById(R.id.navheader_email);
+
+         acct = GoogleSignIn.getLastSignedInAccount(Home_Page.this);
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -62,36 +77,53 @@ public class Home_Page extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        Profile profile = Profile.getCurrentProfile();
-        String imageUrl = profile.getProfilePictureUri(200, 200).toString();
-        String firstname=profile.getFirstName();
-        String lastname=profile.getLastName();
-        String name=firstname + " " +lastname;
-        nav_image_view = (ImageView)header. findViewById(R.id.navheader_imageView);
-        nav_textview_name = (TextView) header.findViewById(R.id.navheader_name);
-        nav_textview_email = (TextView) header.findViewById(R.id.navheader_email);
-        Log.e("TAG_name",name);
-        nav_textview_name.setText(name);
-        new Home_Page.DownloadImage(nav_image_view).execute(imageUrl);
-        GraphRequest req = GraphRequest.newMeRequest(accessToken, new GraphRequest.GraphJSONObjectCallback() {
-            @Override
-            public void onCompleted(JSONObject object, GraphResponse response) {
-                Toast.makeText(getApplicationContext(), "graph request completed", Toast.LENGTH_SHORT).show();
 
-                try {
-                     email = object.getString("email");
-                } catch (JSONException e) {
-                    e.printStackTrace();
+        if(Login_with.equalsIgnoreCase("Facebook")){
+            Profile profile = Profile.getCurrentProfile();
+            String imageUrl = profile.getProfilePictureUri(200, 200).toString();
+            String firstname = profile.getFirstName();
+            String lastname = profile.getLastName();
+            String name = firstname + " " + lastname;
+
+            Log.e("TAG_name", name);
+            nav_textview_name.setText(name);
+            new Home_Page.DownloadImage(nav_image_view).execute(imageUrl);
+            GraphRequest req = GraphRequest.newMeRequest(accessToken, new GraphRequest.GraphJSONObjectCallback() {
+                @Override
+                public void onCompleted(JSONObject object, GraphResponse response) {
+                    Toast.makeText(getApplicationContext(), "graph request completed", Toast.LENGTH_SHORT).show();
+
+                    try {
+                        email = object.getString("email");
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+
                 }
 
 
-            }
+            });
 
-            ;
-        });
-        nav_textview_email.setText(email);
+         //  nav_textview_email.setText(email);
+        }else{
+            if (acct != null) {
+                String personName = acct.getDisplayName();
+                String personGivenName = acct.getGivenName();
+                String personFamilyName = acct.getFamilyName();
+                String personEmail = acct.getEmail();
+                String personId = acct.getId();
+                String personPhoto = acct.getPhotoUrl().toString();
+                nav_textview_name.setText(personName);
+                new Home_Page.DownloadImage(nav_image_view).execute(personPhoto);
+                nav_textview_email.setText(personEmail);
+
+
+            }
+        }
 
     }
+
 
         public class DownloadImage extends AsyncTask<String, Void, Bitmap> {
         ImageView bmImage;
@@ -170,6 +202,14 @@ public class Home_Page extends AppCompatActivity
 
         } else if (id == R.id.nav_setting) {
 
+        }else if(id == R.id.nav_logout){
+            if(Login_with!=null){
+                LoginManager.getInstance().logOut();
+                startActivity(new Intent(Home_Page.this, AskForSignin.class));
+            }else{
+                mAuth.signOut();
+                startActivity(new Intent(Home_Page.this, AskForSignin.class));
+            }
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

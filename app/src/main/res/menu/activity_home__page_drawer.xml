@@ -22,7 +22,7 @@
             android:title="Wishlist" />
         <item
             android:id="@+id/nav_my_activity"
-            android:icon="@drawable/pic1"
+            android:icon="@drawable/na1"
             android:title="My Activity"/>
         <item
             android:id="@+id/nav_notification"
@@ -32,6 +32,10 @@
             android:id="@+id/nav_setting"
             android:icon="@drawable/ic_menu_send"
             android:title="Setting" />
+        <item
+            android:id="@+id/nav_logout"
+            android:icon="@drawable/ic_menu_send"
+            android:title="Log Out" />
     </group>
 
 </menu>

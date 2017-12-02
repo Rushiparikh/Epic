@@ -44,18 +44,26 @@ public class AskForSignin extends AppCompatActivity {
     private SignInButton signInButton;
     private FirebaseAuth mAuth;
     private GoogleApiClient mGoogleApiClient;
+
     private FirebaseAuth.AuthStateListener mAuthStateListener;
     private final static int RC_SIGN_IN = 0;
-    private Button register_button;
+    private Button register_button,fb;
     private Profile profile;
+    GoogleSignInAccount account;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ask_for_signin);
         signInButton = (SignInButton) findViewById(R.id.SignInButton);
         loginButton=(LoginButton) findViewById(R.id.login_button);
+        fb=(Button)findViewById(R.id.fb);
 
-
+        fb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                loginButton.performClick();
+            }
+        });
         callbackManager=CallbackManager.Factory.create();
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
@@ -82,9 +90,8 @@ public class AskForSignin extends AppCompatActivity {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 if (firebaseAuth.getCurrentUser() != null) {
-                    Intent i = new Intent(AskForSignin.this, HomePage.class);
-                    i.putExtra("Login","Google");
-                    startActivity(i);
+                //   firebaseAuthWithGoogle(account);
+
                 }
             }
         };
@@ -170,9 +177,12 @@ public class AskForSignin extends AppCompatActivity {
                             Log.d("TAG", "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             String s= user.getDisplayName();
-                            Intent i = new Intent(AskForSignin.this,HomePage.class);
-                            i.putExtra("User",s);
+                            Intent i = new Intent(AskForSignin.this,Home_Page.class);
+
+                            i.putExtra("Login","Google");
                             startActivity(i);
+
+
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w("TAG", "signInWithCredential:failure", task.getException());
@@ -200,7 +210,7 @@ public class AskForSignin extends AppCompatActivity {
                             Log.d(TAG, "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             String s= user.getDisplayName();
-                            Intent i = new Intent(AskForSignin.this,HomePage.class);
+                            Intent i = new Intent(AskForSignin.this,Home_Page.class);
                             i.putExtra("User",s);
                             startActivity(i);
                         } else {
@@ -215,6 +225,9 @@ public class AskForSignin extends AppCompatActivity {
                     }
                 });
     }
+
+
+
 
 
 

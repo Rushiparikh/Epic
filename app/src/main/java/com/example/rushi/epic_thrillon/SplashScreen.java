@@ -10,7 +10,7 @@ import java.util.TimerTask;
 public class SplashScreen extends AppCompatActivity {
 
 
-    long Delay = 3000;
+    long Delay = 1000;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);

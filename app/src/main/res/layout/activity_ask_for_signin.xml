@@ -5,27 +5,72 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.rushi.epic_thrillon.AskForSignin">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
 
-    <com.google.android.gms.common.SignInButton
-        android:id="@+id/SignInButton"
+    <ImageView
+        android:id="@+id/imageView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="146dp">
+        android:scaleType="fitXY"
+        app:srcCompat="@drawable/loginscreen" />
 
-    </com.google.android.gms.common.SignInButton>
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/gradient_bg" >
 
-    <com.facebook.login.widget.LoginButton
-        android:id="@+id/login_button"
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="75dp"
+                android:layout_marginTop="350dp"
+                android:text="Sign In With"
+                android:textColor="@color/cardview_light_background"
+                android:textSize="50sp" />
+
+        </FrameLayout>
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/FrameLayout1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/register"
         android:layout_centerHorizontal="true"
-        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="62dp"
+        android:clickable="false">
 
-        android:layout_marginBottom="41dp"
-         />
+        <com.facebook.login.widget.LoginButton
+            android:id="@+id/login_button"
+            style="@style/FacebookLoginButton"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp" />
+
+        <Button
+            android:id="@+id/fb"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/fbg"
+
+            android:drawableLeft="@drawable/facebooklogo"
+            android:drawableStart="@drawable/facebooklogo"
+            android:paddingEnd="20dp"
+            android:paddingStart="20dp"
+            android:text="Facebook"
+            android:textAllCaps="false"
+            android:textColor="#ffffff"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+    </FrameLayout>
+
 
     <Button
         android:id="@+id/register"
@@ -34,22 +79,61 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:text="@string/register_button"
+        android:layout_marginBottom="45dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
+        android:background="@drawable/buttons"
+        android:gravity="center"
         android:paddingLeft="65dp"
         android:paddingRight="65dp"
-        android:gravity="center"/>
+        android:text="@string/register_button"
+        android:textColor="@color/cardview_light_background" />
 
     <Button
         android:id="@+id/login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+
+
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:text="@string/login_button"
+        android:layout_below="@+id/FrameLayout1"
+        android:layout_marginEnd="6dp"
+        android:layout_marginRight="6dp"
+        android:background="@drawable/buttons"
+
+
+        android:gravity="center"
         android:paddingLeft="75dp"
         android:paddingRight="75dp"
-        android:gravity="center"/>
+        android:text="@string/login_button"
+        android:textColor="@color/cardview_light_background" />
+
+
+    <FrameLayout
+        android:id="@+id/FrameLayout2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="445dp"
+        android:clickable="false">
+
+        <com.google.android.gms.common.SignInButton
+            android:id="@+id/SignInButton"
+
+            android:layout_width="250dp"
+
+            android:layout_height="51dp">
+
+        </com.google.android.gms.common.SignInButton>
+
+
+    </FrameLayout>
+
+
+
+
 
 
 </RelativeLayout>

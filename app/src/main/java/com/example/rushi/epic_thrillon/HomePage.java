@@ -34,6 +34,9 @@ public class HomePage extends AppCompatActivity {
         lgbtn = (Button) findViewById(R.id.button2);
         tv= (TextView)findViewById(R.id.textView);
         mAuth = FirebaseAuth.getInstance();
+        Intent i = getIntent();
+        String s= i.getExtras().getString("user");
+        tv.setText(s);
 
         Login_with =  getIntent().getStringExtra("Login");
 

@@ -8,6 +8,7 @@
     <string name="last_name_signup">Last Name</string>
     <string name="mobile_number_signup">Mobile Number</string>
     <string name="password_signup">Password</string>
+
     <string name="confirm_password_signup">Confirm Password</string>
     <string name="t_and_c">By Proceeding you confirmed term and condition</string>
     <string name="register">Register</string>
