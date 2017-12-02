@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="Home" />
+        <item
+            android:id="@+id/nav_near_by"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Near By" />
+        <item
+            android:id="@+id/nav_destination"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Destination" />
+        <item
+            android:id="@+id/nav_wishlist"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Wishlist" />
+        <item
+            android:id="@+id/nav_my_activity"
+            android:icon="@drawable/pic1"
+            android:title="My Activity"/>
+        <item
+            android:id="@+id/nav_notification"
+            android:icon="@drawable/ic_menu_share"
+            android:title="Notification" />
+        <item
+            android:id="@+id/nav_setting"
+            android:icon="@drawable/ic_menu_send"
+            android:title="Setting" />
+    </group>
+
+</menu>
