@@ -61,7 +61,7 @@ public class AskForSignin extends AppCompatActivity {
             @Override
             public void onSuccess(LoginResult loginResult) {
                 Log.e("FUVCKUNGNFHFJFJFKKFL","HRLLL LKLSFSJFKJS F JSH HFKJHSFUHSJ KFHSK");
-                Intent i = new Intent(AskForSignin.this, HomePage.class);
+                Intent i = new Intent(AskForSignin.this, Home_Page.class);
                 i.putExtra("Login","facebook");
                 startActivity(i);
             }
@@ -84,8 +84,6 @@ public class AskForSignin extends AppCompatActivity {
                 if (firebaseAuth.getCurrentUser() != null) {
                     Intent i = new Intent(AskForSignin.this, HomePage.class);
                     i.putExtra("Login","Google");
-                    i.getExtras().getString("Login");
-
                     startActivity(i);
                 }
             }
@@ -145,7 +143,7 @@ public class AskForSignin extends AppCompatActivity {
         // Check if user is signed in (non-null) and update UI accordingly.
         mAuth.addAuthStateListener(mAuthStateListener);
         if(Profile.getCurrentProfile()!=null && AccessToken.getCurrentAccessToken()!=null){
-            Intent i = new Intent(AskForSignin.this, HomePage.class);
+            Intent i = new Intent(AskForSignin.this, Home_Page.class);
             i.putExtra("Login","Facebook");
             startActivity(i);
         }

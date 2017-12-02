@@ -21,10 +21,11 @@ import com.google.firebase.auth.FirebaseAuth;
 public class HomePage extends AppCompatActivity {
 
     private Button lgbtn;
+
     private TextView tv;
     private FirebaseAuth mAuth;
     private GoogleSignInClient mGoogleSignInClient;
-    String Login;
+    String Login_with;
     private FirebaseAuth.AuthStateListener mAuthListener;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,9 +34,8 @@ public class HomePage extends AppCompatActivity {
         lgbtn = (Button) findViewById(R.id.button2);
         tv= (TextView)findViewById(R.id.textView);
         mAuth = FirebaseAuth.getInstance();
-        Intent intent=getIntent();
-        Login=intent.getExtras().getString("Login");
-        Log.e("TAG1",Login);
+
+        Login_with =  getIntent().getStringExtra("Login");
 
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -50,16 +50,11 @@ public class HomePage extends AppCompatActivity {
             lgbtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
-                    Log.e("Tag2",Login);
-
-                    if(Login.equalsIgnoreCase("Google")) {
-                        Log.e("error","wrong happen");
-                        mAuth.signOut();
-                        startActivity(new Intent(HomePage.this, AskForSignin.class));
-                    }
-                    if(Login.equalsIgnoreCase("Facebook")){
+                    if(Login_with!=null){
                         LoginManager.getInstance().logOut();
+                        startActivity(new Intent(HomePage.this, AskForSignin.class));
+                    }else{
+                        mAuth.signOut();
                         startActivity(new Intent(HomePage.this, AskForSignin.class));
                     }
 

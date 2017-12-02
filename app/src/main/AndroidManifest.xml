@@ -27,7 +27,11 @@
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
 
-        <activity android:name=".Login"></activity>
+        <activity android:name=".Login" />
+        <activity
+            android:name=".Home_Page"
+            android:label="@string/title_activity_home__page"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
