@@ -23,4 +23,15 @@
 
     <string name="action_settings">Settings</string>
 
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string-array name="nav_item_activity_titles">
+        <item>Home</item>
+        <item>Near By</item>
+        <item>Destination</item>
+        <item>Wishlist</item>
+        <item>My Activity</item>
+        <item>Notification</item>
+
+    </string-array>
 </resources>

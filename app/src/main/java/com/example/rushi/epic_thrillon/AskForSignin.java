@@ -26,6 +26,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.OptionalPendingResult;
+import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
@@ -42,10 +44,10 @@ public class AskForSignin extends AppCompatActivity {
     private LoginButton loginButton;
     private CallbackManager callbackManager;
     private SignInButton signInButton;
-    private FirebaseAuth mAuth;
+
     private GoogleApiClient mGoogleApiClient;
 
-    private FirebaseAuth.AuthStateListener mAuthStateListener;
+
     private final static int RC_SIGN_IN = 0;
     private Button register_button,fb;
     private Profile profile;
@@ -85,16 +87,7 @@ public class AskForSignin extends AppCompatActivity {
             }
         });
 
-        mAuth = FirebaseAuth.getInstance();
-        mAuthStateListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                if (firebaseAuth.getCurrentUser() != null) {
-                //   firebaseAuthWithGoogle(account);
 
-                }
-            }
-        };
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
@@ -123,6 +116,29 @@ public class AskForSignin extends AppCompatActivity {
         });
 
     }
+    private void handleSignInResult(GoogleSignInResult result) {
+        Log.d(TAG, "handleSignInResult:" + result.isSuccess());
+        if (result.isSuccess()) {
+            // Signed in successfully, show authenticated UI.
+            GoogleSignInAccount acct = result.getSignInAccount();
+
+            Log.e(TAG, "display name: " + acct.getDisplayName());
+
+            String personName = acct.getDisplayName();
+            String personPhotoUrl = acct.getPhotoUrl().toString();
+            String email = acct.getEmail();
+
+            Log.e(TAG, "Name: " + personName + ", email: " + email
+                    + ", Image: " + personPhotoUrl);
+
+
+
+            updateUI(true);
+        } else {
+            // Signed out, show unauthenticated UI.
+            updateUI(false);
+        }
+    }
 
 
     private void signIn() {
@@ -136,95 +152,65 @@ public class AskForSignin extends AppCompatActivity {
         // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
         if (requestCode == RC_SIGN_IN) {
            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
-           if(result.isSuccess()){
-                GoogleSignInAccount account=result.getSignInAccount();
-                firebaseAuthWithGoogle(account);
-           }else{
-               
-           }
+            handleSignInResult(result);
 
         }
     }
+    @Override
     public void onStart() {
         super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
-        mAuth.addAuthStateListener(mAuthStateListener);
         if(Profile.getCurrentProfile()!=null && AccessToken.getCurrentAccessToken()!=null){
             Intent i = new Intent(AskForSignin.this, Home_Page.class);
-            i.putExtra("Login","Facebook");
+            i.putExtra("facebook","facebook");
             startActivity(i);
+        }
+        OptionalPendingResult<GoogleSignInResult> opr = Auth.GoogleSignInApi.silentSignIn(mGoogleApiClient);
+        if (opr.isDone()) {
+            // If the user's cached credentials are valid, the OptionalPendingResult will be "done"
+            // and the GoogleSignInResult will be available instantly.
+            Log.d(TAG, "Got cached sign-in");
+            GoogleSignInResult result = opr.get();
+            handleSignInResult(result);
+        } else {
+            // If the user has not previously signed in on this device or the sign-in has expired,
+            // this asynchronous branch will attempt to sign in the user silently.  Cross-device
+            // single sign-on will occur in this branch.
+
+            opr.setResultCallback(new ResultCallback<GoogleSignInResult>() {
+                @Override
+                public void onResult(GoogleSignInResult googleSignInResult) {
+
+                    handleSignInResult(googleSignInResult);
+                }
+            });
         }
     }
 
-    public void onStop() {
 
-        super.onStop();
-        mAuth.removeAuthStateListener(mAuthStateListener);
+
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+        // An unresolvable error has occurred and Google APIs (including Sign-In) will not
+        // be available.
+        Log.d(TAG, "onConnectionFailed:" + connectionResult);
+    }
+
+    private void updateUI(boolean isSignedIn) {
+        if (isSignedIn) {
+            Intent i = new Intent(AskForSignin.this,Home_Page.class);
+
+            i.putExtra("Login","Google");
+            startActivity(i);
+
+        } else {
+
+        }
     }
 
 
 
-    private void firebaseAuthWithGoogle(GoogleSignInAccount account) {
 
 
-        AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
-        mAuth.signInWithCredential(credential)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d("TAG", "signInWithCredential:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            String s= user.getDisplayName();
-                            Intent i = new Intent(AskForSignin.this,Home_Page.class);
 
-                            i.putExtra("Login","Google");
-                            startActivity(i);
-
-
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w("TAG", "signInWithCredential:failure", task.getException());
-                            Toast.makeText(AskForSignin.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
-                            //updateUI(null);
-                        }
-
-                        // ...
-                    }
-                });
-    }
-
-
-    private void handleFacebookAccessToken(AccessToken token) {
-        Log.d(TAG, "handleFacebookAccessToken:" + token);
-
-        AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
-        mAuth.signInWithCredential(credential)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "signInWithCredential:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            String s= user.getDisplayName();
-                            Intent i = new Intent(AskForSignin.this,Home_Page.class);
-                            i.putExtra("User",s);
-                            startActivity(i);
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w(TAG, "signInWithCredential:failure", task.getException());
-                            Toast.makeText(AskForSignin.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
-                           // updateUI(null);
-                        }
-
-                        // ...
-                    }
-                });
-    }
 
 
 
