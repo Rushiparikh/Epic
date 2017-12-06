@@ -52,8 +52,9 @@ import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class Home_Page extends AppCompatActivity
-         {
+public class Home_Page extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener
+
+{
     private ImageView nav_image_view;
     private TextView nav_textview_name,nav_textview_email;
     InputStream is;
@@ -61,7 +62,7 @@ public class Home_Page extends AppCompatActivity
     private String email=null;
     String Login_with;
     private NavigationView navigationView;
-    private DrawerLayout drawer;
+
     private View navHeader;
     private Toolbar toolbar;
     private GoogleApiClient mGoogleApiClient;
@@ -79,7 +80,7 @@ public class Home_Page extends AppCompatActivity
 
     // flag to load home fragment when user presses back key
     private boolean shouldLoadHomeFragOnBackPress = true;
-    private Handler mHandler;
+
     private FragmentManager fragmentManager;
     private FragmentTransaction fragmentTransaction;
 
@@ -89,17 +90,26 @@ public class Home_Page extends AppCompatActivity
         setContentView(R.layout.activity_home__page);
          toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        mHandler = new Handler();
-        activityTitles = getResources().getStringArray(R.array.nav_item_activity_titles);
 
-        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        fragmentManager=getSupportFragmentManager();
-        fragmentTransaction =fragmentManager.beginTransaction();
-        fragmentTransaction.setCustomAnimations(android.R.anim.fade_in,
-                android.R.anim.fade_out);
-         navigationView=(NavigationView)findViewById(R.id.nav_view);
-        View header = navigationView.getHeaderView(0);
-         Login_with =  getIntent().getStringExtra("Login");
+
+      //  activityTitles = getResources().getStringArray(R.array.nav_item_activity_titles);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+
+
+        navigationView.setNavigationItemSelectedListener(this);
+
+        //set Default fragment on loading
+        fragmentTransaction=getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.frame,new HomeFragment()).commit();
+        Login_with =  getIntent().getStringExtra("Login");
+
+       View header = navigationView.getHeaderView(0);
+
         nav_image_view = (ImageView) header.findViewById(R.id.navheader_imageView);
         nav_textview_name = (TextView) header.findViewById(R.id.navheader_name);
         nav_textview_email = (TextView) header.findViewById(R.id.navheader_email);
@@ -117,19 +127,8 @@ public class Home_Page extends AppCompatActivity
                     }
                 }).addApi(Auth.GOOGLE_SIGN_IN_API,gso).build();
 
-        setUpNavigationView();
-        if (savedInstanceState == null) {
-            navItemIndex = 0;
-            CURRENT_TAG = TAG_HOME;
-            loadHomeFragment();
-        }
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+
 
 
         if(Login_with.equalsIgnoreCase("Facebook")){
@@ -178,92 +177,17 @@ public class Home_Page extends AppCompatActivity
         }
 
     }
-    private Fragment getHomeFragment() {
-        switch (navItemIndex) {
-            case 0:
-                // home
-                HomeFragment homeFragment = new HomeFragment();
-                return homeFragment;
-            case 1:
-                // photos
-                NearByFragment nearByFragment = new NearByFragment();
-                return nearByFragment;
-            case 2:
-                // movies fragment
-                DestinationFragment destinationFragment = new DestinationFragment();
-                return destinationFragment;
-            case 3:
-                // notifications fragment
-                WishListFragment wishListFragment = new WishListFragment();
-                return wishListFragment;
 
-            case 4:
-                // settings fragment
-                MyActivityFragment myActivityFragment = new MyActivityFragment();
-                return myActivityFragment;
-
-            case 5:
-                NotificationFragment notificationFragment = new NotificationFragment();
-                return notificationFragment;
-
-            default:
-                return new HomeFragment();
-        }
-    }
-
-    private void setToolbarTitle() {
-        getSupportActionBar().setTitle(activityTitles[navItemIndex]);
-    }
-
-    private void selectNavMenu() {
-        navigationView.getMenu().getItem(navItemIndex).setChecked(true);
-    }
-
-
-    private void loadHomeFragment() {
-        // selecting appropriate nav menu item
-        selectNavMenu();
-
-        // set toolbar title
-        setToolbarTitle();
-
-        // if user select the current navigation menu again, don't do anything
-        // just close the navigation drawer
-        if (getSupportFragmentManager().findFragmentByTag(CURRENT_TAG) != null) {
-            drawer.closeDrawers();
-
-            // show or hide the fab button
-
-            return;
-        }
-
-        // Sometimes, when fragment has huge data, screen seems hanging
-        // when switching between navigation menus
-        // So using runnable, the fragment is loaded with cross fade effect
-        // This effect can be seen in GMail app
-
-
-        // If mPendingRunnable is not null, then add to the message queue
-        Fragment fragment = getHomeFragment();
-        fragmentTransaction.replace(R.id.frame, fragment);
-        fragmentTransaction.commit();
-
-        // show or hide the fab button
-
-
-        //Closing drawer on item click
-        drawer.closeDrawers();
-
-        // refresh toolbar menu
-        invalidateOptionsMenu();
-    }
     @Override
     protected void onStart() {
         super.onStart();
         mGoogleApiClient.connect();
     }
 
-        public class DownloadImage extends AsyncTask<String, Void, Bitmap> {
+
+
+
+    public class DownloadImage extends AsyncTask<String, Void, Bitmap> {
         ImageView bmImage;
 
         public DownloadImage(ImageView bmImage){
@@ -292,25 +216,12 @@ public class Home_Page extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawers();
-            return;
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
         }
-
-        // This code loads home fragment when back key is pressed
-        // when user is in other fragment than home
-        if (shouldLoadHomeFragOnBackPress) {
-            // checking if user is on other navigation menu
-            // rather than home
-            if (navItemIndex != 0) {
-                navItemIndex = 0;
-                CURRENT_TAG = TAG_HOME;
-                loadHomeFragment();
-                return;
-            }
-        }
-
-        super.onBackPressed();
     }
 
     @Override
@@ -335,45 +246,61 @@ public class Home_Page extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    private void setUpNavigationView() {
-        //Setting Navigation View Item Selected Listener to handle the item click of the navigation menu
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
 
-            // This method will trigger on item Click of navigation menu
-
-            @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
-            navItemIndex = 0;
-            CURRENT_TAG = TAG_HOME;
-            loadHomeFragment();
+            setTitle("Home");
+            HomeFragment fragment=new HomeFragment();
+            fragmentTransaction= getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.frame,fragment, "Home");
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.commit();
+
 
             // Handle the camera action
         } else if (id == R.id.nav_near_by) {
-            navItemIndex = 1;
-            CURRENT_TAG = TAG_NEARBY;
-            loadHomeFragment();
+            setTitle("Near By");
+            NearByFragment nearByFragment=new NearByFragment();
+            fragmentTransaction= getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.frame,nearByFragment, "Near By");
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.commit();
 
         } else if (id == R.id.nav_my_activity) {
-            navItemIndex = 4;
-            CURRENT_TAG = TAG_MYACITIVITY;
-            loadHomeFragment();
+            setTitle("My Activity");
+            MyActivityFragment myActivityFragment=new MyActivityFragment();
+            fragmentTransaction= getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.frame,myActivityFragment, "My Activity");
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.commit();
         } else if (id == R.id.nav_destination) {
-            navItemIndex = 2;
-            CURRENT_TAG = TAG_DESTINATION;
-            loadHomeFragment();
+            setTitle("Destination");
+            DestinationFragment destinationFragment=new DestinationFragment();
+            fragmentTransaction= getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.frame,destinationFragment, "Near By");
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.commit();
+
         } else if (id == R.id.nav_notification) {
-            navItemIndex = 5;
-            CURRENT_TAG = TAG_NOTIFICATIONS;
-            loadHomeFragment();
+            setTitle("Notification");
+            NotificationFragment notificationFragment=new NotificationFragment();
+            fragmentTransaction= getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.frame,notificationFragment, "Notification");
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.commit();
+
         }else if(id == R.id.nav_wishlist){
-            navItemIndex = 3;
-            CURRENT_TAG = TAG_WISHLIST;
-            loadHomeFragment();
+            setTitle("WishList");
+            WishListFragment wishListFragment=new WishListFragment();
+            fragmentTransaction= getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.frame,wishListFragment, "WishList");
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.commit();
+
         }
         else if (id == R.id.nav_logout) {
             if (Login_with.equalsIgnoreCase("Facebook")) {
@@ -388,29 +315,21 @@ public class Home_Page extends AppCompatActivity
 
         }
 
-       /* case R.id.nav_about_us:
-        // launch new intent instead of loading fragment
-        startActivity(new Intent(MainActivity.this, AboutUsActivity.class));
-        drawer.closeDrawers();
-        return true;
-        case R.id.nav_privacy_policy:
-        // launch new intent instead of loading fragment
-        startActivity(new Intent(MainActivity.this, PrivacyPolicyActivity.class));
-        drawer.closeDrawers();
-        return true;
-
-        */
-        loadHomeFragment();
 
 
 
 
-        //DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        //drawer.closeDrawer(GravityCompat.START);
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
         return true;
             }
-        });
-    }
+
+
+
+
+
+
     private void signOut() {
         if (mGoogleApiClient != null && mGoogleApiClient.isConnected()) {
             mGoogleApiClient.clearDefaultAccountAndReconnect().setResultCallback(new ResultCallback<Status>() {

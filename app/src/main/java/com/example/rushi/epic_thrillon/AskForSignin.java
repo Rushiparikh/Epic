@@ -161,7 +161,7 @@ public class AskForSignin extends AppCompatActivity {
         super.onStart();
         if(Profile.getCurrentProfile()!=null && AccessToken.getCurrentAccessToken()!=null){
             Intent i = new Intent(AskForSignin.this, Home_Page.class);
-            i.putExtra("facebook","facebook");
+            i.putExtra("Login","facebook");
             startActivity(i);
         }
         OptionalPendingResult<GoogleSignInResult> opr = Auth.GoogleSignInApi.silentSignIn(mGoogleApiClient);
