@@ -87,15 +87,16 @@
                         />
 
                     <EditText
+                        android:id="@+id/email_editText"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:layout_weight="20"
                         android:layout_marginBottom="20dp"
                         android:layout_marginLeft="20dp"
                         android:layout_marginRight="20dp"
+                        android:layout_weight="20"
+                        android:ems="10"
                         android:hint="@string/email_signup"
                         android:inputType="textEmailAddress"
-                        android:ems="10"
                         android:textColor="@color/cardview_light_background"
                         android:textColorHint="@color/cardview_light_background"
                         android:textSize="20sp" />
@@ -146,31 +147,29 @@
                         android:textSize="20sp" />
 
 
-
-
-
-                    <CheckedTextView
+                    <CheckBox
                         android:id="@+id/checkedTextView"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:layout_weight="20
-"
                         android:layout_marginBottom="20dp"
                         android:layout_marginLeft="20dp"
                         android:layout_marginRight="20dp"
+                        android:layout_weight="25
+"
+                        android:buttonTint="@color/cardview_light_background"
                         android:text="@string/t_and_c"
                         android:textColor="@color/cardview_light_background"
                         android:textColorHint="@color/cardview_light_background"
                         android:textSize="20sp" />
 
                     <Button
-                        android:id="@+id/register_button"
+                        android:id="@+id/registeration_button"
                         android:layout_width="wrap_content"
                         android:layout_height="0dp"
-                        android:layout_weight="20"
                         android:layout_gravity="center_horizontal"
                         android:layout_marginBottom="20dp"
                         android:layout_marginLeft="0dp"
+                        android:layout_weight="20"
                         android:width="150dp"
                         android:background="@drawable/buttons"
                         android:text="@string/register"
@@ -184,7 +183,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_marginLeft="20dp"
-                        android:layout_weight="10"
+                        android:layout_weight="20"
                         android:text="@string/already_register_text"
                         android:textColor="@color/cardview_light_background"
                         android:textColorHint="@color/cardview_light_background"

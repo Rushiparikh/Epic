@@ -49,7 +49,7 @@ public class AskForSignin extends AppCompatActivity {
 
 
     private final static int RC_SIGN_IN = 0;
-    private Button register_button,fb;
+    private Button register_button,fb,login;
     private Profile profile;
     GoogleSignInAccount account;
     @Override
@@ -59,7 +59,7 @@ public class AskForSignin extends AppCompatActivity {
         signInButton = (SignInButton) findViewById(R.id.SignInButton);
         loginButton=(LoginButton) findViewById(R.id.login_button);
         fb=(Button)findViewById(R.id.fb);
-
+        login = (Button)findViewById(R.id.login);
         fb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -111,6 +111,14 @@ public class AskForSignin extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent=new Intent(AskForSignin.this,Register.class);
+                startActivity(intent);
+            }
+        });
+
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(AskForSignin.this,Login.class);
                 startActivity(intent);
             }
         });

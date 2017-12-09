@@ -1,13 +1,189 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.example.rushi.epic_thrillon.HomeFragment">
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    tools:context="com.example.rushi.epic_thrillon.Home_Page">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="home" />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-</FrameLayout>
+
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/cardview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.github.aakira.expandablelayout.ExpandableRelativeLayout
+                android:id="@+id/expandable_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="visible"
+                app:ael_duration="500"
+                app:ael_expanded="true"
+                app:ael_interpolator="fastOutSlowIn"
+                app:ael_orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/linearLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="3">
+
+                    <ImageButton
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/cardview_light_background"
+                        android:src="@mipmap/ic_launcher" />
+
+                    <ImageButton
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/cardview_light_background"
+                        android:src="@mipmap/ic_launcher" />
+
+                    <ImageButton
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/cardview_light_background"
+                        android:src="@mipmap/ic_launcher" />
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/expandButton"
+                    android:layout_width="26dp"
+                    android:layout_height="20dp"
+
+                    android:layout_below="@+id/linearLayout"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="21dp"
+                    android:background="@android:drawable/arrow_down_float"
+                    android:textSize="14sp"
+                    android:visibility="visible" />
+
+
+            </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
+
+
+            <LinearLayout
+                android:id="@+id/b2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/b1"
+
+                android:layout_marginTop="50dp"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/cardview_light_background"
+                        android:src="@mipmap/ic_launcher" />
+
+                    <ImageButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/cardview_light_background"
+                        android:src="@mipmap/ic_launcher" />
+
+                    <ImageButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/cardview_light_background"
+                        android:src="@mipmap/ic_launcher" />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/cardview_light_background"
+                        android:src="@mipmap/ic_launcher" />
+
+                    <ImageButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/cardview_light_background"
+                        android:src="@mipmap/ic_launcher" />
+
+                    <ImageButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/cardview_light_background"
+                        android:src="@mipmap/ic_launcher" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view_first"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_marginTop="0dp"
+            android:clipToPadding="false"
+            android:scrollbars="horizontal"
+            tools:ignore="NotSibling" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view_second"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/recycler_view_first"
+            android:layout_marginTop="0dp"
+            android:clipToPadding="false"
+            android:scrollbars="horizontal" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view_third"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/recycler_view_second"
+            android:layout_marginTop="0dp"
+            android:clipToPadding="false"
+            android:scrollbars="horizontal" />
+
+
+    </LinearLayout>
+
+</ScrollView>
+
+
+
+
+
+
+
