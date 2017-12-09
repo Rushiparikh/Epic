@@ -1,38 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     tools:context="com.example.rushi.epic_thrillon.AskForSignin">
+
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:scaleType="fitXY"
-        app:srcCompat="@drawable/loginscreen" />
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/loginscreen" />
 
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/gradient_bg" >
-
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="75dp"
-                android:layout_marginTop="350dp"
-                android:text="Sign In With"
-                android:textColor="@color/cardview_light_background"
-                android:textSize="50sp" />
-
-        </FrameLayout>
+            android:background="@drawable/gradient_bg"></FrameLayout>
     </FrameLayout>
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Sign In With"
+        android:textColor="@android:color/background_light"
+        android:textSize="50sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <FrameLayout
         android:id="@+id/FrameLayout1"
@@ -40,8 +48,12 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/register"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="62dp"
-        android:clickable="false">
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="32dp"
+        android:clickable="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView">
 
         <com.facebook.login.widget.LoginButton
             android:id="@+id/login_button"
@@ -71,7 +83,6 @@
 
     </FrameLayout>
 
-
     <Button
         android:id="@+id/register"
         android:layout_width="wrap_content"
@@ -79,15 +90,32 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="45dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginStart="10dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="80dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/buttons"
         android:gravity="center"
-        android:paddingLeft="65dp"
-        android:paddingRight="65dp"
+        android:paddingLeft="0dp"
+        android:paddingRight="0dp"
         android:text="@string/register_button"
-        android:textColor="@color/cardview_light_background" />
+        android:textColor="#ffffff"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/SignInButton" />
+
+
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/SignInButton"
+
+        android:layout_width="250dp"
+
+        android:layout_height="51dp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/FrameLayout1">
+
+    </com.google.android.gms.common.SignInButton>
 
     <Button
         android:id="@+id/login"
@@ -98,44 +126,24 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/FrameLayout1"
-        android:layout_marginEnd="6dp"
-        android:layout_marginRight="6dp"
+        android:layout_marginBottom="8dp"
+
+
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/buttons"
-
-
         android:gravity="center"
-        android:paddingLeft="75dp"
-        android:paddingRight="75dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         android:text="@string/login_button"
-        android:textColor="@color/cardview_light_background" />
+        android:textColor="#ffffff"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/register"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/SignInButton" />
 
 
-    <FrameLayout
-        android:id="@+id/FrameLayout2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="445dp"
-        android:clickable="false">
-
-        <com.google.android.gms.common.SignInButton
-            android:id="@+id/SignInButton"
-
-            android:layout_width="250dp"
-
-            android:layout_height="51dp">
-
-        </com.google.android.gms.common.SignInButton>
-
-
-    </FrameLayout>
-
-
-
-
-
-
-</RelativeLayout>
+</android.support.constraint.ConstraintLayout>
 
 
