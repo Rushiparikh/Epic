@@ -10,8 +10,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.GridView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.github.aakira.expandablelayout.ExpandableRelativeLayout;
 
@@ -43,6 +46,27 @@ public class HomeFragment extends Fragment {
           //  getSupportActionBar().setTitle(MainActivity.class.getSimpleName());
           recyclerViewfirst = (RecyclerView) view.findViewById(R.id.recycler_view_first);
 
+             int[] mThumbIds = {
+                    R.drawable.album1,R.drawable.album2,R.drawable.album5,R.drawable.album6,R.drawable.album7,R.drawable.album8,R.drawable.album9,R.drawable.album10,
+            };
+            String[] web = {
+                    "Google",
+                    "Github",
+                    "Instagram",
+                    "Facebook",
+                    "Flickr",
+                    "Pinterest",
+                    "Quora",
+                    "Twitter"};
+            GridView gridview = (GridView) view.findViewById(R.id.gridview);
+            gridview.setAdapter(new ImageAdapter(getActivity(),web,mThumbIds));
+
+            gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                public void onItemClick(AdapterView<?> parent, View v,
+                                        int position, long id) {
+
+                }
+            });
             albumList = new ArrayList<>();
             adapter = new AlbumsAdapter(getActivity(), albumList);
 
