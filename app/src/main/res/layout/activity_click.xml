@@ -73,7 +73,7 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/" />
+    <include layout="" />
 
 </android.support.design.widget.CoordinatorLayout>
 

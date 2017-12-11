@@ -41,13 +41,7 @@ public class HomeFragment extends Fragment {
             View view = inflater.inflate(R.layout.fragment_home, container, false);
             Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
           //  getSupportActionBar().setTitle(MainActivity.class.getSimpleName());
-
-            mExpandButton = (Button) view.findViewById(R.id.expandButton);
-            mExpandLayout = (ExpandableRelativeLayout) view.findViewById(R.id.expandable_layout);
-            linearLayout = (LinearLayout)view.findViewById(R.id.b2);
-
-
-            recyclerViewfirst = (RecyclerView) view.findViewById(R.id.recycler_view_first);
+          recyclerViewfirst = (RecyclerView) view.findViewById(R.id.recycler_view_first);
 
             albumList = new ArrayList<>();
             adapter = new AlbumsAdapter(getActivity(), albumList);
@@ -108,21 +102,6 @@ public class HomeFragment extends Fragment {
 
             prepareAlbums();
 
-            mExpandButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    switch (view.getId()) {
-                        case R.id.expandButton:
-                            mExpandLayout.expand();
-                            mExpandButton.setVisibility(View.VISIBLE);
-                            linearLayout.setVisibility(View.VISIBLE);
-                            mExpandButton.animate();
-
-                            break;
-                    }
-
-                }
-            });
 
             return  view;
         }

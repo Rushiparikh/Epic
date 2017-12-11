@@ -6,7 +6,7 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/applogo"
+        android:icon="@drawable/ic_asset_4"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
@@ -20,8 +20,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Home_Page" />
-        <activity android:name=".Login" />
+        <activity android:name=".Home_Page"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Login"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".SwapScreen"
             android:screenOrientation="portrait" />
@@ -30,7 +32,8 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".Register"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateVisible|adjustPan"/>
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"

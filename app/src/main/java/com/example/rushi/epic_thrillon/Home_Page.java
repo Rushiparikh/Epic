@@ -26,6 +26,9 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.rushi.epic_thrillon.HomeFragment;
 import com.facebook.AccessToken;
 import com.facebook.FacebookBroadcastReceiver;
@@ -141,7 +144,8 @@ public class Home_Page extends AppCompatActivity implements NavigationView.OnNav
 
             Log.e("TAG_name", name);
             nav_textview_name.setText(name);
-            new Home_Page.DownloadImage(nav_image_view).execute(imageUrl);
+           // new Home_Page.DownloadImage(nav_image_view).execute(imageUrl);
+            Glide.with(getApplicationContext()).load(imageUrl).apply(RequestOptions.circleCropTransform()).into(nav_image_view);
             GraphRequest req = GraphRequest.newMeRequest(accessToken, new GraphRequest.GraphJSONObjectCallback() {
                 @Override
                 public void onCompleted(JSONObject object, GraphResponse response) {
@@ -169,7 +173,8 @@ public class Home_Page extends AppCompatActivity implements NavigationView.OnNav
                 String personId = acct.getId();
                 String personPhoto = acct.getPhotoUrl().toString();
                 nav_textview_name.setText(personName);
-                new Home_Page.DownloadImage(nav_image_view).execute(personPhoto);
+              //  new Home_Page.DownloadImage(nav_image_view).execute(personPhoto);
+                Glide.with(getApplicationContext()).load(personPhoto).apply(RequestOptions.circleCropTransform()).into(nav_image_view);
                 nav_textview_email.setText(personEmail);
 
 
