@@ -43,25 +43,40 @@ public class Register extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String firstName_register=firstName.getText().toString();
-                String lastName_register=firstName.getText().toString();
+                String lastName_register=lastName.getText().toString();
                 String mobile_register=mobile.getText().toString();
                 String email_register=email.getText().toString();
                 String password_register=password.getText().toString();
                 String confirmPass_register=confirmPass.getText().toString();
+                if(firstName_register.matches("[a-zA-Z]+") && firstName_register.length()>0){
+                    if(lastName_register.matches("[a-zA-Z]+") && lastName_register.length()>0){
+                        if(mobile_register.matches("[0-9]+" )&& mobile_register.length()==10){
+                            if(email_register.matches("[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+") && email_register.length()>0){
+                                if(password_register.length()>6 && password_register.length()<15){
+                                    if(confirmPass_register.equals(password_register)){
+                                        String id=mref.push().getKey();
+                                        User user=new User(firstName_register,lastName_register,mobile_register,email_register,password_register,confirmPass_register);
+                                        mref.child(id).setValue(id,user);
+                                        startActivity(new Intent(Register.this,Login.class));
 
-                if(!TextUtils.isEmpty(firstName_register) && !TextUtils.isEmpty(mobile_register) && !TextUtils.isEmpty(email_register) && !TextUtils.isEmpty(lastName_register) && !TextUtils.isEmpty(password_register)&& !TextUtils.isEmpty(confirmPass_register) ){
-                    if(password_register.equals(confirmPass_register)){
-                        String id=mref.push().getKey();
-                        User user=new User(firstName_register,lastName_register,mobile_register,email_register,password_register,confirmPass_register);
-                        mref.child(id).setValue(id,user);
-                        startActivity(new Intent(Register.this,Login.class));
+                                    }else{
+                                        Toast.makeText(Register.this,"Both password not match", Toast.LENGTH_SHORT).show();
+                                    }
+                                }else{
+                                    Toast.makeText(Register.this,"Password length must be between 7 and 14", Toast.LENGTH_SHORT).show();
+                                }
+                            }else{
+                                Toast.makeText(Register.this,"Wrong input in Email", Toast.LENGTH_SHORT).show();
+                            }
+                        }else{
+                            Toast.makeText(Register.this,"Wrong input in MObile no", Toast.LENGTH_SHORT).show();
+                        }
                     }else{
-                        Toast.makeText(Register.this,"Password and Confirm Password are not same", Toast.LENGTH_LONG).show();
+                        Toast.makeText(Register.this,"Wrong input in Last name", Toast.LENGTH_SHORT).show();
                     }
 
-
                 }else{
-                    Toast.makeText(Register.this,"Pls enter all values", Toast.LENGTH_LONG).show();
+                    Toast.makeText(Register.this,"Wrong input in First name", Toast.LENGTH_SHORT).show();
                 }
             }
         });

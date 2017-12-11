@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="1dp"
             android:scaleType="fitXY"
-            app:srcCompat="@drawable/loginscreen" />
+            app:srcCompat="@drawable/logo" />
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -44,38 +44,67 @@
                         android:id="@+id/register_text"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:layout_weight="20"
                         android:layout_marginBottom="20dp"
+                        android:layout_weight="20"
                         android:gravity="center_horizontal"
                         android:text="@string/register_text"
 
-                        android:visibility="visible"
-                        android:textColor="@color/cardview_light_background"
+                        android:textColor="@color/appColor"
                         android:textColorHint="@color/cardview_light_background"
-                        android:textSize="20sp"/>
+                        android:textSize="20sp"
+                        android:visibility="visible" />
 
-                    <EditText
-                        android:id="@+id/first_name_edittext"
+
+                    <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
-                        android:layout_height="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/email_loginOuter"
+                        android:layout_centerVertical="true"
                         android:layout_marginBottom="20dp"
                         android:layout_marginLeft="20dp"
                         android:layout_marginRight="20dp"
-                        android:layout_weight="20"
-                        android:ems="10"
-                        android:hint="@string/first_name_signup"
-                        android:inputType="textPersonName"
                         android:textColor="@color/cardview_light_background"
-                        android:textColorHint="@color/cardview_light_background"
-                        android:textSize="20sp" />
+                        android:textColorHint="@color/cardview_light_background">
+
+                        <EditText
+                            android:id="@+id/first_name_edittext"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/first_name_signup"
+                            android:singleLine="true"
+                            android:textColor="@color/cardview_light_background"
+                            android:textColorHighlight="@color/cardview_light_background"
+                            android:textColorHint="@color/cardview_light_background" />
+                    </android.support.design.widget.TextInputLayout>
+                    <!--<android.support.design.widget.TextInputLayout-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:id="@+id/email_loginOuter"-->
+                        <!--android:layout_centerVertical="true"-->
+                        <!--android:layout_marginBottom="20dp"-->
+                        <!--android:layout_marginLeft="20dp"-->
+                        <!--android:layout_marginRight="20dp"-->
+                        <!--android:textColor="@color/cardview_light_background"-->
+                        <!--android:textColorHint="@color/cardview_light_background"-->
+                        <!--&gt;-->
+                        <!--<EditText-->
+                            <!--android:id="@+id/first_name_edittext"-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="0dp"-->
+                            <!--android:hint="@string/first_name_signup"-->
+
+                            <!--android:inputType="textPersonName"-->
+                            <!--android:textColor="@color/colorAccent"-->
+                            <!--android:textColorHint="@color/cardview_light_background"-->
+                            <!--android:textSize="20sp" />-->
+                    <!--</android.support.design.widget.TextInputLayout>-->
+                    <!---->
+
 
                     <EditText
                         android:id="@+id/last_name_edittext"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:textColor="@color/cardview_light_background"
-                        android:textColorHint="@color/cardview_light_background"
-                        android:textSize="20sp"
                         android:layout_marginBottom="20dp"
                         android:layout_marginLeft="20dp"
                         android:layout_marginRight="20dp"
@@ -83,6 +112,9 @@
                         android:ems="10"
                         android:hint="@string/last_name_signup"
                         android:inputType="textPersonName"
+                        android:textColor="@color/colorAccent"
+                        android:textColorHint="@color/cardview_light_background"
+                        android:textSize="20sp"
 
                         />
 
@@ -105,13 +137,13 @@
                         android:id="@+id/mobile_number_edittext"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:layout_weight="20"
                         android:layout_marginBottom="20dp"
                         android:layout_marginLeft="20dp"
                         android:layout_marginRight="20dp"
+                        android:layout_weight="20"
                         android:ems="10"
                         android:hint="@string/mobile_number_signup"
-                        android:inputType="textPersonName"
+                        android:inputType="phone"
                         android:textColor="@color/cardview_light_background"
                         android:textColorHint="@color/cardview_light_background"
                         android:textSize="20sp" />
@@ -120,13 +152,13 @@
                         android:id="@+id/password_edittext"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:layout_weight="20"
                         android:layout_marginBottom="20dp"
                         android:layout_marginLeft="20dp"
                         android:layout_marginRight="20dp"
+                        android:layout_weight="20"
                         android:ems="10"
                         android:hint="@string/password_signup"
-                        android:inputType="textPersonName"
+                        android:inputType="textPassword"
                         android:textColor="@color/cardview_light_background"
                         android:textColorHint="@color/cardview_light_background"
                         android:textSize="20sp" />
@@ -135,13 +167,13 @@
                         android:id="@+id/confirm_password_edittext"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:layout_weight="20"
                         android:layout_marginBottom="20dp"
                         android:layout_marginLeft="20dp"
                         android:layout_marginRight="20dp"
+                        android:layout_weight="20"
                         android:ems="10"
                         android:hint="@string/confirm_password_signup"
-                        android:inputType="textPersonName"
+                        android:inputType="textPassword"
                         android:textColor="@color/cardview_light_background"
                         android:textColorHint="@color/cardview_light_background"
                         android:textSize="20sp" />

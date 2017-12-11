@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="1dp"
             android:scaleType="fitXY"
-            app:srcCompat="@drawable/loginscreen" />
+            app:srcCompat="@drawable/logo" />
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -46,14 +46,16 @@
                     android:layout_marginRight="20dp"
                     android:textColor="@color/cardview_light_background"
                     android:textColorHint="@color/cardview_light_background">
-                <EditText
-                    android:id="@+id/email_login"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/email_signup"
-                    android:textColor="@color/cardview_light_background"
-                    android:textColorHighlight="@color/cardview_light_background"
-                    android:textColorHint="@color/cardview_light_background" />
+
+                    <EditText
+                        android:id="@+id/email_login"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/email_signup"
+                        android:singleLine="true"
+                        android:textColor="@color/cardview_light_background"
+                        android:textColorHighlight="@color/cardview_light_background"
+                        android:textColorHint="@color/cardview_light_background" />
                 </android.support.design.widget.TextInputLayout>
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
@@ -66,15 +68,17 @@
                     android:layout_centerVertical="true"
                     android:textColor="@color/cardview_light_background"
                     android:textColorHint="@color/cardview_light_background">
-                <EditText
-                    android:id="@+id/password_login_edittext"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+
+                    <EditText
+                        android:id="@+id/password_login_edittext"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
 
 
-                    android:hint="@string/password_signup"
-                    android:textColor="@color/cardview_light_background"
-                    android:textColorHint="@color/cardview_light_background" />
+                        android:hint="@string/password_signup"
+                        android:singleLine="true"
+                        android:textColor="@color/cardview_light_background"
+                        android:textColorHint="@color/cardview_light_background" />
 
                 </android.support.design.widget.TextInputLayout>
 

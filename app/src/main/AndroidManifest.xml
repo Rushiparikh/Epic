@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SplashScreen"
+        <activity
+            android:name=".SplashScreen"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,19 +20,23 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Home_Page"/>
-        <activity android:name=".Login"></activity>
-        <activity android:name=".SwapScreen"
+        <activity android:name=".Home_Page" />
+        <activity android:name=".Login" />
+        <activity
+            android:name=".SwapScreen"
             android:screenOrientation="portrait" />
-        <activity android:name=".AskForSignin"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".AskForSignin"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Register"
+            android:screenOrientation="portrait" />
 
-        <activity android:name=".Register"
-            android:screenOrientation="portrait"></activity>
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
 
-        <meta-data android:name="com.facebook.sdk.ApplicationId"
-            android:value="@string/facebook_app_id"/>
-
+        <activity android:name=".ActivityClick"></activity>
     </application>
 
 </manifest>
