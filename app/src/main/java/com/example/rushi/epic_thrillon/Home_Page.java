@@ -337,16 +337,17 @@ public class Home_Page extends AppCompatActivity implements NavigationView.OnNav
 
     private void signOut() {
         if (mGoogleApiClient != null && mGoogleApiClient.isConnected()) {
-            mGoogleApiClient.clearDefaultAccountAndReconnect().setResultCallback(new ResultCallback<Status>() {
+            //mGoogleApiClient.clearDefaultAccountAndReconnect().setResultCallback(new ResultCallback<Status>() {
 
-                @Override
-                public void onResult(Status status) {
+              //  @Override
+              //  public void onResult(Status status) {
                     Auth.GoogleSignInApi.signOut(mGoogleApiClient);
                     mGoogleApiClient.disconnect();
                     mGoogleApiClient.connect();
                     startActivity(new Intent(Home_Page.this,AskForSignin.class));
-                }
-            });
+                    finish();
+            //    }
+            //});
 
         }
     }

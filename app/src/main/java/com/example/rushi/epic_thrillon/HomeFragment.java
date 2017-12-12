@@ -1,6 +1,7 @@
 package com.example.rushi.epic_thrillon;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -64,6 +65,9 @@ public class HomeFragment extends Fragment {
             gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 public void onItemClick(AdapterView<?> parent, View v,
                                         int position, long id) {
+
+                    Intent intent=new Intent(getActivity(),ActivityClick.class);
+                    startActivity(intent);
 
                 }
             });
