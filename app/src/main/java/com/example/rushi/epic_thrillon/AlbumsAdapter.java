@@ -33,9 +33,9 @@ public class AlbumsAdapter extends RecyclerView.Adapter<AlbumsAdapter.MyViewHold
         public MyViewHolder(View view) {
             super(view);
             title = (TextView) view.findViewById(R.id.title);
-            count = (TextView) view.findViewById(R.id.count);
-            thumbnail = (ImageView) view.findViewById(R.id.thumbnail);
-            overflow = (ImageView) view.findViewById(R.id.overflow);
+//            count = (TextView) view.findViewById(R.id.count);
+          thumbnail = (ImageView) view.findViewById(R.id.thumbnail);
+//            overflow = (ImageView) view.findViewById(R.id.overflow);
         }
     }
 
@@ -57,18 +57,18 @@ public class AlbumsAdapter extends RecyclerView.Adapter<AlbumsAdapter.MyViewHold
     public void onBindViewHolder(final MyViewHolder holder, int position) {
         Album album = albumList.get(position);
         holder.title.setText(album.getName());
-        holder.count.setText(album.getNumOfSongs() + " songs");
+       // holder.count.setText(album.getNumOfSongs() + " songs");
         holder.thumbnail.setImageResource(album.getThumbnail());
 
         // loading album cover using Glide library
       //  Glide.with(mContext).load(album.getThumbnail()).into(holder.thumbnail);
 
-        holder.overflow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-               // showPopupMenu(holder.overflow);
-            }
-        });
+//        holder.overflow.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//               // showPopupMenu(holder.overflow);
+//            }
+//        });
     }
 
     /**

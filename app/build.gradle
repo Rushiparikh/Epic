@@ -47,6 +47,5 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.4.0'
 
 
-
 }
 apply plugin: 'com.google.gms.google-services'

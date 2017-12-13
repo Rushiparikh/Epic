@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
@@ -22,6 +23,7 @@ public class Register extends AppCompatActivity {
     private Button register;
     private CheckBox checkbox;
     private DatabaseReference mref;
+    private TextView alredyRegister;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +38,14 @@ public class Register extends AppCompatActivity {
         confirmPass=(EditText)findViewById(R.id.confirm_password_edittext);
         checkbox = (CheckBox)findViewById(R.id.checkedTextView);
         register =(Button)findViewById(R.id.registeration_button);
+        alredyRegister=(TextView)findViewById(R.id.alredy_register);
+
+        alredyRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Register.this,Login.class));
+            }
+        });
 
 
 
@@ -56,8 +66,11 @@ public class Register extends AppCompatActivity {
                                     if(confirmPass_register.equals(password_register)){
                                         String id=mref.push().getKey();
                                         User user=new User(firstName_register,lastName_register,mobile_register,email_register,password_register,confirmPass_register);
-                                        mref.child(id).setValue(id,user);
-                                        startActivity(new Intent(Register.this,Login.class));
+                                        mref.child(id).setValue(user);
+                                        Intent i = new Intent(Register.this,OneTimePass.class);
+                                        i.putExtra("Number",mobile_register);
+
+                                        startActivity(i);
 
                                     }else{
                                         Toast.makeText(Register.this,"Both password not match", Toast.LENGTH_SHORT).show();

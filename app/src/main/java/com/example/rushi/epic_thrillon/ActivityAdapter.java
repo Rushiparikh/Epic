@@ -35,9 +35,9 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.MyView
         public MyViewHolder(View view) {
             super(view);
             title = (TextView) view.findViewById(R.id.title);
-            count = (TextView) view.findViewById(R.id.count);
+         //   count = (TextView) view.findViewById(R.id.count);
             thumbnail = (ImageView) view.findViewById(R.id.thumbnail);
-            overflow = (ImageView) view.findViewById(R.id.overflow);
+           // overflow = (ImageView) view.findViewById(R.id.overflow);
         }
     }
 
@@ -59,17 +59,17 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.MyView
     public void onBindViewHolder(final MyViewHolder holder, int position) {
         Album album = albumList.get(position);
         holder.title.setText(album.getName());
-        holder.count.setText(album.getNumOfSongs() + " songs");
+      //  holder.count.setText(album.getNumOfSongs() + " songs");
 
         // loading album cover using Glide library
         Glide.with(mContext).load(album.getThumbnail()).into(holder.thumbnail);
 
-        holder.overflow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showPopupMenu(holder.overflow);
-            }
-        });
+//        holder.overflow.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                showPopupMenu(holder.overflow);
+//            }
+//        });
     }
 
     /**

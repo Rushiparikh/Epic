@@ -250,6 +250,7 @@
                         android:layout_marginLeft="20dp"
                         android:layout_weight="20"
                         android:text="@string/already_register_text"
+
                         android:textColor="@color/cardview_light_background"
                         android:textColorHint="@color/cardview_light_background"
                         android:textSize="20sp" />
