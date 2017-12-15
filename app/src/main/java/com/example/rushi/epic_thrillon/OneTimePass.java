@@ -24,8 +24,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.concurrent.TimeUnit;
 
 public class OneTimePass extends AppCompatActivity {
-    EditText et,tt;
-    Button bt,btt;
+    EditText phoneEdit,oneTimePass;
+    Button phonebt,Ontetimebt;
     FirebaseAuth mAuth;
     String ValidationId,code,phoneNumber;
     PhoneAuthProvider.ForceResendingToken token;
@@ -38,20 +38,22 @@ public class OneTimePass extends AppCompatActivity {
         mAuth =FirebaseAuth.getInstance();
         Intent i = getIntent();
         phoneNumber = i.getExtras().getString("Number");
-        et = (EditText) findViewById(R.id.phone);
-        bt = (Button) findViewById(R.id.phoneSummit);
-        tt = (EditText) findViewById(R.id.otp);
-        btt = (Button) findViewById(R.id.otpSummit);
+        phoneEdit = (EditText) findViewById(R.id.phone);
+        phonebt = (Button) findViewById(R.id.phoneSummit);
+        oneTimePass = (EditText) findViewById(R.id.otp);
+        Ontetimebt = (Button) findViewById(R.id.otpSummit);
 
-        et.setText(phoneNumber);
-        bt.setOnClickListener(new View.OnClickListener() {
+        phoneEdit.setText(phoneNumber);
+
+
+        phonebt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 GetCode();
             }
         });
 
-        btt.setOnClickListener(new View.OnClickListener() {
+        Ontetimebt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 VerifyPhone();
@@ -78,14 +80,14 @@ public class OneTimePass extends AppCompatActivity {
 
     public void GetCode(){
         PhoneAuthProvider.getInstance().verifyPhoneNumber(phoneNumber, 60, TimeUnit.SECONDS, this, mCallBack);
-        bt.setVisibility(View.GONE);
-        et.setVisibility(View.GONE);
-        btt.setVisibility(View.VISIBLE);
-        tt.setVisibility(View.VISIBLE);
+        phonebt.setVisibility(View.GONE);
+        phoneEdit.setVisibility(View.GONE);
+        Ontetimebt.setVisibility(View.VISIBLE);
+        oneTimePass.setVisibility(View.VISIBLE);
 
     }
     public void VerifyPhone(){
-        code = tt.getText().toString();
+        code = oneTimePass.getText().toString();
 
         PhoneAuthCredential credential = PhoneAuthProvider.getCredential(ValidationId,code);
         signInWithPhoneAuthCredential(credential);
@@ -115,6 +117,17 @@ public class OneTimePass extends AppCompatActivity {
                         }
                     });
         }
+
+    private void resendVerificationCode(String phoneNumber,
+                                        PhoneAuthProvider.ForceResendingToken token) {
+        PhoneAuthProvider.getInstance().verifyPhoneNumber(
+                phoneNumber,        // Phone number to verify
+                60,                 // Timeout duration
+                TimeUnit.SECONDS,   // Unit of timeout
+                this,               // Activity (for callback binding)
+                mCallBack,         // OnVerificationStateChangedCallbacks
+                token);             // ForceResendingToken from callbacks
+    }
     }
 
 

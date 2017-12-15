@@ -2,7 +2,9 @@ package com.example.rushi.epic_thrillon;
 
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -18,6 +20,10 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.github.aakira.expandablelayout.ExpandableRelativeLayout;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +39,7 @@ public class HomeFragment extends Fragment {
     private ViewTreeObserver.OnGlobalLayoutListener mGlobalLayoutListener;
     LinearLayout linearLayout;
 
+
     public HomeFragment() {
         // Required empty public constructor
     }
@@ -44,7 +51,9 @@ public class HomeFragment extends Fragment {
             // Inflate the layout for this fragment
             View view = inflater.inflate(R.layout.fragment_home, container, false);
             Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
-          //  getSupportActionBar().setTitle(MainActivity.class.getSimpleName());
+
+
+            //  getSupportActionBar().setTitle(MainActivity.class.getSimpleName());
           recyclerViewfirst = (RecyclerView) view.findViewById(R.id.recycler_view_first);
 
              int[] mThumbIds = {
@@ -62,11 +71,13 @@ public class HomeFragment extends Fragment {
             GridView gridview = (GridView) view.findViewById(R.id.gridview);
             gridview.setAdapter(new ImageAdapter(getActivity(),web,mThumbIds));
 
+
             gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 public void onItemClick(AdapterView<?> parent, View v,
                                         int position, long id) {
 
                     Intent intent=new Intent(getActivity(),ActivityClick.class);
+
                     startActivity(intent);
 
                 }
