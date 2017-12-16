@@ -164,7 +164,11 @@ public class Home_Page extends AppCompatActivity implements NavigationView.OnNav
             });
 
          //  nav_textview_email.setText(email);
-        }else{
+        }else if(Login_with.equalsIgnoreCase("email")){
+
+
+            }else {
+
             if (acct != null) {
                 String personName = acct.getDisplayName();
                 String personGivenName = acct.getGivenName();
@@ -173,11 +177,9 @@ public class Home_Page extends AppCompatActivity implements NavigationView.OnNav
                 String personId = acct.getId();
                 String personPhoto = acct.getPhotoUrl().toString();
                 nav_textview_name.setText(personName);
-              //  new Home_Page.DownloadImage(nav_image_view).execute(personPhoto);
+                //  new Home_Page.DownloadImage(nav_image_view).execute(personPhoto);
                 Glide.with(getApplicationContext()).load(personPhoto).apply(RequestOptions.circleCropTransform()).into(nav_image_view);
                 nav_textview_email.setText(personEmail);
-
-
             }
         }
 
@@ -312,7 +314,11 @@ public class Home_Page extends AppCompatActivity implements NavigationView.OnNav
                 LoginManager.getInstance().logOut();
                 startActivity(new Intent(Home_Page.this, AskForSignin.class));
                 finish();
-            } else {
+            }else if(Login_with.equalsIgnoreCase("email")){
+                startActivity(new Intent(Home_Page.this, AskForSignin.class));
+                finish();
+            }
+            else {
                 signOut();
             }
         }else{
