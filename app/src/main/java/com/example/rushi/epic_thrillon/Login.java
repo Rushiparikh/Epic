@@ -1,6 +1,8 @@
 package com.example.rushi.epic_thrillon;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -22,6 +24,8 @@ public class Login extends AppCompatActivity {
     private Button login;
     boolean flag = false;
 
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
     List<User> arrayList=new ArrayList<>();
     private EditText email,password;
     @Override
@@ -49,6 +53,8 @@ public class Login extends AppCompatActivity {
         });
 
 
+        sharedPreferences=getSharedPreferences(AskForSignin.My_pref, Context.MODE_PRIVATE);
+        editor=sharedPreferences.edit();
         email=findViewById(R.id.email_login);
         password=findViewById(R.id.password_login_edittext);
         login.setOnClickListener(new View.OnClickListener() {
@@ -63,6 +69,8 @@ public class Login extends AppCompatActivity {
                     if(email_login.equals(email_register) && pass_login.equals(password_register)){
                         Intent intent=new Intent(Login.this,Home_Page.class);
                         intent.putExtra("Login","email");
+                        editor.putBoolean("Email",true);
+                        editor.commit();
                         startActivity(intent);
                         flag =true;
 

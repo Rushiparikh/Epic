@@ -20,17 +20,17 @@ import static com.facebook.FacebookSdk.getApplicationContext;
 
 public class ImageAdapter extends BaseAdapter {
     private Context mContext;
-    private final String[] web;
-    private final String[] Imageid;
+    private final List<String> web;
+    private final List<String> Imageid;
 
-    public ImageAdapter(Context c, String[] web,String[] Imageid) {
+    public ImageAdapter(Context c,List<String> web ,List<String> Imageid) {
         mContext = c;
         this.Imageid = Imageid;
         this.web = web;
     }
 
     public int getCount() {
-        return web.length;
+        return web.size();
     }
 
     public Object getItem(int position) {
@@ -59,11 +59,11 @@ public class ImageAdapter extends BaseAdapter {
 
             TextView textView = (TextView)grid.findViewById(R.id.home_text);
             ImageView imageview = (ImageView)grid.findViewById(R.id.home_image);
-            textView.setText(web[position]);
+            textView.setText(web.get(position));
 
 
            // imageview.setImageResource(Imageid[position]);
-            Glide.with(getApplicationContext()).load(decodeFromBase64ToBitmap(Imageid[position])).apply(RequestOptions.circleCropTransform()).into(imageview);
+            Glide.with(getApplicationContext()).load(decodeFromBase64ToBitmap(Imageid.get(position))).apply(RequestOptions.circleCropTransform()).into(imageview);
 
 
         } else {

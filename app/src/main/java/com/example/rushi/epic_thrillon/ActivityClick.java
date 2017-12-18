@@ -242,7 +242,7 @@ private Bitmap decodeFromBase64ToBitmap(String encodedImage)
         switch(item.getItemId()){
             case android.R.id.home:
                 onBackPressed();
-                return  true;
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }

@@ -45,12 +45,12 @@ public class HomeFragment extends Fragment {
     private Button mExpandButton;
     private ExpandableRelativeLayout mExpandLayout;
     private Button mOverlayText,n;
-    int i =0;
+
 
     LinearLayout linearLayout;
     AdView adView;
-    String[] web;
-    String[] mThumbIds;
+    List<String> web;
+    List<String> mThumbIds;
     Upload u;
     DatabaseReference mref;
     GridView gridView;
@@ -85,6 +85,8 @@ public class HomeFragment extends Fragment {
                     .build();
             // Inflate the layout for this fragment
             adView.loadAd(adRequest);
+            web=new ArrayList<>();
+            mThumbIds=new ArrayList<>();
             albumList = new ArrayList<>();
             gridView = (GridView) view.findViewById(R.id.gridview);
 
@@ -94,13 +96,13 @@ public class HomeFragment extends Fragment {
            valueEventListener=new ValueEventListener() {
                @Override
                public void onDataChange(DataSnapshot dataSnapshot) {
-                   web=new String[(int) dataSnapshot.getChildrenCount()];
-                   mThumbIds= new String[(int) dataSnapshot.getChildrenCount()];
+                   web.clear();
+                   mThumbIds.clear();
                    for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
                        u = dataSnapshot1.getValue(Upload.class);
-                       web[i] = u.getActivity_name();
-                       mThumbIds[i] = u.getImages();
-                       i++;
+                         web.add(u.getActivity_name());
+                        mThumbIds.add(u.getImages());
+
 
                    }
                    gridView.setAdapter(new ImageAdapter(getActivity(), web, mThumbIds));
@@ -124,8 +126,8 @@ public class HomeFragment extends Fragment {
                                         int position, long id) {
 
                     Intent intent=new Intent(getActivity(),ActivityClick.class);
-                    intent.putExtra("ActivityName",web[position]);
-                    intent.putExtra("ActivityImage",mThumbIds[position]);
+                    intent.putExtra("ActivityName",web.get(position));
+                    intent.putExtra("ActivityImage",mThumbIds.get(position));
 
                     startActivity(intent);
 

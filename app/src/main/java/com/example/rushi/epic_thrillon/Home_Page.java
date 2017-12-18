@@ -1,6 +1,8 @@
 package com.example.rushi.epic_thrillon;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -68,11 +70,15 @@ public class Home_Page extends AppCompatActivity implements NavigationView.OnNav
     String Login_with;
     private NavigationView navigationView;
 
+    boolean facebook,email_login;
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
     private View navHeader;
     private Toolbar toolbar;
     private GoogleApiClient mGoogleApiClient;
     private GoogleSignInAccount acct;
     public static int navItemIndex = 0;
+    private boolean google;
     private static final String TAG_HOME = "home";
     private static final String TAG_NEARBY = "Near By";
     private static final String TAG_DESTINATION = "Dsstination";
@@ -82,10 +88,8 @@ public class Home_Page extends AppCompatActivity implements NavigationView.OnNav
     public static String CURRENT_TAG = TAG_HOME;
     // toolbar titles respected to selected nav menu item
     private String[] activityTitles;
-
     // flag to load home fragment when user presses back key
     private boolean shouldLoadHomeFragOnBackPress = true;
-
     private FragmentManager fragmentManager;
     private FragmentTransaction fragmentTransaction;
 
@@ -96,7 +100,7 @@ public class Home_Page extends AppCompatActivity implements NavigationView.OnNav
          toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
+        sharedPreferences=getSharedPreferences(AskForSignin.My_pref, Context.MODE_PRIVATE);
 
       //  activityTitles = getResources().getStringArray(R.array.nav_item_activity_titles);
         navigationView = (NavigationView) findViewById(R.id.nav_view);
@@ -105,8 +109,11 @@ public class Home_Page extends AppCompatActivity implements NavigationView.OnNav
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
+        editor=sharedPreferences.edit();
 
-
+        facebook= sharedPreferences.getBoolean("Facebook",false);
+        google=sharedPreferences.getBoolean("Google",false);
+        email_login=sharedPreferences.getBoolean("Email",false);
         navigationView.setNavigationItemSelectedListener(this);
 
         //set Default fragment on loading
@@ -137,7 +144,7 @@ public class Home_Page extends AppCompatActivity implements NavigationView.OnNav
 
 
 
-        if(Login_with.equalsIgnoreCase("Facebook")){
+        if(facebook){
             Profile profile = Profile.getCurrentProfile();
             String imageUrl = profile.getProfilePictureUri(200, 200).toString();
             String firstname = profile.getFirstName();
@@ -167,10 +174,7 @@ public class Home_Page extends AppCompatActivity implements NavigationView.OnNav
             });
 
          //  nav_textview_email.setText(email);
-        }else if(Login_with.equalsIgnoreCase("email")){
-
-
-            }else {
+        }else if(google){
 
             if (acct != null) {
                 String personName = acct.getDisplayName();
@@ -183,7 +187,14 @@ public class Home_Page extends AppCompatActivity implements NavigationView.OnNav
                 //  new Home_Page.DownloadImage(nav_image_view).execute(personPhoto);
                 Glide.with(getApplicationContext()).load(personPhoto).apply(RequestOptions.circleCropTransform()).into(nav_image_view);
                 nav_textview_email.setText(personEmail);
-            }
+                }
+
+        }else if(email_login) {
+
+
+
+
+
         }
 
     }
@@ -313,15 +324,21 @@ public class Home_Page extends AppCompatActivity implements NavigationView.OnNav
 
         }
         else if (id == R.id.nav_logout) {
-            if (Login_with.equalsIgnoreCase("Facebook")) {
+            if (facebook) {
                 LoginManager.getInstance().logOut();
+                editor.putBoolean("Facebook",false);
+                editor.commit();
                 startActivity(new Intent(Home_Page.this, AskForSignin.class));
                 finish();
-            }else if(Login_with.equalsIgnoreCase("email")){
+            }else if(email_login){
                 startActivity(new Intent(Home_Page.this, AskForSignin.class));
+                editor.putBoolean("Email",false);
+                editor.commit();
                 finish();
             }
             else {
+                editor.putBoolean("Google",false);
+                editor.commit();
                 signOut();
             }
         }else{
