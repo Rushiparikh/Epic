@@ -4,7 +4,10 @@ package com.example.rushi.epic_thrillon;
  * Created by dhaval on 15/12/2017.
  */
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.widget.RecyclerView;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,14 +46,26 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.ViewHo
     public void onBindViewHolder(ViewHolder holder, int position) {
         Upload upload = uploads.get(position);
 
-        holder.textViewName.setText(upload.getName());
+      holder.textViewName.setText(upload.getActivity_name());
 
-        Glide.with(context).load(upload.getUrl()).into(holder.imageView);
+        Glide.with(context).load(decodeFromBase64ToBitmap(upload.getImages())).into(holder.imageView);
     }
 
     @Override
     public int getItemCount() {
         return uploads.size();
+    }
+
+    private Bitmap decodeFromBase64ToBitmap(String encodedImage)
+
+    {
+
+        byte[] decodedString = Base64.decode(encodedImage, Base64.DEFAULT);
+
+        Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+
+        return decodedByte;
+
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {

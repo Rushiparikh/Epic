@@ -6,58 +6,95 @@
     android:layout_height="match_parent"
     tools:context="com.example.rushi.epic_thrillon.UploadActivity">
 
-    <LinearLayout
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+      <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="vertical">
+
+        <EditText
+            android:hint="activityname"
+            android:id="@+id/activityname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
         <Button
             android:id="@+id/buttonChoose"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Choose" />
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Choose"/>
 
         <EditText
-            android:id="@+id/editText"
+            android:hint="price"
+            android:id="@+id/price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:hint="destination"
+            android:id="@+id/destination"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/rating"
+            android:hint="rating"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TimePicker
+            android:id="@+id/time"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="4"
-            android:hint="Enter name for Image" />
+            android:layout_height="wrap_content"></TimePicker>
 
-    </LinearLayout>
+        <EditText
+            android:id="@+id/service"
+            android:hint="service"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <EditText
+            android:id="@+id/description"
+            android:hint="description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
+        <EditText
+            android:id="@+id/review"
+            android:hint="review"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <EditText
+            android:id="@+id/organiserName"
+            android:hint="organiserName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <EditText
+            android:id="@+id/mobileNo"
+            android:hint="mobileNo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/linearLayout" />
+        <EditText
+            android:id="@+id/longi"
+            android:hint="longitude"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:orientation="vertical">
-
+        <EditText
+            android:id="@+id/leti"
+            android:hint="letitude"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
         <Button
             android:id="@+id/buttonUpload"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Upload" />
+            android:layout_height="match_parent" />
 
-        <TextView
-            android:id="@+id/textViewShow"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:text="View Uploads"
-            android:textAlignment="center"
-            android:textColor="@color/colorPrimary"
-            android:textStyle="bold" />
-    </LinearLayout>
+       </LinearLayout>
+    </ScrollView>
+
 </RelativeLayout>

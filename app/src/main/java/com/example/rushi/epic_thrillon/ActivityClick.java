@@ -2,6 +2,8 @@ package com.example.rushi.epic_thrillon;
 
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.design.widget.AppBarLayout;
@@ -13,11 +15,13 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Base64;
 import android.util.TypedValue;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.ads.AdRequest;
@@ -45,8 +49,10 @@ public class ActivityClick extends AppCompatActivity {
     private ActionBar maActionBar;
     StorageReference mStorageReference;
     private DatabaseReference mDatabase;
-
+    String ActivityName;
+    String ActivityImage;
     Uri uri;
+    TextView ActName;
 
 
 
@@ -57,6 +63,13 @@ public class ActivityClick extends AppCompatActivity {
         setContentView(R.layout.activity_click);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        ActName= findViewById(R.id.love_music);
+        Intent i =getIntent();
+        ActivityName= i.getStringExtra("ActivityName");
+        ActivityImage = i.getStringExtra("ActivityImage");
+
+        ActName.setText(ActivityName);
+
 
         initCollapsingToolbar();
 
@@ -114,7 +127,7 @@ public class ActivityClick extends AppCompatActivity {
 
         try {
 
-            Glide.with(this).load(R.drawable.cover).into((ImageView) findViewById(R.id.backdrop));
+            Glide.with(this).load(decodeFromBase64ToBitmap(ActivityImage)).into((ImageView) findViewById(R.id.backdrop));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -213,7 +226,17 @@ public class ActivityClick extends AppCompatActivity {
 //
 //        adapter.notifyDataSetChanged();
 //    }
+private Bitmap decodeFromBase64ToBitmap(String encodedImage)
 
+{
+
+    byte[] decodedString = Base64.decode(encodedImage, Base64.DEFAULT);
+
+    Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+
+    return decodedByte;
+
+}
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()){

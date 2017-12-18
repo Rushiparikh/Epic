@@ -1,6 +1,9 @@
 package com.example.rushi.epic_thrillon;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,9 +21,9 @@ import static com.facebook.FacebookSdk.getApplicationContext;
 public class ImageAdapter extends BaseAdapter {
     private Context mContext;
     private final String[] web;
-    private final int[] Imageid;
+    private final String[] Imageid;
 
-    public ImageAdapter(Context c, String[] web,int[] Imageid) {
+    public ImageAdapter(Context c, String[] web,String[] Imageid) {
         mContext = c;
         this.Imageid = Imageid;
         this.web = web;
@@ -57,8 +60,10 @@ public class ImageAdapter extends BaseAdapter {
             TextView textView = (TextView)grid.findViewById(R.id.home_text);
             ImageView imageview = (ImageView)grid.findViewById(R.id.home_image);
             textView.setText(web[position]);
+
+
            // imageview.setImageResource(Imageid[position]);
-            Glide.with(getApplicationContext()).load(Imageid[position]).apply(RequestOptions.circleCropTransform()).into(imageview);
+            Glide.with(getApplicationContext()).load(decodeFromBase64ToBitmap(Imageid[position])).apply(RequestOptions.circleCropTransform()).into(imageview);
 
 
         } else {
@@ -66,6 +71,18 @@ public class ImageAdapter extends BaseAdapter {
         }
 
         return grid;
+    }
+
+    private Bitmap decodeFromBase64ToBitmap(String encodedImage)
+
+    {
+
+        byte[] decodedString = Base64.decode(encodedImage, Base64.DEFAULT);
+
+        Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+
+        return decodedByte;
+
     }
 
 

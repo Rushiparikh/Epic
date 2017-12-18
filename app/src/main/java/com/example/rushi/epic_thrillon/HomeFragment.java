@@ -25,6 +25,12 @@ import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -39,21 +45,36 @@ public class HomeFragment extends Fragment {
     private Button mExpandButton;
     private ExpandableRelativeLayout mExpandLayout;
     private Button mOverlayText,n;
-    private ViewTreeObserver.OnGlobalLayoutListener mGlobalLayoutListener;
+    int i =0;
+
     LinearLayout linearLayout;
     AdView adView;
-
+    String[] web;
+    String[] mThumbIds;
+    Upload u;
+    DatabaseReference mref;
+    GridView gridView;
+    ValueEventListener valueEventListener;
 
     public HomeFragment() {
         // Required empty public constructor
     }
 
 
-        @Override
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mref.addValueEventListener(valueEventListener);
+
+    }
+
+    @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
 
-
+            mref = FirebaseDatabase.getInstance().getReference(Constants.DATABASE_PATH_UPLOADS);
             // Inflate the layout for this fragment
             View view = inflater.inflate(R.layout.fragment_home, container, false);
             Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
@@ -64,39 +85,54 @@ public class HomeFragment extends Fragment {
                     .build();
             // Inflate the layout for this fragment
             adView.loadAd(adRequest);
+            albumList = new ArrayList<>();
+            gridView = (GridView) view.findViewById(R.id.gridview);
 
+            adapter = new AlbumsAdapter(getActivity(), albumList);
 
             //  getSupportActionBar().setTitle(MainActivity.class.getSimpleName());
-          recyclerViewfirst = (RecyclerView) view.findViewById(R.id.recycler_view_first);
+           valueEventListener=new ValueEventListener() {
+               @Override
+               public void onDataChange(DataSnapshot dataSnapshot) {
+                   web=new String[(int) dataSnapshot.getChildrenCount()];
+                   mThumbIds= new String[(int) dataSnapshot.getChildrenCount()];
+                   for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+                       u = dataSnapshot1.getValue(Upload.class);
+                       web[i] = u.getActivity_name();
+                       mThumbIds[i] = u.getImages();
+                       i++;
 
-             int[] mThumbIds = {
-                    R.drawable.album1,R.drawable.album2,R.drawable.album5,R.drawable.album6,R.drawable.album7,R.drawable.album8,R.drawable.album9,R.drawable.album10,
-            };
-            String[] web = {
-                    "Google",
-                    "Github",
-                    "Instagram",
-                    "Facebook",
-                    "Flickr",
-                    "Pinterest",
-                    "Quora",
-                    "Twitter"};
-            GridView gridview = (GridView) view.findViewById(R.id.gridview);
-            gridview.setAdapter(new ImageAdapter(getActivity(),web,mThumbIds));
+                   }
+                   gridView.setAdapter(new ImageAdapter(getActivity(), web, mThumbIds));
+
+               }
+
+               @Override
+               public void onCancelled(DatabaseError databaseError) {
+
+               }
+           };
 
 
-            gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+
+
+
+
+            gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 public void onItemClick(AdapterView<?> parent, View v,
                                         int position, long id) {
 
                     Intent intent=new Intent(getActivity(),ActivityClick.class);
+                    intent.putExtra("ActivityName",web[position]);
+                    intent.putExtra("ActivityImage",mThumbIds[position]);
 
                     startActivity(intent);
 
                 }
             });
-            albumList = new ArrayList<>();
-            adapter = new AlbumsAdapter(getActivity(), albumList);
+
+
 
             //   RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 1);
             //   recyclerView.setLayoutManager(mLayoutManager);
@@ -104,6 +140,7 @@ public class HomeFragment extends Fragment {
             //   recyclerView.setItemAnimator(new DefaultItemAnimator());
             //   recyclerView.setAdapter(adapter);
 
+        recyclerViewfirst = (RecyclerView) view.findViewById(R.id.recycler_view_first);
             recyclerViewfirst.setHasFixedSize(true);
 
 
@@ -208,12 +245,15 @@ public class HomeFragment extends Fragment {
         adapter.notifyDataSetChanged();
     }
 
+
     /**
      * Adding few albums for testing
      */
-
-
-
+    @Override
+    public void onPause() {
+        super.onPause();
+        mref.removeEventListener(valueEventListener);
     }
+}
 
 
