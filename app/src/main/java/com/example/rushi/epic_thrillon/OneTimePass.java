@@ -106,6 +106,7 @@ public class OneTimePass extends AppCompatActivity {
                                 FirebaseUser user = task.getResult().getUser();
 
                                 startActivity(new Intent(OneTimePass.this,Login.class));
+                                finish();
                                 // ...
                             } else {
                                 // Sign in failed, display a message and update the UI

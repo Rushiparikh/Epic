@@ -89,6 +89,7 @@ public class Register extends AppCompatActivity {
 
 
                                         startActivity(i);
+                                        finish();
 
                                     }else{
                                         Toast.makeText(Register.this,"Both password not match", Toast.LENGTH_SHORT).show();

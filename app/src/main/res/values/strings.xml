@@ -16,7 +16,9 @@
     <string name="fb_login_protocol_scheme">fb245423285991094</string>
     <string name="email_signup">Email</string>
     <string name="title_activity_home__page">Home_Page</string>
+    <string name="banner_ad_unit_id">ca-app-pub-4689037977247733/3053805923</string>
 
+    <string name="video_ad_unit_id">ca-app-pub-4689037977247733/3010408042</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 

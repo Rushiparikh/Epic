@@ -55,6 +55,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:background="@drawable/buttons"
+        android:singleLine="true"
         android:text="Verify"
         android:textColor="@color/cardview_light_background"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -69,9 +70,11 @@
         android:layout_height="53dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
+        android:hint="OTP"
+        android:singleLine="true"
+
         android:textColor="@color/cardview_light_background"
         android:textColorHighlight="@color/cardview_light_background"
-
         android:textColorHint="@color/cardview_light_background"
         android:textColorLink="@color/cardview_light_background"
         android:visibility="gone"

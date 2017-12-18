@@ -20,6 +20,9 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.github.aakira.expandablelayout.ExpandableRelativeLayout;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
@@ -38,6 +41,7 @@ public class HomeFragment extends Fragment {
     private Button mOverlayText,n;
     private ViewTreeObserver.OnGlobalLayoutListener mGlobalLayoutListener;
     LinearLayout linearLayout;
+    AdView adView;
 
 
     public HomeFragment() {
@@ -48,9 +52,18 @@ public class HomeFragment extends Fragment {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
+
+
             // Inflate the layout for this fragment
             View view = inflater.inflate(R.layout.fragment_home, container, false);
             Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
+            adView = view.findViewById(R.id.adView);
+            MobileAds.initialize(getActivity(),"ca-app-pub-4689037977247733~9439374585");
+            AdRequest adRequest = new AdRequest.Builder()
+                    .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                    .build();
+            // Inflate the layout for this fragment
+            adView.loadAd(adRequest);
 
 
             //  getSupportActionBar().setTitle(MainActivity.class.getSimpleName());
