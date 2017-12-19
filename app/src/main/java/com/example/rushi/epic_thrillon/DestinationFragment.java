@@ -27,7 +27,7 @@ public class DestinationFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_destination, container, false);
-        adView = view.findViewById(R.id.adViewDEst);
+        adView = view.findViewById(R.id.adView);
         MobileAds.initialize(getActivity(),"ca-app-pub-4689037977247733~9439374585");
         AdRequest adRequest = new AdRequest.Builder()
                 .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)

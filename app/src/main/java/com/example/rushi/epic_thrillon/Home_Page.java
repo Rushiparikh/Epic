@@ -302,7 +302,7 @@ public class Home_Page extends AppCompatActivity implements NavigationView.OnNav
             setTitle("Destination");
             DestinationFragment destinationFragment=new DestinationFragment();
             fragmentTransaction= getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.frame,destinationFragment, "Near By");
+            fragmentTransaction.replace(R.id.frame,destinationFragment, "Destination");
             fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
 
