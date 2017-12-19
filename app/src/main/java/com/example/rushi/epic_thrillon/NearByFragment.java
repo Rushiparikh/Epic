@@ -1,5 +1,6 @@
 package com.example.rushi.epic_thrillon;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Application;
 import android.app.ProgressDialog;
@@ -33,8 +34,10 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -46,11 +49,12 @@ import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 import static android.Manifest.permission.CAMERA;
 
 
-public class NearByFragment extends Fragment implements OnMapReadyCallback{
+public class NearByFragment extends Fragment{
     private GoogleMap mMap;
     private MapView mapView;
     Double longitude,latitude ;
     private static final int PERMISSION_REQUEST_CODE = 200;
+    ProgressBar progressBar;
 
 
     ProgressDialog b;
@@ -62,6 +66,9 @@ public class NearByFragment extends Fragment implements OnMapReadyCallback{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View rootView =inflater.inflate(R.layout.fragment_near_by, container, false);
+        progressBar= rootView.findViewById(R.id.progressBar2);
+
         if(checkPermission()){
             LocationManager lm = (LocationManager)getContext().getSystemService(getContext().LOCATION_SERVICE);
             if(!(lm.isProviderEnabled(LocationManager.GPS_PROVIDER))){
@@ -69,32 +76,73 @@ public class NearByFragment extends Fragment implements OnMapReadyCallback{
                 startActivity(intent);
 
             }
+            mapView = (MapView) rootView.findViewById(R.id.map);
 
-
-
-            // Inflate the layout for this fragment
-            MyLocation.LocationResult locationResult = new MyLocation.LocationResult() {
-                @Override
-                public void gotLocation(Location location) {
-
-                    longitude= location.getLongitude();
-                    latitude= location.getLatitude();
-
-
-
+            if(mapView!= null){
+                mapView.onCreate(savedInstanceState);
+                try {
+                    MapsInitializer.initialize(getActivity().getApplicationContext());
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
-            };
+                MyLocation.LocationResult locationResult = new MyLocation.LocationResult() {
+                    @Override
+                    public void gotLocation(Location location) {
+                        longitude= location.getLongitude();
+                        latitude= location.getLatitude();
+                    }
+                };
+                MyLocation myLocation = new MyLocation();
+                myLocation.getLocation(getActivity(), locationResult);
+            }else{
+                progressBar.isShown();
+            }
 
 
-            MyLocation myLocation = new MyLocation();
-            myLocation.getLocation(getActivity(), locationResult);
+
+
+
+
 
         }
         else{
             requestPermission();
         }
+            // Inflate the layout for this fragment
 
-        return inflater.inflate(R.layout.fragment_near_by, container, false);
+
+            mapView.getMapAsync(new OnMapReadyCallback() {
+                @SuppressLint("MissingPermission")
+                @Override
+                public void onMapReady(GoogleMap googleMap) {
+                    mMap = googleMap;
+                    progressBar.setVisibility(View.GONE);
+
+
+                    // For showing a move to my location button
+                    mMap.setMyLocationEnabled(true);
+                    if(latitude==null&& longitude==null){
+                        progressBar.isShown();
+                    }else{
+                        // For dropping a marker at a point on the Map
+                        LatLng sydney = new LatLng(latitude, longitude);
+
+                        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker Title").snippet("Marker Description"));
+
+                        // For zooming automatically to the location of the marker
+                        CameraPosition cameraPosition = new CameraPosition.Builder().target(sydney).zoom(12).build();
+                        mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+                    }
+
+
+
+                }
+            });
+
+
+
+            return rootView;
+
 
     }
 
@@ -158,35 +206,37 @@ public class NearByFragment extends Fragment implements OnMapReadyCallback{
                 .show();
     }
 
+
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-
-
-        mapView =  view.findViewById(R.id.map);
-        mapView.onCreate(savedInstanceState);
+    public void onResume() {
+        super.onResume();
         mapView.onResume();
-        mapView.getMapAsync(this);
-
     }
-
-
-
-
 
     @Override
-    public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
-
-        Log.e(">>>>>",""+longitude+latitude );
-        // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(latitude, longitude);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Bhai Nu Ghar"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney,15.0f));
-
-
-
-
+    public void onPause() {
+        super.onPause();
+        mapView.onPause();
     }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mapView.onDestroy();
+    }
+
+    @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+        mapView.onLowMemory();
+    }
+
+
+
+
+
+
+
 
 
 }

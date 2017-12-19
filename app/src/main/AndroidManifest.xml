@@ -79,11 +79,14 @@
             android:value="@integer/google_play_services_version" />
 
         <activity android:name=".DestinationActivity" />
+        <activity android:name=".ActivityDetails"/>
 
         <service
             android:name=".NotificationReceiving"
             android:enabled="true"
             android:exported="true"></service>
+
+
     </application>
 
 </manifest>

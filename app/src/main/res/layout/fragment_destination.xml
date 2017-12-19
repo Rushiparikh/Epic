@@ -5,9 +5,9 @@
     tools:context="com.example.rushi.epic_thrillon.DestinationFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Destination" />
+    <com.google.android.gms.ads.AdView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/adViewDEst"></com.google.android.gms.ads.AdView>
 
 </FrameLayout>

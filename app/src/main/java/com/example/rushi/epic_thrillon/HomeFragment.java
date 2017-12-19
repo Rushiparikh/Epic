@@ -75,6 +75,7 @@ public class HomeFragment extends Fragment {
                                  Bundle savedInstanceState) {
 
             mref = FirebaseDatabase.getInstance().getReference(Constants.DATABASE_PATH_UPLOADS);
+            mref.keepSynced(true);
             // Inflate the layout for this fragment
             View view = inflater.inflate(R.layout.fragment_home, container, false);
             Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);

@@ -5,6 +5,7 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.CountDownTimer;
 import android.support.annotation.NonNull;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -22,11 +23,15 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.reward.RewardItem;
+import com.google.android.gms.ads.reward.RewardedVideoAd;
+import com.google.android.gms.ads.reward.RewardedVideoAdListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
@@ -42,7 +47,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ActivityClick extends AppCompatActivity {
+public class ActivityClick extends AppCompatActivity implements RewardedVideoAdListener {
     private RecyclerView recyclerView;
     private ActivityAdapter adapter;
     private List<Upload> albumList;
@@ -53,6 +58,20 @@ public class ActivityClick extends AppCompatActivity {
     String ActivityImage;
     Uri uri;
     TextView ActName;
+
+    private static final String AD_UNIT_ID ="ca-app-pub-4689037977247733/3010408042";
+    private static final String APP_ID = "ca-app-pub-4689037977247733~9439374585";
+    private static final long COUNTER_TIME = 10;
+    private static final int GAME_OVER_REWARD = 1;
+
+    private int mCoinCount;
+    private TextView mCoinCountText;
+    private CountDownTimer mCountDownTimer;
+    private boolean mGameOver;
+    private boolean mGamePaused;
+    private RewardedVideoAd mRewardedVideoAd;
+
+    private long mTimeRemaining;
 
 
 
@@ -70,15 +89,22 @@ public class ActivityClick extends AppCompatActivity {
 
         ActName.setText(ActivityName);
 
+        MobileAds.initialize(this, APP_ID);
+
+        mRewardedVideoAd = MobileAds.getRewardedVideoAdInstance(this);
+        mRewardedVideoAd.setRewardedVideoAdListener(this);
+        loadRewardedVideoAd();
+
+        startGame();
+
 
         initCollapsingToolbar();
 
-        FirebaseStorage mFirebaseStorage = FirebaseStorage.getInstance();
-        mStorageReference = mFirebaseStorage.getReference();
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
 
         albumList = new ArrayList<>();
         mDatabase = FirebaseDatabase.getInstance().getReference(Constants.DATABASE_PATH_UPLOADS);
+        mDatabase.keepSynced(true);
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
@@ -108,6 +134,7 @@ public class ActivityClick extends AppCompatActivity {
                 new RecyclerItemClickListener(getApplicationContext(), recyclerView ,new RecyclerItemClickListener.OnItemClickListener() {
                     @Override public void onItemClick(View view, int position) {
                         // do whatever
+                        showRewardedVideo();
                         startActivity(new Intent(ActivityClick.this,DestinationActivity.class));
                     }
 
@@ -162,6 +189,118 @@ public class ActivityClick extends AppCompatActivity {
                 }
             }
         });
+    }
+    private void startGame() {
+        // Hide the retry button, load the ad, and start the timer.
+
+        loadRewardedVideoAd();
+        createTimer(COUNTER_TIME);
+        mGamePaused = false;
+        mGameOver = false;
+    }
+    @Override
+    public void onPause() {
+        super.onPause();
+        pauseGame();
+        mRewardedVideoAd.pause(this);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (!mGameOver && mGamePaused) {
+            resumeGame();
+        }
+        mRewardedVideoAd.resume(this);
+    }
+
+    private void pauseGame() {
+        mCountDownTimer.cancel();
+        mGamePaused = true;
+    }
+
+    private void resumeGame() {
+        createTimer(mTimeRemaining);
+        mGamePaused = false;
+    }
+
+    private void loadRewardedVideoAd() {
+        if (!mRewardedVideoAd.isLoaded()) {
+            mRewardedVideoAd.loadAd(AD_UNIT_ID, new AdRequest.Builder().build());
+        }
+    }
+
+    // Create the game timer, which counts down to the end of the level
+    // and shows the "retry" button.
+    private void createTimer(long time) {
+
+        if (mCountDownTimer != null) {
+            mCountDownTimer.cancel();
+        }
+        mCountDownTimer = new CountDownTimer(time * 1000, 50) {
+            @Override
+            public void onTick(long millisUnitFinished) {
+                mTimeRemaining = ((millisUnitFinished / 1000) + 1);
+           }
+
+            @Override
+            public void onFinish() {
+                if (mRewardedVideoAd.isLoaded()) {
+
+                }
+
+
+                mGameOver = true;
+            }
+        };
+        mCountDownTimer.start();
+    }
+
+    private void showRewardedVideo() {
+
+        if (mRewardedVideoAd.isLoaded()) {
+            mRewardedVideoAd.show();
+        }
+    }
+    @Override
+    public void onRewardedVideoAdLeftApplication() {
+        Toast.makeText(this, "onRewardedVideoAdLeftApplication", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onRewardedVideoAdClosed() {
+        Toast.makeText(this, "onRewardedVideoAdClosed", Toast.LENGTH_SHORT).show();
+        // Preload the next video ad.
+        loadRewardedVideoAd();
+    }
+
+    @Override
+    public void onRewardedVideoAdFailedToLoad(int errorCode) {
+        Toast.makeText(this, "onRewardedVideoAdFailedToLoad", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onRewardedVideoAdLoaded() {
+        Toast.makeText(this, "onRewardedVideoAdLoaded", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onRewardedVideoAdOpened() {
+        Toast.makeText(this, "onRewardedVideoAdOpened", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onRewarded(RewardItem reward) {
+        Toast.makeText(this,
+                String.format(" onRewarded! currency: %s amount: %d", reward.getType(),
+                        reward.getAmount()),
+                Toast.LENGTH_SHORT).show();
+
+    }
+
+    @Override
+    public void onRewardedVideoStarted() {
+        Toast.makeText(this, "onRewardedVideoStarted", Toast.LENGTH_SHORT).show();
     }
 
     public class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {
