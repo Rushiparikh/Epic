@@ -26,8 +26,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.reward.RewardItem;
 import com.google.android.gms.ads.reward.RewardedVideoAd;
@@ -47,7 +49,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ActivityClick extends AppCompatActivity implements RewardedVideoAdListener {
+public class ActivityClick extends AppCompatActivity  {
     private RecyclerView recyclerView;
     private ActivityAdapter adapter;
     private List<Upload> albumList;
@@ -59,19 +61,14 @@ public class ActivityClick extends AppCompatActivity implements RewardedVideoAdL
     Uri uri;
     TextView ActName;
 
-    private static final String AD_UNIT_ID ="ca-app-pub-4689037977247733/3010408042";
-    private static final String APP_ID = "ca-app-pub-4689037977247733~9439374585";
-    private static final long COUNTER_TIME = 10;
-    private static final int GAME_OVER_REWARD = 1;
 
-    private int mCoinCount;
-    private TextView mCoinCountText;
+
+
+    private static final long GAME_LENGTH_MILLISECONDS = 1000;
+    private boolean mGameIsInProgress;
+    private long mTimerMilliseconds;
+    private InterstitialAd mInterstitialAd;
     private CountDownTimer mCountDownTimer;
-    private boolean mGameOver;
-    private boolean mGamePaused;
-    private RewardedVideoAd mRewardedVideoAd;
-
-    private long mTimeRemaining;
 
 
 
@@ -89,16 +86,24 @@ public class ActivityClick extends AppCompatActivity implements RewardedVideoAdL
 
         ActName.setText(ActivityName);
 
-        MobileAds.initialize(this, APP_ID);
-
-        mRewardedVideoAd = MobileAds.getRewardedVideoAdInstance(this);
-        mRewardedVideoAd.setRewardedVideoAdListener(this);
-        loadRewardedVideoAd();
-
-        startGame();
 
 
         initCollapsingToolbar();
+        MobileAds.initialize(this, "ca-app-pub-4689037977247733~9439374585");
+
+        // Create the InterstitialAd and set the adUnitId.
+        mInterstitialAd = new InterstitialAd(this);
+        // Defined in res/values/strings.xml
+        mInterstitialAd.setAdUnitId(getString(R.string.ad_unit_id));
+        startGame();
+
+        mInterstitialAd.setAdListener(new AdListener() {
+            @Override
+            public void onAdClosed() {
+                startGame();
+            }
+        });
+
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
 
@@ -134,7 +139,7 @@ public class ActivityClick extends AppCompatActivity implements RewardedVideoAdL
                 new RecyclerItemClickListener(getApplicationContext(), recyclerView ,new RecyclerItemClickListener.OnItemClickListener() {
                     @Override public void onItemClick(View view, int position) {
                         // do whatever
-                        showRewardedVideo();
+                        showInterstitial();
                         startActivity(new Intent(ActivityClick.this,DestinationActivity.class));
                     }
 
@@ -190,118 +195,8 @@ public class ActivityClick extends AppCompatActivity implements RewardedVideoAdL
             }
         });
     }
-    private void startGame() {
-        // Hide the retry button, load the ad, and start the timer.
-
-        loadRewardedVideoAd();
-        createTimer(COUNTER_TIME);
-        mGamePaused = false;
-        mGameOver = false;
-    }
-    @Override
-    public void onPause() {
-        super.onPause();
-        pauseGame();
-        mRewardedVideoAd.pause(this);
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        if (!mGameOver && mGamePaused) {
-            resumeGame();
-        }
-        mRewardedVideoAd.resume(this);
-    }
-
-    private void pauseGame() {
-        mCountDownTimer.cancel();
-        mGamePaused = true;
-    }
-
-    private void resumeGame() {
-        createTimer(mTimeRemaining);
-        mGamePaused = false;
-    }
-
-    private void loadRewardedVideoAd() {
-        if (!mRewardedVideoAd.isLoaded()) {
-            mRewardedVideoAd.loadAd(AD_UNIT_ID, new AdRequest.Builder().build());
-        }
-    }
-
-    // Create the game timer, which counts down to the end of the level
-    // and shows the "retry" button.
-    private void createTimer(long time) {
-
-        if (mCountDownTimer != null) {
-            mCountDownTimer.cancel();
-        }
-        mCountDownTimer = new CountDownTimer(time * 1000, 50) {
-            @Override
-            public void onTick(long millisUnitFinished) {
-                mTimeRemaining = ((millisUnitFinished / 1000) + 1);
-           }
-
-            @Override
-            public void onFinish() {
-                if (mRewardedVideoAd.isLoaded()) {
-
-                }
 
 
-                mGameOver = true;
-            }
-        };
-        mCountDownTimer.start();
-    }
-
-    private void showRewardedVideo() {
-
-        if (mRewardedVideoAd.isLoaded()) {
-            mRewardedVideoAd.show();
-        }
-    }
-    @Override
-    public void onRewardedVideoAdLeftApplication() {
-        Toast.makeText(this, "onRewardedVideoAdLeftApplication", Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void onRewardedVideoAdClosed() {
-        Toast.makeText(this, "onRewardedVideoAdClosed", Toast.LENGTH_SHORT).show();
-        // Preload the next video ad.
-        loadRewardedVideoAd();
-    }
-
-    @Override
-    public void onRewardedVideoAdFailedToLoad(int errorCode) {
-        Toast.makeText(this, "onRewardedVideoAdFailedToLoad", Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void onRewardedVideoAdLoaded() {
-        Toast.makeText(this, "onRewardedVideoAdLoaded", Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void onRewardedVideoAdOpened() {
-        Toast.makeText(this, "onRewardedVideoAdOpened", Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void onRewarded(RewardItem reward) {
-        Toast.makeText(this,
-                String.format(" onRewarded! currency: %s amount: %d", reward.getType(),
-                        reward.getAmount()),
-                Toast.LENGTH_SHORT).show();
-
-    }
-
-    @Override
-    public void onRewardedVideoStarted() {
-        Toast.makeText(this, "onRewardedVideoStarted", Toast.LENGTH_SHORT).show();
-    }
 
     public class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {
 
@@ -376,6 +271,75 @@ private Bitmap decodeFromBase64ToBitmap(String encodedImage)
     return decodedByte;
 
 }
+    private void createTimer(final long milliseconds) {
+        // Create the game timer, which counts down to the end of the level
+        // and shows the "retry" button.
+        if (mCountDownTimer != null) {
+            mCountDownTimer.cancel();
+        }
+
+
+
+        mCountDownTimer = new CountDownTimer(milliseconds, 50) {
+            @Override
+            public void onTick(long millisUnitFinished) {
+                mTimerMilliseconds = millisUnitFinished;
+
+            }
+
+            @Override
+            public void onFinish() {
+                mGameIsInProgress = false;
+
+            }
+        };
+    }
+
+    @Override
+    public void onResume() {
+        // Start or resume the game.
+        super.onResume();
+
+        if (mGameIsInProgress) {
+            resumeGame(mTimerMilliseconds);
+        }
+    }
+
+    @Override
+    public void onPause() {
+        // Cancel the timer if the game is paused.
+        mCountDownTimer.cancel();
+        super.onPause();
+    }
+
+    private void showInterstitial() {
+        // Show the ad if it's ready. Otherwise toast and restart the game.
+        if (mInterstitialAd != null && mInterstitialAd.isLoaded()) {
+            mInterstitialAd.show();
+        } else {
+           // Toast.makeText(this, "Ad did not load", Toast.LENGTH_SHORT).show();
+            startGame();
+        }
+    }
+
+    private void startGame() {
+        // Request a new ad if one isn't already loaded, hide the button, and kick off the timer.
+        if (!mInterstitialAd.isLoading() && !mInterstitialAd.isLoaded()) {
+            AdRequest adRequest = new AdRequest.Builder().build();
+            mInterstitialAd.loadAd(adRequest);
+        }
+
+
+        resumeGame(GAME_LENGTH_MILLISECONDS);
+    }
+
+    private void resumeGame(long milliseconds) {
+        // Create a new timer for the correct length and start it.
+        mGameIsInProgress = true;
+        mTimerMilliseconds = milliseconds;
+        createTimer(milliseconds);
+        mCountDownTimer.start();
+    }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()){

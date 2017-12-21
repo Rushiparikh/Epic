@@ -34,6 +34,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.example.rushi.epic_thrillon.HomeFragment;
 import com.facebook.AccessToken;
 import com.facebook.FacebookBroadcastReceiver;
+import com.facebook.FacebookSdk;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.HttpMethod;
@@ -67,6 +68,7 @@ public class Home_Page extends AppCompatActivity implements NavigationView.OnNav
     InputStream is;
     AccessToken accessToken;
     private String email=null;
+
     String Login_with;
     private NavigationView navigationView;
 
@@ -116,10 +118,22 @@ public class Home_Page extends AppCompatActivity implements NavigationView.OnNav
         email_login=sharedPreferences.getBoolean("Email",false);
         navigationView.setNavigationItemSelectedListener(this);
 
+        Bundle bundle=getIntent().getExtras();
+
         //set Default fragment on loading
-        fragmentTransaction=getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.frame,new HomeFragment()).commit();
+
         Login_with =  getIntent().getStringExtra("Login");
+        if( getIntent().getStringExtra("name")!= null){
+            fragmentTransaction=getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.frame,new NotificationFragment()).commit();
+
+        }else{
+            fragmentTransaction=getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.frame,new HomeFragment()).commit();
+
+        }
+        Login_with =  getIntent().getStringExtra("Login");
+
 
        View header = navigationView.getHeaderView(0);
 
@@ -149,31 +163,14 @@ public class Home_Page extends AppCompatActivity implements NavigationView.OnNav
             String imageUrl = profile.getProfilePictureUri(200, 200).toString();
             String firstname = profile.getFirstName();
             String lastname = profile.getLastName();
-
+            String Email = getIntent().getStringExtra("email_id");
             String name = firstname + " " + lastname;
 
             Log.e("TAG_name", name);
             nav_textview_name.setText(name);
            // new Home_Page.DownloadImage(nav_image_view).execute(imageUrl);
             Glide.with(getApplicationContext()).load(imageUrl).apply(RequestOptions.circleCropTransform()).into(nav_image_view);
-            GraphRequest req = GraphRequest.newMeRequest(accessToken, new GraphRequest.GraphJSONObjectCallback() {
-                @Override
-                public void onCompleted(JSONObject object, GraphResponse response) {
-                    Toast.makeText(getApplicationContext(), "graph request completed", Toast.LENGTH_SHORT).show();
-
-                    try {
-                        email = object.getString("email");
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-
-
-                }
-
-
-            });
-
-         //  nav_textview_email.setText(email);
+          nav_textview_email.setText(Email);
         }else if(google){
 
             if (acct != null) {

@@ -24,7 +24,7 @@ public class DestinationActivity extends AppCompatActivity {
     private Activity_DestinationAdapter adapter;
     private List<Destination> imageList;
 
-    private static final long GAME_LENGTH_MILLISECONDS = 3000;
+    private static final long GAME_LENGTH_MILLISECONDS = 1000;
     private boolean mGameIsInProgress;
     private long mTimerMilliseconds;
     private InterstitialAd mInterstitialAd;
@@ -148,7 +148,7 @@ public class DestinationActivity extends AppCompatActivity {
         if (mInterstitialAd != null && mInterstitialAd.isLoaded()) {
             mInterstitialAd.show();
         } else {
-            Toast.makeText(this, "Ad did not load", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "Ad did not load", Toast.LENGTH_SHORT).show();
             startGame();
         }
     }

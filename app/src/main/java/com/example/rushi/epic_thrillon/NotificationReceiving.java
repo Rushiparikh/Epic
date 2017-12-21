@@ -19,15 +19,17 @@ import com.google.firebase.messaging.RemoteMessage;
 import com.google.firebase.storage.FirebaseStorage;
 
 public class NotificationReceiving extends FirebaseMessagingService {
-
+    public static  final int NOTIFICATIONID = 9;
     public NotificationReceiving() {
+
+
     }
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
 
         // ...
 
-        // TODO(developer): Handle FCM messages here.
+
 //        // Not getting messages here? See why this may be: https://goo.gl/39bRNJ
 //        Log.d(">>", "From: " + remoteMessage.getFrom());
 //
@@ -47,7 +49,7 @@ public class NotificationReceiving extends FirebaseMessagingService {
 
         // Check if message contains a notification payload.
         if (remoteMessage.getNotification() != null) {
-            Log.d(">>", "Message Notification Body: " + remoteMessage.getNotification().getBody());
+            Log.e(">>", "Message Notification Body: " + remoteMessage.getNotification().getBody());
 
 
             sendNotification(remoteMessage);
@@ -58,12 +60,16 @@ public class NotificationReceiving extends FirebaseMessagingService {
     }
     private void sendNotification(RemoteMessage remoteMessage) {
         RemoteMessage.Notification notification = remoteMessage.getNotification();
-        Intent intent = new Intent(this,NotificationFragment.class);
-        intent.putExtra("title",remoteMessage.getNotification().getTitle());
-        intent.putExtra("body",remoteMessage.getNotification().getBody());
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        Intent intent = new Intent(this,Home_Page.class);
+        intent.putExtra("name","Notification Fragment");
+        intent.setAction(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_LAUNCHER);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//        intent.putExtra("title",remoteMessage.getNotification().getTitle());
+//        intent.putExtra("body",remoteMessage.getNotification().getBody());
+//        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent,
-                PendingIntent.FLAG_ONE_SHOT);
+                PendingIntent.FLAG_UPDATE_CURRENT);
 
         Uri defaultSoundUri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
@@ -79,7 +85,7 @@ public class NotificationReceiving extends FirebaseMessagingService {
         NotificationManager notificationManager =
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
-        notificationManager.notify(0, notificationBuilder.build());
+        notificationManager.notify(NOTIFICATIONID, notificationBuilder.build());
     }
 
 }

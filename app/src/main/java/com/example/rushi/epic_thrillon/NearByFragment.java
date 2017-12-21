@@ -1,6 +1,7 @@
 package com.example.rushi.epic_thrillon;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Application;
 import android.app.ProgressDialog;
@@ -23,6 +24,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,7 +48,7 @@ import java.util.TimerTask;
 
 import static com.facebook.FacebookSdk.getApplicationContext;
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
-import static android.Manifest.permission.CAMERA;
+
 
 
 public class NearByFragment extends Fragment{
@@ -55,6 +57,7 @@ public class NearByFragment extends Fragment{
     Double longitude,latitude ;
     private static final int PERMISSION_REQUEST_CODE = 200;
     ProgressBar progressBar;
+
 
 
     ProgressDialog b;
@@ -107,6 +110,7 @@ public class NearByFragment extends Fragment{
         }
         else{
             requestPermission();
+
         }
             // Inflate the layout for this fragment
 
@@ -166,8 +170,10 @@ public class NearByFragment extends Fragment{
                     boolean locationAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
 
 
-                    if (locationAccepted)
+                    if (locationAccepted) {
                         Snackbar.make(getView(), "Permission Granted, Now you can access location data and camera.", Snackbar.LENGTH_LONG).show();
+
+                    }
                     else {
 
                         Snackbar.make(getView(), "Permission Denied, You cannot access location data and camera.", Snackbar.LENGTH_LONG).show();

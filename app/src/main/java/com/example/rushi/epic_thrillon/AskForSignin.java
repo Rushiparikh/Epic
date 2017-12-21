@@ -16,6 +16,8 @@ import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
 import com.facebook.Profile;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
@@ -39,6 +41,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import static android.provider.AlarmClock.EXTRA_MESSAGE;
 
 public class AskForSignin extends AppCompatActivity {
@@ -54,10 +59,12 @@ public class AskForSignin extends AppCompatActivity {
 
 
     boolean email_login;
+    JSONObject j;
     SharedPreferences.Editor editor;
     private final static int RC_SIGN_IN = 0;
     private Button register_button,fb,login;
     private Profile profile;
+    String email_id;
     GoogleSignInAccount account;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,11 +87,20 @@ public class AskForSignin extends AppCompatActivity {
             @Override
             public void onSuccess(LoginResult loginResult) {
                 Log.e("FUVCKUNGNFHFJFJFKKFL","HRLLL LKLSFSJFKJS F JSH HFKJHSFUHSJ KFHSK");
+
                 Intent i = new Intent(AskForSignin.this, Home_Page.class);
                 i.putExtra("Login","facebook");
+
+
                 editor.putBoolean("Facebook",true);
                 editor.commit();
                 startActivity(i);
+                finish();
+
+
+
+
+
             }
 
             @Override
@@ -225,6 +241,8 @@ public class AskForSignin extends AppCompatActivity {
             editor.putBoolean("Google",true);
             editor.commit();
             i.putExtra("Login","Google");
+
+            i.putExtra("not",getIntent().getStringExtra("name"));
             startActivity(i);
 
         } else {
