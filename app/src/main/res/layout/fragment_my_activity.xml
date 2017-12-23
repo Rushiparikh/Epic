@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:ads="http://schemas.android.com/apk/res-auto"
-    tools:context="com.example.rushi.epic_thrillon.MyActivityFragment">
+    tools:context="com.example.rushi.epic_thrillon.Fragments.MyActivityFragment">
 
     <com.google.android.gms.ads.AdView
         android:id="@+id/adView"

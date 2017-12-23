@@ -6,7 +6,7 @@
     xmlns:ads="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_height="match_parent"
-    tools:context="com.example.rushi.epic_thrillon.DestinationActivity">
+    tools:context="com.example.rushi.epic_thrillon.MainPages.DestinationActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"

@@ -1,41 +1,23 @@
 package com.example.rushi.epic_thrillon;
 
-import android.app.ProgressDialog;
-import android.content.ContentResolver;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.provider.MediaStore;
-import android.provider.Settings;
-import android.support.annotation.NonNull;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
 import android.view.View;
-import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.TimePicker;
-import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
+import com.example.rushi.epic_thrillon.Auxiliaries.Constants;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.OnProgressListener;
-import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 
 public class UploadActivity extends AppCompatActivity implements View.OnClickListener {
     //constant to track image chooser intent
@@ -81,7 +63,7 @@ public class UploadActivity extends AppCompatActivity implements View.OnClickLis
 
 
 
-        mDatabase = FirebaseDatabase.getInstance().getReference(Constants.DATABASE_PATH_UPLOADS);
+        mDatabase = FirebaseDatabase.getInstance().getReference(Constants.ACIVITY_DATABASE_PATH_UPLOADS);
 
         buttonChoose.setOnClickListener(this);
         buttonUpload.setOnClickListener(this);
@@ -101,7 +83,7 @@ public class UploadActivity extends AppCompatActivity implements View.OnClickLis
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
             filePath = data.getData();
 
-            String ImagePath = com.example.rushi.epic_thrillon.ImagePath.getPath(getApplicationContext(),filePath);
+            String ImagePath = com.example.rushi.epic_thrillon.Auxiliaries.ImagePath.getPath(getApplicationContext(),filePath);
              Image =convertToBase64(ImagePath);
 
         }

@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/app_bar_home__page"
-    tools:context="com.example.rushi.epic_thrillon.Home_Page">
+    tools:context="com.example.rushi.epic_thrillon.MainPages.Home_Page">
 
     <!-- A fragmet container to dynamically swap between fragmets-->
     <FrameLayout
