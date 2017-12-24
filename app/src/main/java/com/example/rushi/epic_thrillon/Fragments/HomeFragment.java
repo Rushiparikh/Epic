@@ -13,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 
 import com.example.rushi.epic_thrillon.Adapters.ImageAdapter;
+import com.example.rushi.epic_thrillon.Classes.Activities;
 import com.example.rushi.epic_thrillon.Classes.Activity;
 import com.example.rushi.epic_thrillon.MainPages.ActivityClick;
 import com.example.rushi.epic_thrillon.Adapters.AlbumsAdapter;
@@ -37,7 +38,7 @@ public class HomeFragment extends Fragment {
     private AlbumsAdapter adapter;
     private List<Album> albumList;
     AdView adView;
-    List<Activity> activityList;
+    List<Activities> activityList;
 
     Upload u;
     DatabaseReference mref;
@@ -57,7 +58,7 @@ public class HomeFragment extends Fragment {
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
 
-            mref = FirebaseDatabase.getInstance().getReference(Constants.ACIVITY_DATABASE_PATH_UPLOADS);
+            mref = FirebaseDatabase.getInstance().getReference(Constants.ACIVITIES_DATABASE_PATH_UPLOADS);
             mref.keepSynced(true);
             // Inflate the layout for this fragment
             View view = inflater.inflate(R.layout.fragment_home, container, false);
@@ -79,7 +80,7 @@ public class HomeFragment extends Fragment {
                public void onDataChange(DataSnapshot dataSnapshot) {
                         activityList.clear();
                         for(DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()){
-                            Activity activity =dataSnapshot1.getValue(Activity.class);
+                            Activities activity =dataSnapshot1.getValue(Activities.class);
                             activityList.add(activity);
 
 
@@ -97,8 +98,8 @@ public class HomeFragment extends Fragment {
                                         int position, long id) {
 
                     Intent intent=new Intent(getActivity(),ActivityClick.class);
-                    intent.putExtra("ActivityName",activityList.get(position).getActivityName());
-                    intent.putExtra("ActivityImage",activityList.get(position).getImages().getImg2());
+                    intent.putExtra("ActivityName",activityList.get(position).getName());
+                    intent.putExtra("ActivityImage",activityList.get(position).getImage());
                     startActivity(intent);
 
                 }

@@ -142,7 +142,10 @@ public class ActivityClick extends AppCompatActivity {
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
 
                     Activity activity = postSnapshot.getValue(Activity.class);
-                    destinationList.add(activity.getDestination());
+                    if(ActivityName.equalsIgnoreCase(activity.getActivityName())){
+                        destinationList.add(activity.getDestination());
+                    }
+
                 }
 
                 Set<String> set = new HashSet<>();

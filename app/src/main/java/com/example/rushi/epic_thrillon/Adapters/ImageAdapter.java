@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.example.rushi.epic_thrillon.Classes.Activities;
 import com.example.rushi.epic_thrillon.Classes.Activity;
 import com.example.rushi.epic_thrillon.R;
 
@@ -22,10 +23,10 @@ import static com.facebook.FacebookSdk.getApplicationContext;
 
 public class ImageAdapter extends BaseAdapter {
     private Context mContext;
-    private final List<Activity> activityList;
+    private final List<Activities> activityList;
 
 
-    public ImageAdapter(Context c,List<Activity> activityList) {
+    public ImageAdapter(Context c,List<Activities> activityList) {
         mContext = c;
         this.activityList = activityList;
     }
@@ -53,9 +54,9 @@ public class ImageAdapter extends BaseAdapter {
 
             TextView textView = (TextView)grid.findViewById(R.id.home_text);
             ImageView imageview = (ImageView)grid.findViewById(R.id.home_image);
-            textView.setText(activityList.get(position).getActivityName());
+            textView.setText(activityList.get(position).getName());
            // imageview.setImageResource(Imageid[position]);
-            Glide.with(getApplicationContext()).load(activityList.get(position).getImages().getImg1()).apply(RequestOptions.circleCropTransform()).into(imageview);
+            Glide.with(getApplicationContext()).load(activityList.get(position).getImage()).apply(RequestOptions.circleCropTransform()).into(imageview);
 
         } else {
             grid = (View) convertView;
