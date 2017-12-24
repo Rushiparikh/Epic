@@ -50,6 +50,5 @@ dependencies {
     compile 'com.github.bumptech.glide:glide:4.4.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.4.0'
     compile 'com.borjabravo:readmoretextview:2.0.1'
-
 }
 apply plugin: 'com.google.gms.google-services'

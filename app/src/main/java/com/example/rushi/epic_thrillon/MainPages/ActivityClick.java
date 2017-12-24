@@ -82,7 +82,7 @@ public class ActivityClick extends AppCompatActivity {
         ActName= findViewById(R.id.love_music);
         Intent i =getIntent();
         ActivityName= i.getStringExtra("ActivityName");
-        ActivityImage = i.getStringExtra("ActivityImage");
+
         ActName.setText(ActivityName);
         initCollapsingToolbar();
         MobileAds.initialize(this, "ca-app-pub-4689037977247733~9439374585");
@@ -212,7 +212,7 @@ public class ActivityClick extends AppCompatActivity {
                 if (scrollRange + verticalOffset == 0) {
                     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
                     getSupportActionBar().setDisplayShowHomeEnabled(true);
-                    collapsingToolbar.setTitle("Destination");
+                    collapsingToolbar.setTitle(ActivityName);
                     isShow = true;
                 } else if (isShow) {
                     collapsingToolbar.setTitle(" ");

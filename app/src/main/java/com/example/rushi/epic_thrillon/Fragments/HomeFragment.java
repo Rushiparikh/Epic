@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
 
+import com.example.rushi.epic_thrillon.Adapters.ActivityOfTheDayAdapter;
 import com.example.rushi.epic_thrillon.Adapters.ImageAdapter;
 import com.example.rushi.epic_thrillon.Classes.Activities;
 import com.example.rushi.epic_thrillon.Classes.Activity;
@@ -29,21 +30,29 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 
 public class HomeFragment extends Fragment {
     private RecyclerView recyclerViewfirst,recyclerViewsecond,recyclerViewthird;
     private AlbumsAdapter adapter;
+    private ActivityOfTheDayAdapter activityOfTheDayAdapter;
     private List<Album> albumList;
     AdView adView;
     List<Activities> activityList;
+    List<Activity> activityofthedayList;
+    Date currentDate;
 
     Upload u;
-    DatabaseReference mref;
+    DatabaseReference mref,mdatabse;
     GridView gridView;
-    ValueEventListener valueEventListener;
+    ValueEventListener valueEventListener,activityValueEventListener;
+    String formattedDate;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -52,6 +61,8 @@ public class HomeFragment extends Fragment {
     public void onResume() {
         super.onResume();
         mref.addValueEventListener(valueEventListener);
+        mdatabse.addValueEventListener(activityValueEventListener);
+
     }
 
     @Override
@@ -59,7 +70,12 @@ public class HomeFragment extends Fragment {
                                  Bundle savedInstanceState) {
 
             mref = FirebaseDatabase.getInstance().getReference(Constants.ACIVITIES_DATABASE_PATH_UPLOADS);
+            mdatabse = FirebaseDatabase.getInstance().getReference(Constants.ACIVITY_DATABASE_PATH_UPLOADS);
             mref.keepSynced(true);
+            mdatabse.keepSynced(true);
+            currentDate = Calendar.getInstance().getTime();
+            SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+             formattedDate = df.format(currentDate);
             // Inflate the layout for this fragment
             View view = inflater.inflate(R.layout.fragment_home, container, false);
             Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
@@ -73,7 +89,55 @@ public class HomeFragment extends Fragment {
             albumList = new ArrayList<>();
             gridView = (GridView) view.findViewById(R.id.gridview);
             activityList = new ArrayList<>();
-            adapter = new AlbumsAdapter(getActivity(), albumList);
+            activityofthedayList = new ArrayList<>();
+
+
+
+
+        recyclerViewsecond = (RecyclerView) view.findViewById(R.id.recycler_view_second);
+
+        albumList = new ArrayList<>();
+        adapter = new AlbumsAdapter(getActivity(), albumList);
+
+        //   RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 1);
+        //   recyclerView.setLayoutManager(mLayoutManager);
+        //   recyclerView.addItemDecoration(new GridSpacingItemDecoration(1, dpToPx(10), true));
+        //   recyclerView.setItemAnimator(new DefaultItemAnimator());
+        //   recyclerView.setAdapter(adapter);
+
+        recyclerViewsecond.setHasFixedSize(true);
+
+
+        recyclerViewsecond.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
+
+        recyclerViewsecond.setAdapter(adapter);
+
+        prepareAlbums();
+
+        recyclerViewthird = (RecyclerView) view.findViewById(R.id.recycler_view_third);
+
+        albumList = new ArrayList<>();
+        adapter = new AlbumsAdapter(getActivity(), albumList);
+
+        //   RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 1);
+        //   recyclerView.setLayoutManager(mLayoutManager);
+        //   recyclerView.addItemDecoration(new GridSpacingItemDecoration(1, dpToPx(10), true));
+        //   recyclerView.setItemAnimator(new DefaultItemAnimator());
+        //   recyclerView.setAdapter(ad
+        // apter);
+
+        recyclerViewthird.setHasFixedSize(true);
+
+
+        recyclerViewthird.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
+
+        recyclerViewthird.setAdapter(adapter);
+
+        prepareAlbums();
+
+            recyclerViewfirst = (RecyclerView) view.findViewById(R.id.recycler_view_first);
+            recyclerViewfirst.setHasFixedSize(true);
+            recyclerViewfirst.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
             //  getSupportActionBar().setTitle(MainActivity.class.getSimpleName());
            valueEventListener=new ValueEventListener() {
                @Override
@@ -99,7 +163,7 @@ public class HomeFragment extends Fragment {
 
                     Intent intent=new Intent(getActivity(),ActivityClick.class);
                     intent.putExtra("ActivityName",activityList.get(position).getName());
-                    intent.putExtra("ActivityImage",activityList.get(position).getImage());
+
                     startActivity(intent);
 
                 }
@@ -107,62 +171,38 @@ public class HomeFragment extends Fragment {
 
 
 
+        activityValueEventListener=new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                activityofthedayList.clear();
+                for(DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()){
+                    Activity activity =dataSnapshot1.getValue(Activity.class);
+
+                    if(activity.getActivityDate().equals(formattedDate)){
+                        activityofthedayList.add(activity);
+                    }
+
+                }
+                recyclerViewfirst.setAdapter(new ActivityOfTheDayAdapter(getActivity(), activityofthedayList));
+
+
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        };
+
             //   RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 1);
             //   recyclerView.setLayoutManager(mLayoutManager);
             //   recyclerView.addItemDecoration(new GridSpacingItemDecoration(1, dpToPx(10), true));
             //   recyclerView.setItemAnimator(new DefaultItemAnimator());
             //   recyclerView.setAdapter(adapter);
 
-            recyclerViewfirst = (RecyclerView) view.findViewById(R.id.recycler_view_first);
-            recyclerViewfirst.setHasFixedSize(true);
 
 
-            recyclerViewfirst.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
-
-            recyclerViewfirst.setAdapter(adapter);
-
-            prepareAlbums();
-
-            recyclerViewsecond = (RecyclerView) view.findViewById(R.id.recycler_view_second);
-
-            albumList = new ArrayList<>();
-            adapter = new AlbumsAdapter(getActivity(), albumList);
-
-            //   RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 1);
-            //   recyclerView.setLayoutManager(mLayoutManager);
-            //   recyclerView.addItemDecoration(new GridSpacingItemDecoration(1, dpToPx(10), true));
-            //   recyclerView.setItemAnimator(new DefaultItemAnimator());
-            //   recyclerView.setAdapter(adapter);
-
-            recyclerViewsecond.setHasFixedSize(true);
 
 
-            recyclerViewsecond.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
-
-            recyclerViewsecond.setAdapter(adapter);
-
-            prepareAlbums();
-
-            recyclerViewthird = (RecyclerView) view.findViewById(R.id.recycler_view_third);
-
-            albumList = new ArrayList<>();
-            adapter = new AlbumsAdapter(getActivity(), albumList);
-
-            //   RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 1);
-            //   recyclerView.setLayoutManager(mLayoutManager);
-            //   recyclerView.addItemDecoration(new GridSpacingItemDecoration(1, dpToPx(10), true));
-            //   recyclerView.setItemAnimator(new DefaultItemAnimator());
-            //   recyclerView.setAdapter(ad
-            // apter);
-
-            recyclerViewthird.setHasFixedSize(true);
-
-
-            recyclerViewthird.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
-
-            recyclerViewthird.setAdapter(adapter);
-
-            prepareAlbums();
 
 
             return  view;
