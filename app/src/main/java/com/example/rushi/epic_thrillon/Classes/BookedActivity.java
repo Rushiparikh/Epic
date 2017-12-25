@@ -12,7 +12,9 @@ public class BookedActivity {
     private String actId;
     private String orgId;
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
-
+    public BookedActivity(){
+        
+    }
 
     public BookedActivity(String actId, String orgId) {
         this.actId = actId;

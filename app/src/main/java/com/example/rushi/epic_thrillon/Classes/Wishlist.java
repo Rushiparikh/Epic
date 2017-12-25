@@ -13,7 +13,9 @@ public class Wishlist {
     private String orgId;
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
+    public Wishlist(){
 
+    }
     public Wishlist(String actId, String orgId) {
         this.actId = actId;
         this.orgId = orgId;

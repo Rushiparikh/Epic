@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.rushi.epic_thrillon.R;
+import com.example.rushi.epic_thrillon.Classes.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseException;
@@ -19,16 +20,23 @@ import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.concurrent.TimeUnit;
+
+import static com.example.rushi.epic_thrillon.MainPages.Home_Page.i;
 
 public class OneTimePass extends AppCompatActivity {
     EditText phoneEdit,oneTimePass;
     Button phonebt,Ontetimebt;
     FirebaseAuth mAuth;
+    DatabaseReference mref;
+    String id;
     String ValidationId,code,phoneNumber;
     PhoneAuthProvider.ForceResendingToken token;
     PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallBack;
+    String firstName_register,lastName_register,email_register,password_register,confirmPass_register,mobile_register;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +50,7 @@ public class OneTimePass extends AppCompatActivity {
         oneTimePass = (EditText) findViewById(R.id.otp);
         Ontetimebt = (Button) findViewById(R.id.otpSummit);
 
+        mref= FirebaseDatabase.getInstance().getReference("user");
         phoneEdit.setText(phoneNumber);
 
 
@@ -103,6 +112,23 @@ public class OneTimePass extends AppCompatActivity {
                                 Log.e(">>>>>>>>>>", "signInWithCredential:success");
 
                                 FirebaseUser user = task.getResult().getUser();
+                                String key=mref.push().getKey();
+                                Intent intent = getIntent();
+
+                                if(i>9){
+                                    id="00"+i;
+                                }else{
+                                    id="000"+i;
+                                }
+
+                                firstName_register = intent.getStringExtra("FirstName");
+                                lastName_register = intent.getStringExtra("LastName");
+                                mobile_register = intent.getStringExtra("Number");
+                                email_register = intent.getStringExtra("Email");
+                                password_register = intent.getStringExtra("Password");
+                                confirmPass_register = intent.getStringExtra("ConfirmPassword");
+                                User userdta=new User(null,confirmPass_register,email_register,firstName_register,lastName_register,Long.parseLong(mobile_register),password_register,id,null);
+                                mref.child(key).setValue(userdta);
 
                                 startActivity(new Intent(OneTimePass.this,Login.class));
                                 finish();

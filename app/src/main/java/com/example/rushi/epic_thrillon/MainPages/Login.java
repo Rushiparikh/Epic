@@ -11,7 +11,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.rushi.epic_thrillon.R;
-import com.example.rushi.epic_thrillon.User;
+import com.example.rushi.epic_thrillon.Classes.User;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -38,7 +38,7 @@ public class Login extends AppCompatActivity {
 
         login=findViewById(R.id.button2);
 
-        mDatabaseReference = FirebaseDatabase.getInstance().getReference("users");
+        mDatabaseReference = FirebaseDatabase.getInstance().getReference("user");
         mDatabaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {

@@ -20,6 +20,10 @@ public class User {
     private Wishlist wishlist;
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
+    public User(){
+
+    }
+
     public User(BookedActivity bookedActivity, String confirmPass, String email, String firstName, String lastName, long mobileNo, String password, String userId, Wishlist wishlist) {
         this.bookedActivity = bookedActivity;
         this.confirmPass = confirmPass;

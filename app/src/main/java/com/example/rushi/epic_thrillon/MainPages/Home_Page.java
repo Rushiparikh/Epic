@@ -23,6 +23,8 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.example.rushi.epic_thrillon.Auxiliaries.Constants;
+import com.example.rushi.epic_thrillon.Classes.User;
 import com.example.rushi.epic_thrillon.Fragments.DestinationFragment;
 import com.example.rushi.epic_thrillon.Fragments.HomeFragment;
 import com.example.rushi.epic_thrillon.Fragments.MyActivityFragment;
@@ -39,12 +41,19 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.io.InputStream;
 
 public class Home_Page extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener
 
 {
+
     private ImageView nav_image_view;
     private TextView nav_textview_name,nav_textview_email;
     InputStream is;
@@ -52,7 +61,9 @@ public class Home_Page extends AppCompatActivity implements NavigationView.OnNav
     private String email=null;
 
     String Login_with;
+    String imageUrl,firstName,lastName,Email,name,id;
     private NavigationView navigationView;
+    private DatabaseReference mref;
 
     boolean facebook,email_login;
     SharedPreferences sharedPreferences;
@@ -76,7 +87,8 @@ public class Home_Page extends AppCompatActivity implements NavigationView.OnNav
     private boolean shouldLoadHomeFragOnBackPress = true;
     private FragmentManager fragmentManager;
     private FragmentTransaction fragmentTransaction;
-
+    public static int i=9;
+    private Query query;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,6 +98,7 @@ public class Home_Page extends AppCompatActivity implements NavigationView.OnNav
 
         sharedPreferences=getSharedPreferences(AskForSignin.My_pref, Context.MODE_PRIVATE);
 
+        mref= FirebaseDatabase.getInstance().getReference(Constants.USERS_DATABASE_PATH_UPLOADS);
       //  activityTitles = getResources().getStringArray(R.array.nav_item_activity_titles);
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -117,6 +130,8 @@ public class Home_Page extends AppCompatActivity implements NavigationView.OnNav
         Login_with =  getIntent().getStringExtra("Login");
 
 
+
+
        View header = navigationView.getHeaderView(0);
 
         nav_image_view = (ImageView) header.findViewById(R.id.navheader_imageView);
@@ -135,37 +150,73 @@ public class Home_Page extends AppCompatActivity implements NavigationView.OnNav
                         Toast.makeText(Home_Page.this,"Went wrong",Toast.LENGTH_SHORT).show();
                     }
                 }).addApi(Auth.GOOGLE_SIGN_IN_API,gso).build();
-
-
-
+        if(i>9){
+            id="00"+i;
+        }else{
+            id="000"+i;
+        }
 
 
         if(facebook){
             Profile profile = Profile.getCurrentProfile();
-            String imageUrl = profile.getProfilePictureUri(200, 200).toString();
-            String firstname = profile.getFirstName();
-            String lastname = profile.getLastName();
-            String Email = getIntent().getStringExtra("email_id");
-            String name = firstname + " " + lastname;
+            imageUrl = profile.getProfilePictureUri(200, 200).toString();
+            firstName = profile.getFirstName();
+            lastName = profile.getLastName();
+            Email=profile.getId();
+            name = firstName + " " + lastName;
 
             Log.e("TAG_name", name);
             nav_textview_name.setText(name);
+            nav_textview_email.setText("");
            // new Home_Page.DownloadImage(nav_image_view).execute(imageUrl);
             Glide.with(getApplicationContext()).load(imageUrl).apply(RequestOptions.circleCropTransform()).into(nav_image_view);
-          nav_textview_email.setText(Email);
+            query=mref.orderByChild("email").equalTo(Email);
+            query.addValueEventListener(new ValueEventListener() {
+              @Override
+              public void onDataChange(DataSnapshot dataSnapshot) {
+                  if(!dataSnapshot.exists()){
+                      String key=mref.push().getKey();
+                      User user=new User(null,"",Email,firstName,lastName,-1,"",id,null);
+                      mref.child(key).setValue(user);
+                      i++;
+                  }
+              }
+
+              @Override
+              public void onCancelled(DatabaseError databaseError) {
+
+              }
+          });
         }else if(google){
 
             if (acct != null) {
-                String personName = acct.getDisplayName();
+                final String personName = acct.getDisplayName();
                 String personGivenName = acct.getGivenName();
-                String personFamilyName = acct.getFamilyName();
-                String personEmail = acct.getEmail();
+                final String personFamilyName = acct.getFamilyName();
+                final String personEmail = acct.getEmail();
                 String personId = acct.getId();
                 String personPhoto = acct.getPhotoUrl().toString();
                 nav_textview_name.setText(personName);
                 //  new Home_Page.DownloadImage(nav_image_view).execute(personPhoto);
                 Glide.with(getApplicationContext()).load(personPhoto).apply(RequestOptions.circleCropTransform()).into(nav_image_view);
                 nav_textview_email.setText(personEmail);
+                query=mref.orderByChild("email").equalTo(personEmail);
+                query.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        if(!dataSnapshot.exists()){
+                            String key=mref.push().getKey();
+                            User user=new User(null,"",personEmail,personName,personFamilyName,-1,"",id,null);
+                            mref.child(key).setValue(user);
+                        }
+                        i++;
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
                 }
 
         }else if(email_login) {
