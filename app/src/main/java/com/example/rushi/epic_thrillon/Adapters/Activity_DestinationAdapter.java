@@ -1,6 +1,7 @@
 package com.example.rushi.epic_thrillon.Adapters;
 
 import android.content.Context;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,8 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.example.rushi.epic_thrillon.Classes.Activity;
 import com.example.rushi.epic_thrillon.Destination;
 import com.example.rushi.epic_thrillon.R;
 
@@ -21,7 +24,7 @@ import java.util.List;
 public class Activity_DestinationAdapter extends RecyclerView.Adapter<Activity_DestinationAdapter.MyViewHolder> {
 
     private Context mContext;
-    private List<Destination> imageList;
+    private List<Activity> imageList;
     private RatingBar ratingBar;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
@@ -39,7 +42,7 @@ public class Activity_DestinationAdapter extends RecyclerView.Adapter<Activity_D
         }
     }
 
-    public Activity_DestinationAdapter(Context mContext,List<Destination> activityList){
+    public Activity_DestinationAdapter(Context mContext,List<Activity> activityList){
         this.mContext=mContext;
         this.imageList=activityList;
     }
@@ -55,14 +58,14 @@ public class Activity_DestinationAdapter extends RecyclerView.Adapter<Activity_D
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
 
-        Destination destination_activity = imageList.get(position);
-        holder.name.setText(destination_activity.getName());
+        Activity destination_activity = imageList.get(position);
+        holder.name.setText(destination_activity.getActivityName());
         // holder.count.setText(album.getNumOfSongs() + " songs");
-        holder.activity_image.setImageResource(destination_activity.getImage_id());
+       //holder.activity_image.setImageURI(Uri.parse(destination_activity.getImages().getImg1()));
 
-        holder.rupee.setText(destination_activity.getRupee()+"");
+        holder.rupee.setText(destination_activity.getPrice()+"");
         // loading album cover using Glide library
-        //  Glide.with(mContext).load(album.getThumbnail()).into(holder.thumbnail);
+        Glide.with(mContext).load(destination_activity.getImages().getImg1()).into(holder.activity_image);
 
 //        holder.overflow.setOnClickListener(new View.OnClickListener() {
 //            @Override

@@ -163,6 +163,7 @@ public class HomeFragment extends Fragment {
 
                     Intent intent=new Intent(getActivity(),ActivityClick.class);
                     intent.putExtra("ActivityName",activityList.get(position).getName());
+                    intent.putExtra("ActivityImage",activityList.get(position).getImage());
 
                     startActivity(intent);
 

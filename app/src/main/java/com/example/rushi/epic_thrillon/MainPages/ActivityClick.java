@@ -83,6 +83,7 @@ public class ActivityClick extends AppCompatActivity {
         Intent i =getIntent();
         ActivityName= i.getStringExtra("ActivityName");
 
+        ActivityImage=i.getStringExtra("ActivityImage");
         ActName.setText(ActivityName);
         initCollapsingToolbar();
         MobileAds.initialize(this, "ca-app-pub-4689037977247733~9439374585");
@@ -118,7 +119,11 @@ public class ActivityClick extends AppCompatActivity {
                     @Override public void onItemClick(View view, int position) {
                         // do whatever
                         showInterstitial();
-                        startActivity(new Intent(ActivityClick.this,DestinationActivity.class));
+                        Intent intent=new Intent(ActivityClick.this,DestinationActivity.class);
+                        intent.putExtra("ActivityName",ActivityName);
+                        intent.putExtra("Destination",unique.get(position).getDestName());
+                        startActivity(intent);
+
                     }
 
                     @Override public void onLongItemClick(View view, int position) {

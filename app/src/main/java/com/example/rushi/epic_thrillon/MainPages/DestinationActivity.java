@@ -10,6 +10,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.example.rushi.epic_thrillon.Adapters.Activity_DestinationAdapter;
+import com.example.rushi.epic_thrillon.Auxiliaries.Constants;
+import com.example.rushi.epic_thrillon.Classes.Activity;
 import com.example.rushi.epic_thrillon.Destination;
 import com.example.rushi.epic_thrillon.R;
 import com.example.rushi.epic_thrillon.Auxiliaries.RecyclerItemClickListener;
@@ -17,6 +19,11 @@ import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,13 +31,15 @@ import java.util.List;
 public class DestinationActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private Activity_DestinationAdapter adapter;
-    private List<Destination> imageList;
+    private List<Activity> imageList;
 
     private static final long GAME_LENGTH_MILLISECONDS = 1000;
     private boolean mGameIsInProgress;
     private long mTimerMilliseconds;
     private InterstitialAd mInterstitialAd;
     private CountDownTimer mCountDownTimer;
+    private DatabaseReference mref;
+    private String activityName,destinationName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +49,7 @@ public class DestinationActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         MobileAds.initialize(this, "ca-app-pub-4689037977247733~9439374585");
 
+        mref= FirebaseDatabase.getInstance().getReference(Constants.ACIVITY_DATABASE_PATH_UPLOADS);
         // Create the InterstitialAd and set the adUnitId.
         mInterstitialAd = new InterstitialAd(this);
         // Defined in res/values/strings.xml
@@ -54,14 +64,35 @@ public class DestinationActivity extends AppCompatActivity {
         });
 
 
+        activityName=getIntent().getStringExtra("ActivityName");
+        destinationName=getIntent().getStringExtra("Destination");
 
+        mref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot dataSnapshot1:dataSnapshot.getChildren()){
+                    Activity activity=dataSnapshot1.getValue(Activity.class);
+                    if(activity.getActivityName().equalsIgnoreCase(activityName) && activity.getDestination().equalsIgnoreCase(destinationName)){
+                        imageList.add(activity);
+                    }
+                }
+                adapter = new Activity_DestinationAdapter(getApplicationContext(), imageList);
+                recyclerView.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
         recyclerView = findViewById(R.id.recycleview);
         imageList = new ArrayList<>();
-        adapter = new Activity_DestinationAdapter(this, imageList);
+
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
-        recyclerView.setAdapter(adapter);
-        prepareImage();
+
+        //prepareImage();
 
         recyclerView.addOnItemTouchListener(
                 new RecyclerItemClickListener(getApplicationContext(), recyclerView ,new RecyclerItemClickListener.OnItemClickListener() {
@@ -80,7 +111,7 @@ public class DestinationActivity extends AppCompatActivity {
 
     }
 
-    private void prepareImage() {
+   /* private void prepareImage() {
         int[] covers = new int[]{
                 R.drawable.album1,
                 R.drawable.album2,
@@ -103,7 +134,7 @@ public class DestinationActivity extends AppCompatActivity {
         adapter.notifyDataSetChanged();
 
     }
-
+*/
     private void createTimer(final long milliseconds) {
         // Create the game timer, which counts down to the end of the level
         // and shows the "retry" button.
