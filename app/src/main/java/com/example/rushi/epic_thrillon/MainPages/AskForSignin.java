@@ -72,11 +72,8 @@ public class AskForSignin extends AppCompatActivity {
             @Override
             public void onSuccess(LoginResult loginResult) {
                 Log.e("FUVCKUNGNFHFJFJFKKFL","HRLLL LKLSFSJFKJS F JSH HFKJHSFUHSJ KFHSK");
-
                 Intent i = new Intent(AskForSignin.this, Home_Page.class);
                 i.putExtra("Login","facebook");
-
-
                 editor.putBoolean("Facebook",true);
                 editor.commit();
                 startActivity(i);
@@ -183,12 +180,14 @@ public class AskForSignin extends AppCompatActivity {
         if(email_login){
             Intent i = new Intent(AskForSignin.this, Home_Page.class);
             startActivity(i);
+            finish();
         }
         if(Profile.getCurrentProfile()!=null && AccessToken.getCurrentAccessToken()!=null){
             Intent i = new Intent(AskForSignin.this, Home_Page.class);
             //i.putExtra("Login","facebook");
             //editor.putBoolean("Facebook",true);
             startActivity(i);
+            finish();
         }
         OptionalPendingResult<GoogleSignInResult> opr = Auth.GoogleSignInApi.silentSignIn(mGoogleApiClient);
         if (opr.isDone()) {
@@ -229,6 +228,7 @@ public class AskForSignin extends AppCompatActivity {
 
             i.putExtra("not",getIntent().getStringExtra("name"));
             startActivity(i);
+            finish();
 
         } else {
 

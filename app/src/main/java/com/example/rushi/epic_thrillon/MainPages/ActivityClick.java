@@ -103,7 +103,9 @@ public class ActivityClick extends AppCompatActivity {
         OrgDestList = new ArrayList<>();
         unique=new ArrayList<>();
         mDatabase = FirebaseDatabase.getInstance().getReference(Constants.ACIVITY_DATABASE_PATH_UPLOADS);
+        mDatabase.keepSynced(true);
         mDest = FirebaseDatabase.getInstance().getReference(Constants.DESTINATION_DATABASE_PATH_UPLOADS);
+        mDest.keepSynced(true);
         Log.e("<<<<",mDatabase+"");
 
 

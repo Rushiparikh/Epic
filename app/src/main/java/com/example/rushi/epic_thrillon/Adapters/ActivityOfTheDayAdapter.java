@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.rushi.epic_thrillon.Classes.Activity;
 import com.example.rushi.epic_thrillon.Classes.Album;
 import com.example.rushi.epic_thrillon.R;
@@ -52,7 +53,17 @@ public class ActivityOfTheDayAdapter extends  RecyclerView.Adapter<ActivityOfThe
     public void onBindViewHolder(MyViewHolder holder, int position) {
         Activity activity = activityList.get(position);
         holder.title.setText(activity.getActivityName());
-        Glide.with(mContext).load(activityList.get(position).getImages().getImg2()).into(holder.thumbnail);
+
+        //Glide.with(mContext).load(activityList.get(position).getImages().getImg2()).into(holder.thumbnail);
+
+        Glide
+                .with(mContext)
+                .load(activityList.get(position).getImages().getImg2())
+                .placeholder(R.drawable.logo) // can also be a drawable
+                .error(R.mipmap.ic_launcher) // will be displayed if the image cannot be loaded
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .crossFade()
+                .into(holder.thumbnail);
     }
     @Override
     public int getItemCount() {

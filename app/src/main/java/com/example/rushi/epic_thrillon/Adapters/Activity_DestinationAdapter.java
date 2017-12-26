@@ -11,6 +11,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.rushi.epic_thrillon.Classes.Activity;
 import com.example.rushi.epic_thrillon.Destination;
 import com.example.rushi.epic_thrillon.R;
@@ -65,7 +66,17 @@ public class Activity_DestinationAdapter extends RecyclerView.Adapter<Activity_D
 
         holder.rupee.setText(destination_activity.getPrice()+"");
         // loading album cover using Glide library
-        Glide.with(mContext).load(destination_activity.getImages().getImg1()).into(holder.activity_image);
+
+        Glide
+                .with(mContext)
+                .load(destination_activity.getImages().getImg1())
+                .placeholder(R.drawable.logo) // can also be a drawable
+                .error(R.mipmap.ic_launcher) // will be displayed if the image cannot be loaded
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .crossFade()
+                .into(holder.activity_image);
+
+        ratingBar.setRating((float)destination_activity.getRating());
 
 //        holder.overflow.setOnClickListener(new View.OnClickListener() {
 //            @Override

@@ -3,6 +3,8 @@ package com.example.rushi.epic_thrillon.Adapters;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,7 +14,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+
+import com.bumptech.glide.request.target.BitmapImageViewTarget;
+import com.example.rushi.epic_thrillon.Auxiliaries.CircleTransform;
 import com.example.rushi.epic_thrillon.Classes.Activities;
 import com.example.rushi.epic_thrillon.Classes.Activity;
 import com.example.rushi.epic_thrillon.R;
@@ -24,6 +29,7 @@ import static com.facebook.FacebookSdk.getApplicationContext;
 public class ImageAdapter extends BaseAdapter {
     private Context mContext;
     private final List<Activities> activityList;
+    ImageView imageview;
 
 
     public ImageAdapter(Context c,List<Activities> activityList) {
@@ -53,10 +59,11 @@ public class ImageAdapter extends BaseAdapter {
             grid = inflater.inflate(R.layout.homepage_buttons,null);
 
             TextView textView = (TextView)grid.findViewById(R.id.home_text);
-            ImageView imageview = (ImageView)grid.findViewById(R.id.home_image);
+             imageview = (ImageView)grid.findViewById(R.id.home_image);
             textView.setText(activityList.get(position).getName());
-           // imageview.setImageResource(Imageid[position]);
-            Glide.with(getApplicationContext()).load(activityList.get(position).getImage()).apply(RequestOptions.circleCropTransform()).into(imageview);
+            // imageview.setImageResource(Imageid[position]);
+
+            Glide.with(getApplicationContext()).load(activityList.get(position).getImage()).crossFade().diskCacheStrategy(DiskCacheStrategy.ALL).transform(new CircleTransform(getApplicationContext())).into(imageview);
 
         } else {
             grid = (View) convertView;

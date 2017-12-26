@@ -32,6 +32,9 @@
         <item name="colorPrimaryDark">@color/appColor</item>
 
     </style>
-
+    <style name="RatingBar" parent="Theme.AppCompat">
+        <item name="colorControlNormal">@color/duskYellow</item>
+        <item name="colorControlActivated">@color/lightGrey</item>
+    </style>
 
     </resources>

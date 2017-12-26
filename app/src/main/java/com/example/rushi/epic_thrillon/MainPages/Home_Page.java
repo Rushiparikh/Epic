@@ -3,10 +3,13 @@ package com.example.rushi.epic_thrillon.MainPages;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -22,7 +25,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
+
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.target.BitmapImageViewTarget;
+import com.example.rushi.epic_thrillon.Auxiliaries.CircleTransform;
 import com.example.rushi.epic_thrillon.Auxiliaries.Constants;
 import com.example.rushi.epic_thrillon.Classes.User;
 import com.example.rushi.epic_thrillon.Fragments.DestinationFragment;
@@ -169,7 +175,9 @@ public class Home_Page extends AppCompatActivity implements NavigationView.OnNav
             nav_textview_name.setText(name);
             nav_textview_email.setText("");
            // new Home_Page.DownloadImage(nav_image_view).execute(imageUrl);
-            Glide.with(getApplicationContext()).load(imageUrl).apply(RequestOptions.circleCropTransform()).into(nav_image_view);
+
+            Glide.with(getApplicationContext()).load(imageUrl).crossFade().diskCacheStrategy(DiskCacheStrategy.ALL).transform(new CircleTransform(getApplicationContext())).into(nav_image_view);
+
             query=mref.orderByChild("email").equalTo(Email);
             query.addValueEventListener(new ValueEventListener() {
               @Override
@@ -198,7 +206,9 @@ public class Home_Page extends AppCompatActivity implements NavigationView.OnNav
                 String personPhoto = acct.getPhotoUrl().toString();
                 nav_textview_name.setText(personName);
                 //  new Home_Page.DownloadImage(nav_image_view).execute(personPhoto);
-                Glide.with(getApplicationContext()).load(personPhoto).apply(RequestOptions.circleCropTransform()).into(nav_image_view);
+
+                Glide.with(getApplicationContext()).load(personPhoto).crossFade().diskCacheStrategy(DiskCacheStrategy.ALL).transform(new CircleTransform(getApplicationContext())).into(nav_image_view);
+
                 nav_textview_email.setText(personEmail);
                 query=mref.orderByChild("email").equalTo(personEmail);
                 query.addValueEventListener(new ValueEventListener() {
@@ -247,7 +257,9 @@ public class Home_Page extends AppCompatActivity implements NavigationView.OnNav
             drawer.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
+
         }
+
     }
 
     @Override
@@ -382,5 +394,7 @@ public class Home_Page extends AppCompatActivity implements NavigationView.OnNav
 
         }
     }
+
+
 }
 
