@@ -52,8 +52,7 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.ViewHo
         viewHolder.textViewName.setText(destination.getDestName());
 
         //Glide.with(context).load(destination.getImage()).into(holder.imageView);
-        Glide
-                .with(context)
+        Glide.with(context)
                 .load(destination.getImage())
                 .placeholder(R.drawable.logo) // can also be a drawable
                 .error(R.mipmap.ic_launcher) // will be displayed if the image cannot be loaded

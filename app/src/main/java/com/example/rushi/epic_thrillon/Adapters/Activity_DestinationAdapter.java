@@ -67,8 +67,7 @@ public class Activity_DestinationAdapter extends RecyclerView.Adapter<Activity_D
         holder.rupee.setText(destination_activity.getPrice()+"");
         // loading album cover using Glide library
 
-        Glide
-                .with(mContext)
+        Glide.with(mContext)
                 .load(destination_activity.getImages().getImg1())
                 .placeholder(R.drawable.logo) // can also be a drawable
                 .error(R.mipmap.ic_launcher) // will be displayed if the image cannot be loaded
