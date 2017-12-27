@@ -8,4 +8,7 @@
     <color name="appColor">#1911AA</color>
     <color name="duskYellow">#dfc97a</color>
     <color name="lightGrey">#b6b4ac</color>
+
+    <color name="btn_pressed" >#ff0000</color>
+    <color name="btn_released" >#ffffff</color>
 </resources>

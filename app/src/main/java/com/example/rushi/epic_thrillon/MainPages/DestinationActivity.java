@@ -1,6 +1,8 @@
 package com.example.rushi.epic_thrillon.MainPages;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -40,6 +42,7 @@ public class DestinationActivity extends AppCompatActivity {
     private CountDownTimer mCountDownTimer;
     private DatabaseReference mref;
     private String activityName,destinationName;
+    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +66,9 @@ public class DestinationActivity extends AppCompatActivity {
             }
         });
 
+        sharedPreferences = getSharedPreferences(AskForSignin.My_pref, Context.MODE_PRIVATE);
+
+
 
         activityName=getIntent().getStringExtra("ActivityName");
         destinationName=getIntent().getStringExtra("Destination");
@@ -76,7 +82,7 @@ public class DestinationActivity extends AppCompatActivity {
                         imageList.add(activity);
                     }
                 }
-                adapter = new Activity_DestinationAdapter(getApplicationContext(), imageList);
+                adapter = new Activity_DestinationAdapter(getApplicationContext(), imageList,sharedPreferences);
                 recyclerView.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
             }

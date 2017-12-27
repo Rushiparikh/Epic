@@ -4,17 +4,25 @@ package com.example.rushi.epic_thrillon.Adapters;
  * Created by dhaval on 15/12/2017.
  */
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.rushi.epic_thrillon.Classes.Destination;
+import com.example.rushi.epic_thrillon.MainPages.Home_Page;
 import com.example.rushi.epic_thrillon.R;
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
@@ -31,6 +39,8 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.ViewHo
     private List<Destination> destinations;
     Destination destination;
     ViewHolder viewHolder;
+    View v;
+
 
     public ActivityAdapter(Context context, List<Destination> destinations) {
         this.destinations = destinations;
@@ -39,9 +49,9 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.ViewHo
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext())
+         v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.activity_dest_card, parent, false);
-        ViewHolder viewHolder = new ViewHolder(v);
+         viewHolder = new ViewHolder(v);
         return viewHolder;
     }
 
@@ -58,7 +68,9 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.ViewHo
                 .error(R.mipmap.ic_launcher) // will be displayed if the image cannot be loaded
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .crossFade()
-                .into(holder.imageView);
+                .into(viewHolder.imageView);
+
+
     }
 
     @Override

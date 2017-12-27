@@ -256,7 +256,7 @@ public class HomeFragment extends Fragment {
         a = new Album("Greatest Hits", 17, covers[9]);
         albumList.add(a);
 
-        adapter.notifyDataSetChanged();
+
     }
 
 
