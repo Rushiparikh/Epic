@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
@@ -31,11 +32,13 @@ import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.example.rushi.epic_thrillon.Auxiliaries.CircleTransform;
 import com.example.rushi.epic_thrillon.Auxiliaries.Constants;
 import com.example.rushi.epic_thrillon.Classes.User;
+import com.example.rushi.epic_thrillon.Fragments.Completed;
 import com.example.rushi.epic_thrillon.Fragments.DestinationFragment;
 import com.example.rushi.epic_thrillon.Fragments.HomeFragment;
 import com.example.rushi.epic_thrillon.Fragments.MyActivityFragment;
 import com.example.rushi.epic_thrillon.Fragments.NearByFragment;
 import com.example.rushi.epic_thrillon.Fragments.NotificationFragment;
+import com.example.rushi.epic_thrillon.Fragments.Upcoming;
 import com.example.rushi.epic_thrillon.Fragments.WishListFragment;
 import com.example.rushi.epic_thrillon.R;
 import com.facebook.AccessToken;
@@ -56,7 +59,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.io.InputStream;
 
-public class Home_Page extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener
+public class Home_Page extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,Upcoming.OnFragmentInteractionListener,Completed.OnFragmentInteractionListener
 
 {
 
@@ -396,5 +399,9 @@ public class Home_Page extends AppCompatActivity implements NavigationView.OnNav
     }
 
 
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
+    }
 }
 

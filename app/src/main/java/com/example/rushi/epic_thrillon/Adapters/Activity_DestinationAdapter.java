@@ -6,7 +6,9 @@ import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.Build;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -59,9 +61,12 @@ public class Activity_DestinationAdapter extends RecyclerView.Adapter<Activity_D
     boolean flag = true;
     private GoogleApiClient mGoogleApiClient;
     private GoogleSignInAccount acct;
+    int position;
+    int match=-1;
 
+    String fullId=null;
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public TextView name, rupee;
         public ImageView activity_image;
         public ImageButton heart;
@@ -80,6 +85,83 @@ public class Activity_DestinationAdapter extends RecyclerView.Adapter<Activity_D
             heart = view.findViewById(R.id.heart);
             mUser = FirebaseDatabase.getInstance().getReference(Constants.USERS_DATABASE_PATH_UPLOADS);
             acct = GoogleSignIn.getLastSignedInAccount(getApplicationContext());
+            heart.setOnClickListener(this);
+
+        }
+
+        @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+        @Override
+        public void onClick(View view) {
+            position=getAdapterPosition();
+            heart.setImageTintList(ColorStateList.valueOf(Color.RED));
+            Toast.makeText(mContext,"Added to Wishlist",Toast.LENGTH_LONG).show();
+            facebook = sharedPreferences.getBoolean("Facebook",false);
+            google = sharedPreferences.getBoolean("Google",false);
+            email = sharedPreferences.getBoolean("Email",false);
+            if(facebook){
+                Profile profile =  Profile.getCurrentProfile();
+                final String facebookID = profile.getId();
+                Query query = mUser.orderByChild("email").equalTo(facebookID);
+                query.addValueEventListener( new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for (DataSnapshot dataSnapshot1: dataSnapshot.getChildren()){
+                            if(match!=position){
+                                flag=true;
+                            }
+                            String id=imageList.get(position).getActivityId()+""+imageList.get(position).getOrganizerId();
+                            if(!id.equals(fullId) && flag) {
+                                Wishlist wishlist = new Wishlist(imageList.get(position).getActivityId(), imageList.get(position).getOrganizerId());
+                                String Key = mUser.push().getKey();
+                                mUser.child(dataSnapshot1.getKey()).child("wishlist").child(Key).setValue(wishlist);
+                                fullId = imageList.get(position).getActivityId() + "" + imageList.get(position).getOrganizerId();
+                                flag=false;
+                                match=position;
+                            }else{
+                                //Toast.makeText(getApplicationContext(),"Already addedd wishlist",Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+            }else if(google && acct!=null){
+
+                final String googleMail = acct.getEmail();
+                Query query = mUser.orderByChild("email").equalTo(googleMail);
+                query.addValueEventListener( new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        if(match!=position){
+                            flag=true;
+                        }
+                        for (DataSnapshot dataSnapshot1: dataSnapshot.getChildren()){
+                            String id=imageList.get(position).getActivityId()+""+imageList.get(position).getOrganizerId();
+                            if(!id.equals(fullId) && flag) {
+                                Wishlist wishlist = new Wishlist(imageList.get(position).getActivityId(), imageList.get(position).getOrganizerId());
+                                String Key = mUser.push().getKey();
+                                mUser.child(dataSnapshot1.getKey()).child("wishlist").child(Key).setValue(wishlist);
+                                fullId = imageList.get(position).getActivityId() + "" + imageList.get(position).getOrganizerId();
+                                flag=false;
+                                match=position;
+                            }else{
+                                //Toast.makeText(getApplicationContext(),"Already addedd wishlist",Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+            }else{
+
+
+            }
 
         }
     }
@@ -118,76 +200,7 @@ public class Activity_DestinationAdapter extends RecyclerView.Adapter<Activity_D
                 .into(holder.activity_image);
 
         holder.ratingBar.setRating((float)destination_activity.getRating());
-        holder.heart.setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("NewApi")
-            @Override
-            public void onClick(View view) {
 
-                holder.heart.setImageTintList(ColorStateList.valueOf(Color.RED));
-                Toast.makeText(mContext,"Added to Wishlist",Toast.LENGTH_LONG).show();
-                facebook = sharedPreferences.getBoolean("Facebook",false);
-                google = sharedPreferences.getBoolean("Google",false);
-                email = sharedPreferences.getBoolean("Email",false);
-                if(facebook){
-                    Profile profile =  Profile.getCurrentProfile();
-                    final String facebookID = profile.getId();
-                    mUser.addValueEventListener( new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-                            for (DataSnapshot dataSnapshot1: dataSnapshot.getChildren()){
-                                User user= dataSnapshot1.getValue(User.class);
-
-                                if(user.getEmail().equals(facebookID) && flag){
-                                    dataSnapshot1.getKey();
-                                    Wishlist wishlist = new Wishlist(destination_activity.getActivityId(),destination_activity.getOrganizerId());
-                                    String Key= mUser.push().getKey();
-                                    mUser.child(dataSnapshot1.getKey()).child("wishlist").child(Key).setValue(wishlist);
-                                    flag = false;
-                                    break;
-                                }
-                            }
-                        }
-
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
-
-                        }
-                    });
-                }else if(google && acct!=null){
-
-                    final String googleMail = acct.getEmail();
-                    mUser.addValueEventListener( new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-                            for (DataSnapshot dataSnapshot1: dataSnapshot.getChildren()){
-                                User user= dataSnapshot1.getValue(User.class);
-
-                                if(user.getEmail().equals(googleMail) && flag){
-                                    dataSnapshot1.getKey();
-                                    Wishlist wishlist = new Wishlist(destination_activity.getActivityId(),destination_activity.getOrganizerId());
-                                    String Key= mUser.push().getKey();
-                                    mUser.child(dataSnapshot1.getKey()).child("wishlist").child(Key).setValue(wishlist);
-                                    flag = false;
-                                    break;
-                                }
-                            }
-                        }
-
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
-
-                        }
-                    });
-                }else{
-
-
-                }
-
-
-
-
-            }
-        });
 
 
 //        holder.overflow.setOnClickListener(new View.OnClickListener() {
