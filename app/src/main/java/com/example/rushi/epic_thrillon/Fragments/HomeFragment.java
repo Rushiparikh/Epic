@@ -14,12 +14,14 @@ import android.widget.GridView;
 
 import com.example.rushi.epic_thrillon.Adapters.ActivityOfTheDayAdapter;
 import com.example.rushi.epic_thrillon.Adapters.ImageAdapter;
+import com.example.rushi.epic_thrillon.Auxiliaries.RecyclerItemClickListener;
 import com.example.rushi.epic_thrillon.Classes.Activities;
 import com.example.rushi.epic_thrillon.Classes.Activity;
 import com.example.rushi.epic_thrillon.MainPages.ActivityClick;
 import com.example.rushi.epic_thrillon.Adapters.AlbumsAdapter;
 import com.example.rushi.epic_thrillon.Classes.Album;
 import com.example.rushi.epic_thrillon.Auxiliaries.Constants;
+import com.example.rushi.epic_thrillon.MainPages.ActivityDetails;
 import com.example.rushi.epic_thrillon.R;
 import com.example.rushi.epic_thrillon.Upload;
 import com.google.android.gms.ads.AdRequest;
@@ -186,14 +188,25 @@ public class HomeFragment extends Fragment {
                 }
                 recyclerViewfirst.setAdapter(new ActivityOfTheDayAdapter(getActivity(), activityofthedayList));
 
-
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
             }
         };
+            recyclerViewfirst.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(), recyclerViewfirst, new RecyclerItemClickListener.OnItemClickListener() {
+                @Override
+                public void onItemClick(View view, int position) {
+                    Intent i = new Intent(getActivity(), ActivityDetails.class);
+                    i.putExtra("activityId",activityofthedayList.get(position).getId());
+                    startActivity(i);
+                }
 
+                @Override
+                public void onLongItemClick(View view, int position) {
+
+                }
+            }));
             //   RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 1);
             //   recyclerView.setLayoutManager(mLayoutManager);
             //   recyclerView.addItemDecoration(new GridSpacingItemDecoration(1, dpToPx(10), true));

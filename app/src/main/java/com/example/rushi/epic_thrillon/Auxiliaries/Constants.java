@@ -12,6 +12,7 @@ public class Constants {
     public static final String DESTINATION_DATABASE_PATH_UPLOADS = "destination";
     public static final String WISHLIST_DATABASE_PATH_UPLOADS = "user/wishlist";
     public static final String NOTIFICATION_DATABASE_PATH_UPLOADS = "notification";
+    public static final String ORGANZIER_DATABASE_PATH_UPLOADS = "organizer";
 
 
 }

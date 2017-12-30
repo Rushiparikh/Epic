@@ -41,5 +41,6 @@
     <string name="backdrop_subtitle">This season top 20 albums</string>
     <string name="title_activity_maps">Map</string>
     <string name="ad_unit_id">ca-app-pub-4689037977247733/6322079041</string>
+    <string name="title_activity_check_availability">CheckAvailability</string>
 
 </resources>

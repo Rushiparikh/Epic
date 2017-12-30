@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.rushi.epic_thrillon.MainPages.Booking">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appBarLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+    </android.support.design.widget.AppBarLayout>
+
+
+    <TextView
+        android:id="@+id/actName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ScoobaDiving"
+        />
+
+    <ImageView
+        android:id="@+id/watch"
+        android:layout_width="48dp"
+        android:layout_height="32dp"
+        app:srcCompat="@android:drawable/ic_menu_recent_history"
+        />
+
+    <TextView
+        android:id="@+id/actTiming"
+        android:layout_width="wrap_content"
+        android:layout_height="32dp"
+        android:text="10:10 A.M." />
+
+    <TextView
+        android:id="@+id/actPesron"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Person:"
+        />
+
+    <TextView
+        android:id="@+id/person"
+        android:layout_width="35dp"
+        android:layout_height="29dp"
+        android:text="8"
+        />
+
+    <TextView
+        android:id="@+id/contact_info"
+        android:layout_width="160dp"
+        android:layout_height="22dp"
+        android:text="Contact Information"
+        />
+
+    <EditText
+        android:id="@+id/first_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="First Name"
+        android:inputType="textPersonName"
+         />
+
+    <EditText
+        android:id="@+id/last_name"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:ems="10"
+        android:hint="Last Name"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/email_id"
+        android:layout_width="199dp"
+        android:layout_height="59dp"
+        android:ems="10"
+        android:hint="Email"
+        android:inputType="textEmailAddress"
+        />
+
+    <EditText
+        android:id="@+id/mobile_no"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:ems="10"
+        android:hint="Mobile Number"
+        android:inputType="number"
+        />
+
+    <EditText
+        android:id="@+id/promo_coupon"
+        android:layout_width="177dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        />
+
+    <Button
+        android:id="@+id/promo_apply"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Apply" />
+
+    <TextView
+        android:id="@+id/amount"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="Total Amount"
+        />
+
+    <TextView
+        android:id="@+id/price"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="1000" />
+
+    <Button
+        android:id="@+id/make_payment_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="8dp"
+        android:text="Make Payment"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <TextView
+        android:id="@+id/actDateTextview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:text="Date"
+        app:layout_constraintLeft_toLeftOf="parent"
+        tools:layout_editor_absoluteY="190dp" />
+
+    <TextView
+        android:id="@+id/actDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        tools:layout_editor_absoluteX="64dp"
+        tools:layout_editor_absoluteY="190dp" />
+
+
+</LinearLayout>

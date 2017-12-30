@@ -1,14 +1,20 @@
 package com.example.rushi.epic_thrillon.MainPages;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Handler;
+import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.support.v7.widget.Toolbar;
 
 import com.borjabravo.readmoretextview.ReadMoreTextView;
 import com.example.rushi.epic_thrillon.Adapters.ActivityDetailPageAdapter;
@@ -59,6 +65,8 @@ public class ActivityDetails extends AppCompatActivity implements OnMapReadyCall
     ImageView food,travel,guide,acomodation;
     GoogleMap mMap;
     MapView mapView;
+    Button checkavailabily;
+
     double latitude,longitude;
 
     private ArrayList<String> imageLists = new ArrayList<String>();
@@ -66,6 +74,10 @@ public class ActivityDetails extends AppCompatActivity implements OnMapReadyCall
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        initCollapsingToolbar();
+
         final String actId = getIntent().getStringExtra("activityId");
         mActivityReference = FirebaseDatabase.getInstance().getReference(Constants.ACIVITY_DATABASE_PATH_UPLOADS);
         mPager = (ViewPager) findViewById(R.id.pager);
@@ -84,6 +96,7 @@ public class ActivityDetails extends AppCompatActivity implements OnMapReadyCall
         food = findViewById(R.id.actFood);
         travel = findViewById(R.id.actTravelling);
         acomodation = findViewById(R.id.actAcomodation);
+        checkavailabily = findViewById(R.id.checkavailability);
         mapView.onCreate(savedInstanceState);
 
         MapsInitializer.initialize(getApplicationContext());
@@ -152,8 +165,58 @@ public class ActivityDetails extends AppCompatActivity implements OnMapReadyCall
         });
 
         mapView.getMapAsync(this);
+        checkavailabily.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(ActivityDetails.this,CheckAvailability.class);
+                i.putExtra("activityId",actId);
+                startActivity(i);
+            }
+        });
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()){
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void initCollapsingToolbar() {
+        final CollapsingToolbarLayout collapsingToolbar =
+                (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
+        collapsingToolbar.setTitle("");
+        AppBarLayout appBarLayout = (AppBarLayout) findViewById(R.id.appbar);
+        appBarLayout.setExpanded(true);
+
+        // hiding & showing the title when toolbar expanded & collapsed
+        appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
+            boolean isShow = false;
+            int scrollRange = -1;
+
+            @Override
+            public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
+                if (scrollRange == -1) {
+                    scrollRange = appBarLayout.getTotalScrollRange();
+                }
+                if (scrollRange + verticalOffset == 0) {
+                    getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+                    getSupportActionBar().setDisplayShowHomeEnabled(true);
+                    collapsingToolbar.setTitle(activity.getActivityName());
+                    isShow = true;
+                } else if (isShow) {
+                    collapsingToolbar.setTitle(" ");
+                    getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+                    getSupportActionBar().setDisplayShowHomeEnabled(false);
+                    isShow = false;
+                }
+            }
+        });
+    }
 
     @SuppressLint("MissingPermission")
     @Override
@@ -209,4 +272,5 @@ public class ActivityDetails extends AppCompatActivity implements OnMapReadyCall
         super.onLowMemory();
         mapView.onLowMemory();
     }
+
 }
