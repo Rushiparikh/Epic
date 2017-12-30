@@ -9,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.rushi.epic_thrillon.Auxiliaries.Constants;
+import com.example.rushi.epic_thrillon.Classes.Notifiation;
 import com.example.rushi.epic_thrillon.R;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -22,6 +24,7 @@ import java.net.URISyntaxException;
 public class NotificationFragment extends Fragment {
     private DatabaseReference mDatabase;
     AdView adView;
+    DatabaseReference notificationReference;
     public NotificationFragment() {
         // Required empty public constructor
     }
@@ -39,6 +42,20 @@ public class NotificationFragment extends Fragment {
                 .build();
         // Inflate the layout for this fragment
         adView.loadAd(adRequest);
+        if(getArguments() !=null){
+            Bundle b = getArguments().getBundle("DATA");
+            String Data= b.getString("payload");
+            String name = b.getString("name");
+            Notifiation notifiation = new Notifiation(name,Data);
+            notificationReference = FirebaseDatabase.getInstance().getReference(Constants.NOTIFICATION_DATABASE_PATH_UPLOADS);
+            String Key= notificationReference.push().getKey();
+            notificationReference.child(Key).setValue(notifiation);
+        }
+
+
+
+
+
         return v;
     }
 

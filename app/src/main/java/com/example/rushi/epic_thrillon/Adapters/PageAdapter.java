@@ -28,6 +28,9 @@ public class PageAdapter extends PagerAdapter {
         inflater = LayoutInflater.from(context);
     }
 
+    public PageAdapter() {
+    }
+
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
         container.removeView((View) object);

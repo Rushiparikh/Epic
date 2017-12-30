@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Activity {
-
+    private String id;
     private String activityDate;
     private String activityId;
     private String activity_name;
@@ -29,7 +29,8 @@ public class Activity {
     public Activity() {
     }
 
-    public Activity(String activityDate, String activityId, String activity_name, String activityTime, String description, String destination, Images images, Location location, long organizerContact, String organizerId, String organizerName, double price, PublicReviews publicReviews, double rating, Service service) {
+    public Activity(String id, String activityDate, String activityId, String activity_name, String activityTime, String description, String destination, Images images, Location location, long organizerContact, String organizerId, String organizerName, double price, PublicReviews publicReviews, double rating, Service service) {
+        this.id =id;
         this.activityDate = activityDate;
         this.activityId = activityId;
         this.activity_name = activity_name;
@@ -49,6 +50,10 @@ public class Activity {
 
     public String getActivityDate() {
         return activityDate;
+    }
+
+    public String getId() {
+        return id;
     }
 
     public void setActivityDate(String activityDate) {

@@ -76,6 +76,7 @@ public class DestinationActivity extends AppCompatActivity {
         mref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                imageList.clear();
                 for(DataSnapshot dataSnapshot1:dataSnapshot.getChildren()){
                     Activity activity=dataSnapshot1.getValue(Activity.class);
                     if(activity.getActivityName().equalsIgnoreCase(activityName) && activity.getDestination().equalsIgnoreCase(destinationName)){
@@ -105,7 +106,9 @@ public class DestinationActivity extends AppCompatActivity {
                     @Override public void onItemClick(View view, int position) {
                         showInterstitial();
                         // do whatever
-                        startActivity(new Intent(DestinationActivity.this,ActivityDetails.class));
+                        Intent i = new Intent(DestinationActivity.this,ActivityDetails.class);
+                        i.putExtra("activityId",imageList.get(position).getId());
+                        startActivity(i);
                     }
 
                     @Override public void onLongItemClick(View view, int position) {

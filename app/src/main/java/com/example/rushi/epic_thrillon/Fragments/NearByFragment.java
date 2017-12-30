@@ -10,6 +10,7 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.Settings;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
@@ -32,6 +33,9 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import static com.facebook.FacebookSdk.getApplicationContext;
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 
@@ -43,6 +47,7 @@ public class NearByFragment extends Fragment{
     Double longitude,latitude ;
     private static final int PERMISSION_REQUEST_CODE = 200;
     ProgressBar progressBar;
+    LocationManager lm;
 
 
 
@@ -57,82 +62,76 @@ public class NearByFragment extends Fragment{
                              Bundle savedInstanceState) {
         View rootView =inflater.inflate(R.layout.fragment_near_by, container, false);
         progressBar= rootView.findViewById(R.id.progressBar2);
+         lm= (LocationManager) getContext().getSystemService(getContext().LOCATION_SERVICE);
+        mapView = (MapView) rootView.findViewById(R.id.map);
 
-        if(checkPermission()){
-            LocationManager lm = (LocationManager)getContext().getSystemService(getContext().LOCATION_SERVICE);
-            if(!(lm.isProviderEnabled(LocationManager.GPS_PROVIDER))){
-                Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                startActivity(intent);
-
+        if(mapView!= null) {
+            mapView.onCreate(savedInstanceState);
+            try {
+                MapsInitializer.initialize(getActivity().getApplicationContext());
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-            mapView = (MapView) rootView.findViewById(R.id.map);
 
-            if(mapView!= null){
-                mapView.onCreate(savedInstanceState);
-                try {
-                    MapsInitializer.initialize(getActivity().getApplicationContext());
-                } catch (Exception e) {
-                    e.printStackTrace();
+
+            if (checkPermission()) {
+
+                if (!(lm.isProviderEnabled(LocationManager.GPS_PROVIDER))) {
+                    Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                    startActivity(intent);
                 }
-                MyLocation.LocationResult locationResult = new MyLocation.LocationResult() {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        MyLocation.LocationResult locationResult = new MyLocation.LocationResult() {
                     @Override
                     public void gotLocation(Location location) {
-                        longitude= location.getLongitude();
-                        latitude= location.getLatitude();
+                        longitude = location.getLongitude();
+                        latitude = location.getLatitude();
+
+                            mapView.getMapAsync(new OnMapReadyCallback() {
+                                @SuppressLint("MissingPermission")
+                                @Override
+                                public void onMapReady(GoogleMap googleMap) {
+                                    mMap = googleMap;
+
+
+                                            // For showing a move to my location button
+                                            mMap.setMyLocationEnabled(true);
+                                            // For dropping a marker at a point on the Map
+                                            LatLng sydney = new LatLng(latitude, longitude);
+                                            mMap.addMarker(new MarkerOptions().position(sydney).title("Marker Title").snippet("Marker Description"));
+
+                                            // For zooming automatically to the location of the marker
+                                            CameraPosition cameraPosition = new CameraPosition.Builder().target(sydney).zoom(12).build();
+                                            mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+
+
+                                }
+                            });
+
+
                     }
                 };
+
+
+
                 MyLocation myLocation = new MyLocation();
                 myLocation.getLocation(getActivity(), locationResult);
-            }else{
-                progressBar.isShown();
-            }
 
-
-
-
-
-
-
-        }
-        else{
-            requestPermission();
-
-        }
-            // Inflate the layout for this fragment
-
-
-            mapView.getMapAsync(new OnMapReadyCallback() {
-                @SuppressLint("MissingPermission")
-                @Override
-                public void onMapReady(GoogleMap googleMap) {
-                    mMap = googleMap;
-                    progressBar.setVisibility(View.GONE);
-
-
-                    // For showing a move to my location button
-                    mMap.setMyLocationEnabled(true);
-                    if(latitude==null&& longitude==null){
-                        progressBar.isShown();
-                    }else{
-                        // For dropping a marker at a point on the Map
-                        LatLng sydney = new LatLng(latitude, longitude);
-
-                        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker Title").snippet("Marker Description"));
-
-                        // For zooming automatically to the location of the marker
-                        CameraPosition cameraPosition = new CameraPosition.Builder().target(sydney).zoom(12).build();
-                        mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
                     }
 
+                }, 5000);
 
 
-                }
-            });
+            } else {
+                progressBar.isShown();
+                requestPermission();
+            }
+        }
 
 
-
-            return rootView;
-
+        return rootView;
 
     }
 
@@ -147,56 +146,11 @@ public class NearByFragment extends Fragment{
         ActivityCompat.requestPermissions(getActivity(), new String[]{ACCESS_FINE_LOCATION}, PERMISSION_REQUEST_CODE);
 
     }
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
-        switch (requestCode) {
-            case PERMISSION_REQUEST_CODE:
-                if (grantResults.length > 0) {
-
-                    boolean locationAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
 
 
-                    if (locationAccepted) {
-                        Snackbar.make(getView(), "Permission Granted, Now you can access location data and camera.", Snackbar.LENGTH_LONG).show();
-
-                    }
-                    else {
-
-                        Snackbar.make(getView(), "Permission Denied, You cannot access location data and camera.", Snackbar.LENGTH_LONG).show();
-
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                            if (shouldShowRequestPermissionRationale(ACCESS_FINE_LOCATION)) {
-                                showMessageOKCancel("You need to allow access to both the permissions",
-                                        new DialogInterface.OnClickListener() {
-                                            @Override
-                                            public void onClick(DialogInterface dialog, int which) {
-                                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                                                    requestPermissions(new String[]{ACCESS_FINE_LOCATION},
-                                                            PERMISSION_REQUEST_CODE);
-                                                }
-                                            }
-                                        });
-                                return;
-                            }
-                        }
-
-                    }
-                }
 
 
-                break;
-        }
-    }
 
-
-    private void showMessageOKCancel(String message, DialogInterface.OnClickListener okListener) {
-        new AlertDialog.Builder(getActivity())
-                .setMessage(message)
-                .setPositiveButton("OK", okListener)
-                .setNegativeButton("Cancel", null)
-                .create()
-                .show();
-    }
 
 
     @Override
@@ -222,12 +176,6 @@ public class NearByFragment extends Fragment{
         super.onLowMemory();
         mapView.onLowMemory();
     }
-
-
-
-
-
-
 
 
 

@@ -1,12 +1,19 @@
 package com.example.rushi.epic_thrillon.MainPages;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.location.LocationManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
@@ -59,6 +66,8 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.io.InputStream;
 
+import static android.Manifest.permission.ACCESS_FINE_LOCATION;
+
 public class Home_Page extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,Upcoming.OnFragmentInteractionListener,Completed.OnFragmentInteractionListener
 
 {
@@ -68,7 +77,7 @@ public class Home_Page extends AppCompatActivity implements NavigationView.OnNav
     InputStream is;
     AccessToken accessToken;
     private String email=null;
-
+    private static final int PERMISSION_REQUEST_CODE = 200;
     String Login_with;
     String imageUrl,firstName,lastName,Email,name,id;
     private NavigationView navigationView;
@@ -122,14 +131,17 @@ public class Home_Page extends AppCompatActivity implements NavigationView.OnNav
         email_login=sharedPreferences.getBoolean("Email",false);
         navigationView.setNavigationItemSelectedListener(this);
 
-        Bundle bundle=getIntent().getExtras();
 
         //set Default fragment on loading
 
         Login_with =  getIntent().getStringExtra("Login");
         if( getIntent().getStringExtra("name")!= null){
             fragmentTransaction=getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.frame,new NotificationFragment()).commit();
+            NotificationFragment notificationFragment = new NotificationFragment();
+            Bundle bundle= new Bundle();
+            bundle.putBundle("DATA",getIntent().getExtras());
+            notificationFragment.setArguments(bundle);
+            fragmentTransaction.replace(R.id.frame,notificationFragment).commit();
 
         }else{
             fragmentTransaction=getSupportFragmentManager().beginTransaction();
@@ -378,9 +390,6 @@ public class Home_Page extends AppCompatActivity implements NavigationView.OnNav
 
 
 
-
-
-
     private void signOut() {
         if (mGoogleApiClient != null && mGoogleApiClient.isConnected()) {
             //mGoogleApiClient.clearDefaultAccountAndReconnect().setResultCallback(new ResultCallback<Status>() {
@@ -402,6 +411,63 @@ public class Home_Page extends AppCompatActivity implements NavigationView.OnNav
     @Override
     public void onFragmentInteraction(Uri uri) {
 
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case PERMISSION_REQUEST_CODE:
+
+                if (grantResults.length > 0) {
+
+                    boolean locationAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
+
+
+                    if (locationAccepted) {
+                        LocationManager lm = (LocationManager) getApplicationContext().getSystemService(getApplicationContext().LOCATION_SERVICE);
+                        if (!(lm.isProviderEnabled(LocationManager.GPS_PROVIDER))) {
+                            Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                            startActivity(intent);
+
+                        }
+
+
+
+                    }
+                    else {
+
+
+
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                            if (shouldShowRequestPermissionRationale(ACCESS_FINE_LOCATION)) {
+                                showMessageOKCancel("You need to allow access to both the permissions",
+                                        new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                                                    requestPermissions(new String[]{ACCESS_FINE_LOCATION},
+                                                            PERMISSION_REQUEST_CODE);
+                                                }
+                                            }
+                                        });
+                                return;
+                            }
+                        }
+
+                    }
+                }
+
+
+                break;
+        }
+    }
+    private void showMessageOKCancel(String message, DialogInterface.OnClickListener okListener) {
+        new AlertDialog.Builder(getApplicationContext())
+                .setMessage(message)
+                .setPositiveButton("OK", okListener)
+                .setNegativeButton("Cancel", null)
+                .create()
+                .show();
     }
 }
 

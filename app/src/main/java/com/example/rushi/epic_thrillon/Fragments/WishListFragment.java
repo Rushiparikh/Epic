@@ -89,6 +89,7 @@ public class WishListFragment extends Fragment {
             query.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
+                    wishlists.clear();
                     for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()){
                         for(DataSnapshot ds: dataSnapshot1.child("wishlist").getChildren()){
                             Wishlist wishlist = ds.getValue(Wishlist.class);
@@ -107,6 +108,7 @@ public class WishListFragment extends Fragment {
             mActivity.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
+                    activityList.clear();
                     for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
                         Activity activity = dataSnapshot1.getValue(Activity.class);
                         for (int i = 0; i < wishlists.size(); i++) {
@@ -134,6 +136,7 @@ public class WishListFragment extends Fragment {
             query.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
+                    wishlists.clear();
                     for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()){
                         for(DataSnapshot ds: dataSnapshot1.child("wishlist").getChildren()){
                             Wishlist wishlist = ds.getValue(Wishlist.class);
@@ -152,6 +155,7 @@ public class WishListFragment extends Fragment {
             mActivity.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
+                    activityList.clear();
                     for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
                         Activity activity = dataSnapshot1.getValue(Activity.class);
                         for (int i = 0; i < wishlists.size(); i++) {

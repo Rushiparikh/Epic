@@ -1,6 +1,5 @@
 package com.example.rushi.epic_thrillon.Adapters;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
@@ -21,7 +20,6 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.rushi.epic_thrillon.Auxiliaries.Constants;
 import com.example.rushi.epic_thrillon.Classes.Activity;
-import com.example.rushi.epic_thrillon.Classes.User;
 import com.example.rushi.epic_thrillon.Classes.Wishlist;
 import com.example.rushi.epic_thrillon.R;
 import com.facebook.Profile;
@@ -71,7 +69,7 @@ public class MyActivityAdapter extends RecyclerView.Adapter<MyActivityAdapter.My
 //            count = (TextView) view.findViewById(R.id.count);
             activity_image = (ImageView) view.findViewById(R.id.activityimage);
 //            overflow = (ImageView) view.findViewById(R.id.overflow);
-            ratingBar=view.findViewById(R.id.ratingbar);
+            ratingBar=view.findViewById(R.id.actRating);
             heart = view.findViewById(R.id.heart);
             mUser = FirebaseDatabase.getInstance().getReference(Constants.USERS_DATABASE_PATH_UPLOADS);
             acct = GoogleSignIn.getLastSignedInAccount(getApplicationContext());
@@ -85,8 +83,7 @@ public class MyActivityAdapter extends RecyclerView.Adapter<MyActivityAdapter.My
         public void onClick(View view) {
 
             position=getAdapterPosition();
-            heart.setImageTintList(ColorStateList.valueOf(Color.RED));
-            Toast.makeText(mContext,"Added to Wishlist",Toast.LENGTH_LONG).show();
+
             facebook = sharedPreferences.getBoolean("Facebook",false);
             google = sharedPreferences.getBoolean("Google",false);
             email = sharedPreferences.getBoolean("Email",false);
@@ -97,16 +94,31 @@ public class MyActivityAdapter extends RecyclerView.Adapter<MyActivityAdapter.My
                 query.addValueEventListener( new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
+
                         for (DataSnapshot dataSnapshot1: dataSnapshot.getChildren()){
                             if(match!=position){
                                 flag=true;
                             }
-                            String id=imageList.get(position).getActivityId()+""+imageList.get(position).getOrganizerId();
-                            if(!id.equals(fullId) && flag) {
+                            for(DataSnapshot ds: dataSnapshot1.child("wishlist").getChildren()){
+
+                                Wishlist wishlist = ds.getValue(Wishlist.class);
+                                if(wishlist.getActId().equals(imageList.get(position).getActivityId())){
+                                    if((wishlist.getOrgId().equals(imageList.get(position).getOrganizerId()))){
+                                        Toast.makeText(mContext,"already added",Toast.LENGTH_SHORT).show();
+                                        flag = false;
+                                        match=position;
+                                        break;
+                                    }
+                                }
+                            }
+//                            String id=imageList.get(position).getActivityId()+""+imageList.get(position).getOrganizerId();
+                            if(flag) {
                                 Wishlist wishlist = new Wishlist(imageList.get(position).getActivityId(), imageList.get(position).getOrganizerId());
                                 String Key = mUser.push().getKey();
                                 mUser.child(dataSnapshot1.getKey()).child("wishlist").child(Key).setValue(wishlist);
-                                fullId = imageList.get(position).getActivityId() + "" + imageList.get(position).getOrganizerId();
+                                heart.setImageTintList(ColorStateList.valueOf(Color.RED));
+                                Toast.makeText(mContext," added to wishlist",Toast.LENGTH_SHORT).show();
+                               // fullId = imageList.get(position).getActivityId() + "" + imageList.get(position).getOrganizerId();
                                 flag=false;
                                 match=position;
                             }else{
@@ -127,16 +139,34 @@ public class MyActivityAdapter extends RecyclerView.Adapter<MyActivityAdapter.My
                 query.addValueEventListener( new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        if(match!=position){
-                            flag=true;
-                        }
+
+
                         for (DataSnapshot dataSnapshot1: dataSnapshot.getChildren()){
-                            String id=imageList.get(position).getActivityId()+""+imageList.get(position).getOrganizerId();
-                            if(!id.equals(fullId) && flag) {
+                            if(match!=position){
+                                flag=true;
+                            }
+                            for(DataSnapshot ds: dataSnapshot1.child("wishlist").getChildren()){
+
+                                Wishlist wishlist = ds.getValue(Wishlist.class);
+                                if(wishlist.getActId().equals(imageList.get(position).getActivityId())){
+                                    if((wishlist.getOrgId().equals(imageList.get(position).getOrganizerId()))){
+                                        Toast.makeText(mContext,"already added",Toast.LENGTH_SHORT).show();
+
+                                        flag = false;
+                                        match=position;
+                                        break;
+                                    }
+                                }
+                            }
+//                            String id=imageList.get(position).getActivityId()+""+imageList.get(position).getOrganizerId();
+                            if( flag) {
                                 Wishlist wishlist = new Wishlist(imageList.get(position).getActivityId(), imageList.get(position).getOrganizerId());
                                 String Key = mUser.push().getKey();
                                 mUser.child(dataSnapshot1.getKey()).child("wishlist").child(Key).setValue(wishlist);
-                                fullId = imageList.get(position).getActivityId() + "" + imageList.get(position).getOrganizerId();
+                                heart.setImageTintList(ColorStateList.valueOf(Color.RED));
+                                Toast.makeText(mContext," added to wishlist",Toast.LENGTH_SHORT).show();
+
+                                // fullId = imageList.get(position).getActivityId() + "" + imageList.get(position).getOrganizerId();
                                 flag=false;
                                 match=position;
                             }else{

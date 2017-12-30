@@ -182,6 +182,7 @@ public class Upcoming extends Fragment {
             query.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
+                    bookedActivityList.clear();
                     for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()){
                         for(DataSnapshot ds: dataSnapshot1.child("booked_activity").getChildren()){
                             BookedActivity bookedActivity = ds.getValue(BookedActivity.class);
@@ -200,6 +201,7 @@ public class Upcoming extends Fragment {
             mActivity.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
+                    activityList.clear();
                     for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
                         Activity activity = dataSnapshot1.getValue(Activity.class);
                         for (int i = 0; i < bookedActivityList.size(); i++) {

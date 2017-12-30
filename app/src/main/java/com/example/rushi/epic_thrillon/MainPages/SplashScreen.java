@@ -26,12 +26,13 @@ public class SplashScreen extends AppCompatActivity {
         mDbHelper = new DbVisit(this);
 
 
-
+        Bundle b = getIntent().getExtras();
         String s=getIntent().getExtras().getString("name");
         Log.e("TAG",s+" ");
         if(s !=null){
             Intent i = new Intent(this,Home_Page.class);
             i.putExtra("name",getIntent().getExtras().getString("name"));
+            i.putExtra("data",b);
             startActivity(i);
             finish();
         }else{
