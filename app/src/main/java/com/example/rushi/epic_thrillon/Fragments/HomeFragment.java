@@ -85,14 +85,15 @@ public class HomeFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        statusCheck();
+
         mref.addValueEventListener(valueEventListener);
         mdatabse.addValueEventListener(activityValueEventListener);
         mdestination.addValueEventListener(destinationValueEventListner);
 
-
+        statusCheck();
 
     }
+
 
     @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -104,8 +105,8 @@ public class HomeFragment extends Fragment {
             mref.keepSynced(true);
             mdatabse.keepSynced(true);
             mdestination.keepSynced(true);
-            statusCheck();
 
+            statusCheck();
             currentDate = Calendar.getInstance().getTime();
             SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
              formattedDate = df.format(currentDate);
@@ -297,8 +298,6 @@ public class HomeFragment extends Fragment {
 
             return  view;
         }
-
-
     public void statusCheck() {
         final LocationManager manager = (LocationManager) getContext().getSystemService(Context.LOCATION_SERVICE);
 
@@ -318,12 +317,14 @@ public class HomeFragment extends Fragment {
                 })
                 .setNegativeButton("No", new DialogInterface.OnClickListener() {
                     public void onClick(final DialogInterface dialog, final int id) {
-                        dialog.cancel();
+                        statusCheck();
                     }
                 });
         final AlertDialog alert = builder.create();
         alert.show();
     }
+
+
 
 
 

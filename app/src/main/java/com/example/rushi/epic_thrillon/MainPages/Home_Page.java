@@ -17,8 +17,10 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.util.Log;
@@ -72,6 +74,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.io.InputStream;
 
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
+import static com.facebook.FacebookSdk.getApplicationContext;
 
 public class Home_Page extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,Upcoming.OnFragmentInteractionListener,Completed.OnFragmentInteractionListener
 
@@ -100,6 +103,7 @@ public class Home_Page extends AppCompatActivity implements NavigationView.OnNav
         super.onResume();
         Intent i =new Intent(getApplicationContext(),MyService.class);
         startService(i);
+
 
         if(broadcastReceiver == null){
             broadcastReceiver = new BroadcastReceiver() {
@@ -148,8 +152,14 @@ public class Home_Page extends AppCompatActivity implements NavigationView.OnNav
         setContentView(R.layout.activity_home__page);
          toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        Intent intent =new Intent(getApplicationContext(),MyService.class);
-        startService(intent);
+
+        if(checkPermission()){
+
+            Intent intent =new Intent(getApplicationContext(),MyService.class);
+            startService(intent);
+        }else{
+            requestPermission();
+        }
 
         sharedPreferences=getSharedPreferences(AskForSignin.My_pref, Context.MODE_PRIVATE);
 
@@ -467,14 +477,6 @@ public class Home_Page extends AppCompatActivity implements NavigationView.OnNav
 
 
                     if (locationAccepted) {
-                        LocationManager lm = (LocationManager) getApplicationContext().getSystemService(getApplicationContext().LOCATION_SERVICE);
-                        NearByFragment nearByFragment=new NearByFragment();
-                        fragmentTransaction= getSupportFragmentManager().beginTransaction();
-                        fragmentTransaction.replace(R.id.frame,nearByFragment, "Near By");
-                        fragmentTransaction.addToBackStack(null);
-                        fragmentTransaction.commit();
-
-
 
                     }
                     else {
@@ -504,6 +506,7 @@ public class Home_Page extends AppCompatActivity implements NavigationView.OnNav
                 break;
         }
     }
+
     private void showMessageOKCancel(String message, DialogInterface.OnClickListener okListener) {
         new AlertDialog.Builder(getApplicationContext())
                 .setMessage(message)
@@ -512,5 +515,17 @@ public class Home_Page extends AppCompatActivity implements NavigationView.OnNav
                 .create()
                 .show();
     }
+    private boolean checkPermission() {
+        int result = ContextCompat.checkSelfPermission(getApplicationContext(), ACCESS_FINE_LOCATION);
+
+
+        return result == PackageManager.PERMISSION_GRANTED;
+    }
+    private void requestPermission() {
+
+        ActivityCompat.requestPermissions(this, new String[]{ACCESS_FINE_LOCATION}, PERMISSION_REQUEST_CODE);
+
+    }
+
 }
 

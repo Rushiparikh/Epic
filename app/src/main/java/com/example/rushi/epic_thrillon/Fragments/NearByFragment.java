@@ -92,12 +92,8 @@ public class NearByFragment extends Fragment{
             }
 
 
-            if (checkPermission()) {
 
-                if (!(lm.isProviderEnabled(LocationManager.GPS_PROVIDER))) {
-                    Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                    startActivity(intent);
-                }
+
 
 
                 activityValueEventListener=new ValueEventListener() {
@@ -157,26 +153,16 @@ public class NearByFragment extends Fragment{
 
             } else {
                 progressBar.isShown();
-                requestPermission();
+
             }
-        }
+
 
 
         return rootView;
 
     }
 
-    private boolean checkPermission() {
-        int result = ContextCompat.checkSelfPermission(getApplicationContext(), ACCESS_FINE_LOCATION);
 
-
-        return result == PackageManager.PERMISSION_GRANTED;
-    }
-    private void requestPermission() {
-
-        ActivityCompat.requestPermissions(getActivity(), new String[]{ACCESS_FINE_LOCATION}, PERMISSION_REQUEST_CODE);
-
-    }
 
 
 
