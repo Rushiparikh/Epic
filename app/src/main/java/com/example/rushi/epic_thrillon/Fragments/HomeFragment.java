@@ -1,12 +1,16 @@
 package com.example.rushi.epic_thrillon.Fragments;
 
 import android.app.AlertDialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.location.Location;
+import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -21,6 +25,7 @@ import com.example.rushi.epic_thrillon.Adapters.ActivityOfTheDayAdapter;
 import com.example.rushi.epic_thrillon.Adapters.ImageAdapter;
 import com.example.rushi.epic_thrillon.Adapters.PopularDestinationAdapter;
 import com.example.rushi.epic_thrillon.Auxiliaries.MyLocation;
+import com.example.rushi.epic_thrillon.Auxiliaries.MyService;
 import com.example.rushi.epic_thrillon.Auxiliaries.RecyclerItemClickListener;
 import com.example.rushi.epic_thrillon.Classes.Activities;
 import com.example.rushi.epic_thrillon.Classes.Activity;
@@ -48,6 +53,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import static com.example.rushi.epic_thrillon.MainPages.Home_Page.latitude;
+import static com.example.rushi.epic_thrillon.MainPages.Home_Page.longitude;
 
 
 
@@ -61,13 +68,16 @@ public class HomeFragment extends Fragment {
     List<Activity> nearByActivityList;
     List<Destination> destinationList;
     Date currentDate;
-    double longitude,latitude;
+    Activity activity;
+    com.example.rushi.epic_thrillon.Classes.Location location;
+
 
     Upload u;
     DatabaseReference mref,mdatabse,mdestination;
     GridView gridView;
     ValueEventListener valueEventListener,activityValueEventListener,destinationValueEventListner;
     String formattedDate;
+
 
     public HomeFragment() {
         // Required empty public constructor
@@ -80,15 +90,6 @@ public class HomeFragment extends Fragment {
         mdatabse.addValueEventListener(activityValueEventListener);
         mdestination.addValueEventListener(destinationValueEventListner);
 
-        MyLocation.LocationResult locationResult = new MyLocation.LocationResult() {
-            @Override
-            public void gotLocation(Location location) {
-                longitude = location.getLongitude();
-                latitude = location.getLatitude();
-            }
-        };
-        MyLocation myLocation = new MyLocation();
-        myLocation.getLocation(getActivity(), locationResult);
 
 
     }
@@ -103,6 +104,8 @@ public class HomeFragment extends Fragment {
             mref.keepSynced(true);
             mdatabse.keepSynced(true);
             mdestination.keepSynced(true);
+            statusCheck();
+
             currentDate = Calendar.getInstance().getTime();
             SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
              formattedDate = df.format(currentDate);
@@ -115,16 +118,22 @@ public class HomeFragment extends Fragment {
                     .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
                     .build();
             adView.loadAd(adRequest);
-            statusCheck();
-        MyLocation.LocationResult locationResult = new MyLocation.LocationResult() {
-            @Override
-            public void gotLocation(Location location) {
-                longitude = location.getLongitude();
-                latitude = location.getLatitude();
-            }
-        };
-        MyLocation myLocation = new MyLocation();
-        myLocation.getLocation(getActivity(), locationResult);
+
+//        MyLocation.LocationResult locationResult = new MyLocation.LocationResult() {
+//            @Override
+//            public void gotLocation(Location location) {
+//                longitude = location.getLongitude();
+//                latitude = location.getLatitude();
+//            }
+//        };
+//        MyLocation myLocation = new MyLocation();
+//        myLocation.getLocation(getActivity(), locationResult);
+
+
+
+
+
+
             albumList = new ArrayList<>();
             gridView = (GridView) view.findViewById(R.id.gridview);
             activityList = new ArrayList<>();
@@ -176,27 +185,31 @@ public class HomeFragment extends Fragment {
             });
 
 
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
 
+            }
+        },2000);
         activityValueEventListener=new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 activityofthedayList.clear();
                 nearByActivityList.clear();
                 for(DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()){
-                    Activity activity =dataSnapshot1.getValue(Activity.class);
+                     activity =dataSnapshot1.getValue(Activity.class);
 
                     if(activity.getActivityDate().equals(formattedDate)){
                         activityofthedayList.add(activity);
                     }
 
-                    com.example.rushi.epic_thrillon.Classes.Location location = activity.getLocation();
+                     location = activity.getLocation();
 
-                        double latDiff = Math.abs((location.getLatitude()) - latitude);
-                        double longDiff = Math.abs((location.getLongitude()) - longitude);
-                        if((latDiff < 20) && (longDiff < 20)){
-                            nearByActivityList.add(activity);
-                        }
-
+                    double latDiff = Math.abs((location.getLatitude()) - latitude);
+                    double longDiff = Math.abs((location.getLongitude()) - longitude);
+                    if((latDiff < 20) && (longDiff < 20)){
+                        nearByActivityList.add(activity);
+                    }
 
 
 
@@ -206,6 +219,7 @@ public class HomeFragment extends Fragment {
                 ActivityOfTheDayAdapter adapter=new ActivityOfTheDayAdapter(getActivity(),nearByActivityList);
                 recyclerViewsecond.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
+
 
 
             }
@@ -323,6 +337,8 @@ public class HomeFragment extends Fragment {
     @Override
     public void onStop() {
         super.onStop();
+        Intent i = new Intent(getActivity(),MyService.class);
+        getActivity().stopService(i);
 
     }
 }

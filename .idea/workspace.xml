@@ -17,46 +17,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="076ef183-413c-45aa-a389-08877a4fff1a" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/res/drawable/album1.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/res/drawable/album10.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/res/drawable/album11.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/res/drawable/album2.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/res/drawable/album3.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/res/drawable/album4.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/res/drawable/album5.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/res/drawable/album6.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/res/drawable/album7.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/res/drawable/album8.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/res/drawable/album9.png" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/4.1/fileHashes/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/4.1/fileHashes/fileHashes.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/4.1/fileHashes/fileHashes.lock" afterPath="$PROJECT_DIR$/.gradle/4.1/fileHashes/fileHashes.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/4.1/fileHashes/resourceHashesCache.bin" afterPath="$PROJECT_DIR$/.gradle/4.1/fileHashes/resourceHashesCache.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/4.1/javaCompile/classAnalysis.bin" afterPath="$PROJECT_DIR$/.gradle/4.1/javaCompile/classAnalysis.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/4.1/javaCompile/jarAnalysis.bin" afterPath="$PROJECT_DIR$/.gradle/4.1/javaCompile/jarAnalysis.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/4.1/javaCompile/javaCompile.lock" afterPath="$PROJECT_DIR$/.gradle/4.1/javaCompile/javaCompile.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/4.1/javaCompile/taskHistory.bin" afterPath="$PROJECT_DIR$/.gradle/4.1/javaCompile/taskHistory.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/4.1/javaCompile/taskJars.bin" afterPath="$PROJECT_DIR$/.gradle/4.1/javaCompile/taskJars.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/4.1/taskHistory/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/4.1/taskHistory/fileSnapshots.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/4.1/taskHistory/taskHistory.bin" afterPath="$PROJECT_DIR$/.gradle/4.1/taskHistory/taskHistory.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/4.1/taskHistory/taskHistory.lock" afterPath="$PROJECT_DIR$/.gradle/4.1/taskHistory/taskHistory.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.iml" afterPath="$PROJECT_DIR$/app/app.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build.gradle" afterPath="$PROJECT_DIR$/app/build.gradle" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/rushi/epic_thrillon/Adapters/WishlistAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/rushi/epic_thrillon/Adapters/WishlistAdapter.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/rushi/epic_thrillon/Auxiliaries/MyLocation.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/rushi/epic_thrillon/Auxiliaries/MyLocation.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/rushi/epic_thrillon/Classes/BookedActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/rushi/epic_thrillon/Classes/BookedActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/rushi/epic_thrillon/Fragments/Completed.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/rushi/epic_thrillon/Fragments/Completed.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/rushi/epic_thrillon/Fragments/DestinationFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/rushi/epic_thrillon/Fragments/DestinationFragment.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/rushi/epic_thrillon/Fragments/HomeFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/rushi/epic_thrillon/Fragments/HomeFragment.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/rushi/epic_thrillon/Fragments/NearByFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/rushi/epic_thrillon/Fragments/NearByFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/rushi/epic_thrillon/Fragments/NotificationFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/rushi/epic_thrillon/Fragments/NotificationFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/rushi/epic_thrillon/Fragments/Upcoming.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/rushi/epic_thrillon/Fragments/Upcoming.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/rushi/epic_thrillon/MainPages/Booking.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/rushi/epic_thrillon/MainPages/Booking.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/rushi/epic_thrillon/MainPages/Home_Page.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/rushi/epic_thrillon/MainPages/Home_Page.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/rushi/epic_thrillon/MainPages/SplashScreen.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/rushi/epic_thrillon/MainPages/SplashScreen.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.gradle" afterPath="$PROJECT_DIR$/build.gradle" />
     </list>
     <list id="7472d4f3-4e87-481f-9287-ab09ee42612d" name="Second page data retrival and back problem solved" comment="" />
     <list id="7064c966-e3e9-4886-944f-fe552b0fb74d" name="Second page data retrival" comment="" />
@@ -160,120 +135,99 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="Home_Page.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rushi/epic_thrillon/MainPages/Home_Page.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="484">
+              <caret line="510" column="50" lean-forward="true" selection-start-line="510" selection-start-column="50" selection-end-line="510" selection-end-column="50" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#4257#4560#0" expanded="true" />
+                <element signature="e#4559#4560#0" expanded="true" />
+                <element signature="e#8941#9253#0" expanded="true" />
+                <element signature="e#9252#9253#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SplashScreen.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rushi/epic_thrillon/MainPages/SplashScreen.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="400">
+              <caret line="29" column="29" lean-forward="true" selection-start-line="29" selection-start-column="29" selection-end-line="29" selection-end-column="29" />
+              <folding>
+                <element signature="e#1963#2804#0" expanded="true" />
+                <element signature="e#2803#2804#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="HomeFragment.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rushi/epic_thrillon/Fragments/HomeFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="121" column="52" lean-forward="false" selection-start-line="121" selection-start-column="52" selection-end-line="121" selection-end-column="52" />
+            <state relative-caret-position="548">
+              <caret line="119" column="37" lean-forward="true" selection-start-line="119" selection-start-column="37" selection-end-line="119" selection-end-column="37" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#12555#12830#0" expanded="true" />
+                <element signature="e#12829#12830#0" expanded="true" />
+                <element signature="e#12873#13079#0" expanded="true" />
+                <element signature="e#13078#13079#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="WishlistAdapter.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rushi/epic_thrillon/Adapters/WishlistAdapter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="286">
-              <caret line="106" column="39" lean-forward="false" selection-start-line="106" selection-start-column="35" selection-end-line="106" selection-end-column="39" />
-              <folding>
-                <marker date="1514719577103" expanded="true" signature="8577:8586" ph="{...}" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Upcoming.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rushi/epic_thrillon/Fragments/Upcoming.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="42">
-              <caret line="147" column="0" lean-forward="false" selection-start-line="147" selection-start-column="0" selection-end-line="147" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DestinationFragment.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rushi/epic_thrillon/Fragments/DestinationFragment.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="350">
-              <caret line="49" column="34" lean-forward="false" selection-start-line="49" selection-start-column="34" selection-end-line="49" selection-end-column="34" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DestinationClick.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rushi/epic_thrillon/MainPages/DestinationClick.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1700">
-              <caret line="110" column="90" lean-forward="false" selection-start-line="110" selection-start-column="71" selection-end-line="110" selection-end-column="90" />
-              <folding>
-                <element signature="e#3303#3333#0" expanded="true" />
-                <element signature="e#3395#3527#0" expanded="true" />
-                <element signature="e#3526#3527#0" expanded="true" />
-                <marker date="1514717164354" expanded="false" signature="11813:11824" ph=" { " />
-                <marker date="1514717164354" expanded="false" signature="11840:11846" ph=" }" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ActivityDetails.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ActivityDetails.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rushi/epic_thrillon/MainPages/ActivityDetails.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="575">
+            <state relative-caret-position="2150">
               <caret line="133" column="70" lean-forward="false" selection-start-line="133" selection-start-column="55" selection-end-line="133" selection-end-column="70" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="MyService.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rushi/epic_thrillon/Auxiliaries/MyService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="283">
+              <caret line="39" column="0" lean-forward="false" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
+              <folding>
+                <element signature="e#718#719#0" expanded="true" />
+                <element signature="e#745#746#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AndroidManifest.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="564">
+              <caret line="110" column="53" lean-forward="false" selection-start-line="110" selection-start-column="53" selection-end-line="110" selection-end-column="53" />
+              <folding>
+                <marker date="1514720682249" expanded="true" signature="4787:4904" ph="..." />
+              </folding>
+            </state>
+          </provider>
+          <provider editor-type-id="android-manifest">
+            <state />
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="NearByFragment.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rushi/epic_thrillon/Fragments/NearByFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="25">
-              <caret line="107" column="29" lean-forward="false" selection-start-line="107" selection-start-column="29" selection-end-line="107" selection-end-column="29" />
+            <state relative-caret-position="120">
+              <caret line="168" column="3" lean-forward="false" selection-start-line="168" selection-start-column="3" selection-end-line="178" selection-end-column="5" />
               <folding>
-                <element signature="e#5103#6922#0" expanded="true" />
-                <element signature="e#5258#6862#0" expanded="true" />
-                <element signature="e#6861#6862#0" expanded="true" />
-                <element signature="e#6921#6922#0" expanded="true" />
+                <element signature="imports" expanded="true" />
+                <element signature="e#4667#6271#0" expanded="true" />
+                <element signature="e#6270#6271#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DestinationActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rushi/epic_thrillon/MainPages/DestinationActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="398">
-              <caret line="76" column="61" lean-forward="false" selection-start-line="76" selection-start-column="49" selection-end-line="76" selection-end-column="61" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ActivityClick.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rushi/epic_thrillon/MainPages/ActivityClick.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="598">
-              <caret line="83" column="52" lean-forward="false" selection-start-line="83" selection-start-column="40" selection-end-line="83" selection-end-column="52" />
-              <folding>
-                <element signature="e#3673#3805#0" expanded="true" />
-                <element signature="e#3804#3805#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ActivityAdapter.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rushi/epic_thrillon/Adapters/ActivityAdapter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="723">
-              <caret line="94" column="5" lean-forward="false" selection-start-line="37" selection-start-column="3" selection-end-line="94" selection-end-column="5" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -2103,8 +2057,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/src/main/res/menu/wishlistheart.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/drawable/wishlistlike.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/colors.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/destination_card.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/rushi/epic_thrillon/Adapters/ActivityAdapter.java" />
@@ -2140,20 +2092,22 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/rushi/epic_thrillon/MainPages/Booking.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/rushi/epic_thrillon/Classes/BookedActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/rushi/epic_thrillon/MainPages/PaymentDetails.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/rushi/epic_thrillon/Auxiliaries/MyLocation.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/rushi/epic_thrillon/MainPages/Home_Page.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/rushi/epic_thrillon/MainPages/SplashScreen.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/rushi/epic_thrillon/Fragments/NotificationFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/rushi/epic_thrillon/Fragments/Completed.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/rushi/epic_thrillon/Fragments/Upcoming.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/rushi/epic_thrillon/Adapters/PopularDestinationAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_destination_click.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/rushi/epic_thrillon/Adapters/DestinationClickAdapter.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/rushi/epic_thrillon/Fragments/HomeFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/rushi/epic_thrillon/MainPages/DestinationClick.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/rushi/epic_thrillon/Fragments/DestinationFragment.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/rushi/epic_thrillon/Fragments/NearByFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/rushi/epic_thrillon/Adapters/WishlistAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/rushi/epic_thrillon/Auxiliaries/MyLocation.java" />
+        <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/rushi/epic_thrillon/Auxiliaries/MyService.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/rushi/epic_thrillon/Fragments/HomeFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/rushi/epic_thrillon/MainPages/SplashScreen.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/rushi/epic_thrillon/Fragments/NearByFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/rushi/epic_thrillon/MainPages/Home_Page.java" />
       </list>
     </option>
   </component>
@@ -2369,6 +2323,20 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Epic" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="manifests" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidManifestsGroupNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
       <pane id="Scratches" />
@@ -2492,7 +2460,7 @@
       <option name="ACTIVITY_CLASS" value="com.example.rushi.epic_thrillon.MainPages.AskForSignin" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1514720120418" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1514727074008" />
       </method>
     </configuration>
     <configuration default="false" name="EpicThrillon [signingReport]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
@@ -2583,7 +2551,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1514720120419" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1514727074009" />
       </method>
     </configuration>
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Instrumented Tests">
@@ -2631,7 +2599,7 @@
       </Profilers>
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1514720120420" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1514727074009" />
       </method>
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -2814,7 +2782,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1514720120423" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1514727074011" />
       </method>
     </configuration>
     <list size="3">
@@ -2994,7 +2962,14 @@
       <option name="project" value="LOCAL" />
       <updated>1514608831263</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="Popular Destination in Home Fragment">
+      <created>1514720243485</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1514720243485</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TodoView">
@@ -3030,7 +3005,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3283237" sideWeight="0.4882353" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21550801" sideWeight="0.4913295" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26737967" sideWeight="0.4913295" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32716763" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23368984" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -3125,7 +3100,8 @@
     <MESSAGE value="Notification" />
     <MESSAGE value="Destination and Activtiy retrival" />
     <MESSAGE value="wishlist removes resolved" />
-    <option name="LAST_COMMIT_MESSAGE" value="wishlist removes resolved" />
+    <MESSAGE value="Popular Destination in Home Fragment" />
+    <option name="LAST_COMMIT_MESSAGE" value="Popular Destination in Home Fragment" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -3533,24 +3509,6 @@
           <option name="timeStamp" value="1269" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/rushi/epic_thrillon/MainPages/Home_Page.java</url>
-          <line>141</line>
-          <properties />
-          <option name="timeStamp" value="1275" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/rushi/epic_thrillon/MainPages/Home_Page.java</url>
-          <line>142</line>
-          <properties />
-          <option name="timeStamp" value="1276" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/rushi/epic_thrillon/MainPages/Home_Page.java</url>
-          <line>149</line>
-          <properties />
-          <option name="timeStamp" value="1277" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/example/rushi/epic_thrillon/Fragments/NotificationFragment.java</url>
           <line>43</line>
           <properties />
@@ -3558,7 +3516,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/example/rushi/epic_thrillon/MainPages/Home_Page.java</url>
-          <line>150</line>
+          <line>184</line>
           <properties />
           <option name="timeStamp" value="1284" />
         </line-breakpoint>
@@ -3755,116 +3713,86 @@
           <option name="timeStamp" value="1577" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/rushi/epic_thrillon/Fragments/HomeFragment.java</url>
-          <line>199</line>
-          <properties />
-          <option name="timeStamp" value="1585" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/rushi/epic_thrillon/Fragments/HomeFragment.java</url>
-          <line>206</line>
-          <properties />
-          <option name="timeStamp" value="1595" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/rushi/epic_thrillon/Fragments/HomeFragment.java</url>
-          <line>204</line>
-          <properties />
-          <option name="timeStamp" value="1596" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/rushi/epic_thrillon/MainPages/SplashScreen.java</url>
-          <line>33</line>
-          <properties />
-          <option name="timeStamp" value="1616" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/rushi/epic_thrillon/MainPages/SplashScreen.java</url>
-          <line>34</line>
-          <properties />
-          <option name="timeStamp" value="1617" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/example/rushi/epic_thrillon/Fragments/NearByFragment.java</url>
-          <line>144</line>
+          <line>133</line>
           <properties />
           <option name="timeStamp" value="1626" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/example/rushi/epic_thrillon/Fragments/NearByFragment.java</url>
-          <line>145</line>
+          <line>134</line>
           <properties />
           <option name="timeStamp" value="1627" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/example/rushi/epic_thrillon/Fragments/NearByFragment.java</url>
-          <line>146</line>
+          <line>135</line>
           <properties />
           <option name="timeStamp" value="1628" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/example/rushi/epic_thrillon/Fragments/NearByFragment.java</url>
-          <line>142</line>
+          <line>131</line>
           <properties />
           <option name="timeStamp" value="1629" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/example/rushi/epic_thrillon/Fragments/NearByFragment.java</url>
-          <line>141</line>
+          <line>130</line>
           <properties />
           <option name="timeStamp" value="1630" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/example/rushi/epic_thrillon/Fragments/NearByFragment.java</url>
-          <line>150</line>
+          <line>139</line>
           <properties />
           <option name="timeStamp" value="1631" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/example/rushi/epic_thrillon/Fragments/NearByFragment.java</url>
-          <line>151</line>
+          <line>140</line>
           <properties />
           <option name="timeStamp" value="1632" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/example/rushi/epic_thrillon/Fragments/NearByFragment.java</url>
-          <line>110</line>
+          <line>102</line>
           <properties />
           <option name="timeStamp" value="1633" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/example/rushi/epic_thrillon/Fragments/NearByFragment.java</url>
-          <line>114</line>
+          <line>106</line>
           <properties />
           <option name="timeStamp" value="1635" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/example/rushi/epic_thrillon/Fragments/NearByFragment.java</url>
-          <line>115</line>
+          <line>107</line>
           <properties />
           <option name="timeStamp" value="1636" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/example/rushi/epic_thrillon/Fragments/NearByFragment.java</url>
-          <line>116</line>
+          <line>108</line>
           <properties />
           <option name="timeStamp" value="1637" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/example/rushi/epic_thrillon/Fragments/NearByFragment.java</url>
-          <line>120</line>
+          <line>112</line>
           <properties />
           <option name="timeStamp" value="1638" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/example/rushi/epic_thrillon/Fragments/NearByFragment.java</url>
-          <line>119</line>
+          <line>111</line>
           <properties />
           <option name="timeStamp" value="1640" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/example/rushi/epic_thrillon/Fragments/NearByFragment.java</url>
-          <line>118</line>
+          <line>110</line>
           <properties />
           <option name="timeStamp" value="1641" />
         </line-breakpoint>
@@ -3950,7 +3878,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/example/rushi/epic_thrillon/Fragments/NearByFragment.java</url>
-          <line>112</line>
+          <line>104</line>
           <properties method="onDataChange">
             <option name="EMULATED" value="true" />
           </properties>
@@ -3960,18 +3888,11 @@
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="1642" />
+      <option name="time" value="1667" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rushi/epic_thrillon/Adapters/PageAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="748">
-          <caret line="59" column="0" lean-forward="false" selection-start-line="20" selection-start-column="3" selection-end-line="59" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rushi/epic_thrillon/Classes/Service.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
@@ -4124,19 +4045,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="-2136">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <marker date="1514714437706" expanded="true" signature="4787:4816" ph="..." />
-          </folding>
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-manifest">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rushi/epic_thrillon/MainPages/Booking.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1875">
@@ -4182,14 +4090,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rushi/epic_thrillon/Auxiliaries/MyLocation.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="250">
-          <caret line="48" column="51" lean-forward="false" selection-start-line="48" selection-start-column="47" selection-end-line="48" selection-end-column="51" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rushi/epic_thrillon/Classes/Location.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="497">
@@ -4213,22 +4113,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="277">
           <caret line="477" column="16" lean-forward="false" selection-start-line="477" selection-start-column="16" selection-end-line="477" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rushi/epic_thrillon/MainPages/Home_Page.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="473">
-          <caret line="148" column="0" lean-forward="false" selection-start-line="148" selection-start-column="0" selection-end-line="148" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rushi/epic_thrillon/MainPages/SplashScreen.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="650">
-          <caret line="42" column="33" lean-forward="false" selection-start-line="42" selection-start-column="33" selection-end-line="42" selection-end-column="33" />
           <folding />
         </state>
       </provider>
@@ -4315,9 +4199,9 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2041#2042#0" expanded="true" />
-            <element signature="e#2083#2084#0" expanded="true" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#2041#2042#0" expanded="false" />
+            <element signature="e#2083#2084#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -4335,8 +4219,8 @@
         <state relative-caret-position="598">
           <caret line="83" column="52" lean-forward="false" selection-start-line="83" selection-start-column="40" selection-end-line="83" selection-end-column="52" />
           <folding>
-            <element signature="e#3673#3805#0" expanded="true" />
-            <element signature="e#3804#3805#0" expanded="true" />
+            <element signature="e#3673#3805#0" expanded="false" />
+            <element signature="e#3804#3805#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -4345,6 +4229,45 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="398">
           <caret line="76" column="61" lean-forward="false" selection-start-line="76" selection-start-column="49" selection-end-line="76" selection-end-column="61" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="564">
+          <caret line="110" column="53" lean-forward="false" selection-start-line="110" selection-start-column="53" selection-end-line="110" selection-end-column="53" />
+          <folding>
+            <marker date="1514720682249" expanded="true" signature="4787:4904" ph="..." />
+          </folding>
+        </state>
+      </provider>
+      <provider editor-type-id="android-manifest">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rushi/epic_thrillon/Adapters/WishlistAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="286">
+          <caret line="106" column="39" lean-forward="false" selection-start-line="106" selection-start-column="35" selection-end-line="106" selection-end-column="39" />
+          <folding>
+            <marker date="1514719577103" expanded="true" signature="8577:8586" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rushi/epic_thrillon/Fragments/DestinationFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="350">
+          <caret line="49" column="34" lean-forward="false" selection-start-line="49" selection-start-column="34" selection-end-line="49" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rushi/epic_thrillon/Fragments/Upcoming.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="42">
+          <caret line="147" column="0" lean-forward="false" selection-start-line="147" selection-start-column="0" selection-end-line="147" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -4363,60 +4286,81 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rushi/epic_thrillon/Fragments/DestinationFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="350">
-          <caret line="49" column="34" lean-forward="false" selection-start-line="49" selection-start-column="34" selection-end-line="49" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rushi/epic_thrillon/Fragments/NearByFragment.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rushi/epic_thrillon/Auxiliaries/MyLocation.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="25">
-          <caret line="107" column="29" lean-forward="false" selection-start-line="107" selection-start-column="29" selection-end-line="107" selection-end-column="29" />
-          <folding>
-            <element signature="e#5103#6922#0" expanded="true" />
-            <element signature="e#5258#6862#0" expanded="true" />
-            <element signature="e#6861#6862#0" expanded="true" />
-            <element signature="e#6921#6922#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rushi/epic_thrillon/Fragments/HomeFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="121" column="52" lean-forward="false" selection-start-line="121" selection-start-column="52" selection-end-line="121" selection-end-column="52" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rushi/epic_thrillon/Fragments/Upcoming.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="42">
-          <caret line="147" column="0" lean-forward="false" selection-start-line="147" selection-start-column="0" selection-end-line="147" selection-end-column="0" />
+          <caret line="23" column="36" lean-forward="false" selection-start-line="23" selection-start-column="19" selection-end-line="23" selection-end-column="36" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rushi/epic_thrillon/Adapters/WishlistAdapter.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rushi/epic_thrillon/Auxiliaries/MyService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="286">
-          <caret line="106" column="39" lean-forward="false" selection-start-line="106" selection-start-column="35" selection-end-line="106" selection-end-column="39" />
+        <state relative-caret-position="283">
+          <caret line="39" column="0" lean-forward="false" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
           <folding>
-            <marker date="1514719577103" expanded="true" signature="8577:8586" ph="{...}" />
+            <element signature="e#718#719#0" expanded="true" />
+            <element signature="e#745#746#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rushi/epic_thrillon/MainPages/ActivityDetails.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="575">
+        <state relative-caret-position="2150">
           <caret line="133" column="70" lean-forward="false" selection-start-line="133" selection-start-column="55" selection-end-line="133" selection-end-column="70" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rushi/epic_thrillon/Fragments/NearByFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="168" column="3" lean-forward="false" selection-start-line="168" selection-start-column="3" selection-end-line="178" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#4667#6271#0" expanded="true" />
+            <element signature="e#6270#6271#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rushi/epic_thrillon/Fragments/HomeFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="548">
+          <caret line="119" column="37" lean-forward="true" selection-start-line="119" selection-start-column="37" selection-end-line="119" selection-end-column="37" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#12555#12830#0" expanded="true" />
+            <element signature="e#12829#12830#0" expanded="true" />
+            <element signature="e#12873#13079#0" expanded="true" />
+            <element signature="e#13078#13079#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rushi/epic_thrillon/MainPages/SplashScreen.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="400">
+          <caret line="29" column="29" lean-forward="true" selection-start-line="29" selection-start-column="29" selection-end-line="29" selection-end-column="29" />
+          <folding>
+            <element signature="e#1963#2804#0" expanded="true" />
+            <element signature="e#2803#2804#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rushi/epic_thrillon/MainPages/Home_Page.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="484">
+          <caret line="510" column="50" lean-forward="true" selection-start-line="510" selection-start-column="50" selection-end-line="510" selection-end-column="50" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#4257#4560#0" expanded="true" />
+            <element signature="e#4559#4560#0" expanded="true" />
+            <element signature="e#8941#9253#0" expanded="true" />
+            <element signature="e#9252#9253#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -46,6 +46,8 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import static com.example.rushi.epic_thrillon.MainPages.Home_Page.latitude;
+import static com.example.rushi.epic_thrillon.MainPages.Home_Page.longitude;
 import static com.facebook.FacebookSdk.getApplicationContext;
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 
@@ -54,12 +56,10 @@ import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 public class NearByFragment extends Fragment{
     private GoogleMap mMap;
     private MapView mapView;
-    double longitude,latitude ;
     private static final int PERMISSION_REQUEST_CODE = 200;
     ProgressBar progressBar;
     LocationManager lm;
-    Handler handler;
-    Runnable runnable;
+
     ValueEventListener activityValueEventListener;
     DatabaseReference mref;
     List<com.example.rushi.epic_thrillon.Classes.Location> locationList;
@@ -98,15 +98,7 @@ public class NearByFragment extends Fragment{
                     Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
                     startActivity(intent);
                 }
-                final MyLocation.LocationResult locationResult = new MyLocation.LocationResult() {
-                    @Override
-                    public void gotLocation(Location location) {
-                        longitude = location.getLongitude();
-                        latitude = location.getLatitude();
-                    }
-                };
-                MyLocation myLocation = new MyLocation();
-                myLocation.getLocation(getActivity(), locationResult);
+
 
                 activityValueEventListener=new ValueEventListener() {
                     @Override
@@ -126,10 +118,7 @@ public class NearByFragment extends Fragment{
 
 
                         }
-                        handler = new Handler();
-                        runnable = new Runnable() {
-                            @Override
-                            public void run() {
+
                                 mapView.getMapAsync(new OnMapReadyCallback() {
                                     @SuppressLint("MissingPermission")
                                     @Override
@@ -155,10 +144,9 @@ public class NearByFragment extends Fragment{
                                     }
                                 });
 
-                            }
 
-                        };
-                        handler.postDelayed(runnable,11000);
+
+
                     }
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
@@ -207,13 +195,13 @@ public class NearByFragment extends Fragment{
     public void onPause() {
         super.onPause();
         mapView.onPause();
-        handler.removeCallbacksAndMessages(runnable);
+
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        handler.removeCallbacksAndMessages(runnable);
+        mapView.onStop();
 
     }
 

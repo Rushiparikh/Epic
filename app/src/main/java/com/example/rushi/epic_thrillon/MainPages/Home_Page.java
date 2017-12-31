@@ -1,9 +1,11 @@
 package com.example.rushi.epic_thrillon.MainPages;
 
 import android.app.AlertDialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -40,6 +42,7 @@ import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.example.rushi.epic_thrillon.Auxiliaries.CircleTransform;
 import com.example.rushi.epic_thrillon.Auxiliaries.Constants;
 import com.example.rushi.epic_thrillon.Auxiliaries.MyLocation;
+import com.example.rushi.epic_thrillon.Auxiliaries.MyService;
 import com.example.rushi.epic_thrillon.Classes.User;
 import com.example.rushi.epic_thrillon.Fragments.Completed;
 import com.example.rushi.epic_thrillon.Fragments.DestinationFragment;
@@ -77,11 +80,40 @@ public class Home_Page extends AppCompatActivity implements NavigationView.OnNav
     private ImageView nav_image_view;
     private TextView nav_textview_name,nav_textview_email;
     InputStream is;
-    AccessToken accessToken;
+
     private String email=null;
     private static final int PERMISSION_REQUEST_CODE = 200;
     String Login_with;
     String imageUrl,firstName,lastName,Email,name,id;
+    private BroadcastReceiver broadcastReceiver;
+    public static double longitude,latitude;
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Intent i = new Intent(getApplicationContext(),MyService.class);
+        stopService(i);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Intent i =new Intent(getApplicationContext(),MyService.class);
+        startService(i);
+
+        if(broadcastReceiver == null){
+            broadcastReceiver = new BroadcastReceiver() {
+                @Override
+                public void onReceive(Context context, Intent intent) {
+                    latitude =intent.getExtras().getDouble("latitude");
+                    longitude = intent.getExtras().getDouble("longitude");
+
+                }
+            };
+        }
+        registerReceiver(broadcastReceiver,new IntentFilter("location_update"));
+    }
+
     private NavigationView navigationView;
     private DatabaseReference mref;
 
@@ -116,6 +148,8 @@ public class Home_Page extends AppCompatActivity implements NavigationView.OnNav
         setContentView(R.layout.activity_home__page);
          toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        Intent intent =new Intent(getApplicationContext(),MyService.class);
+        startService(intent);
 
         sharedPreferences=getSharedPreferences(AskForSignin.My_pref, Context.MODE_PRIVATE);
 
@@ -434,11 +468,6 @@ public class Home_Page extends AppCompatActivity implements NavigationView.OnNav
 
                     if (locationAccepted) {
                         LocationManager lm = (LocationManager) getApplicationContext().getSystemService(getApplicationContext().LOCATION_SERVICE);
-                        if (!(lm.isProviderEnabled(LocationManager.GPS_PROVIDER))) {
-                            Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                            startActivity(intent);
-
-                        }
                         NearByFragment nearByFragment=new NearByFragment();
                         fragmentTransaction= getSupportFragmentManager().beginTransaction();
                         fragmentTransaction.replace(R.id.frame,nearByFragment, "Near By");

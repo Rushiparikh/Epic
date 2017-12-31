@@ -7,20 +7,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.example.rushi.epic_thrillon.Auxiliaries.Constants;
 import com.example.rushi.epic_thrillon.Auxiliaries.DbVisit;
 import com.example.rushi.epic_thrillon.Auxiliaries.DbVisitContract;
-import com.example.rushi.epic_thrillon.Classes.Notifiation;
+import com.example.rushi.epic_thrillon.Auxiliaries.MyService;
 import com.example.rushi.epic_thrillon.R;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class SplashScreen extends AppCompatActivity {
 
-    DatabaseReference notificationReference;
+
     long Delay = 1000;
     DbVisit mDbHelper;
     String v= null;
@@ -29,18 +26,15 @@ public class SplashScreen extends AppCompatActivity {
         setContentView(R.layout.activity_splash_screen);
         mDbHelper = new DbVisit(this);
 
-
-
+        Intent intent =new Intent(getApplicationContext(),MyService.class);
+        startService(intent);
+        Bundle b = getIntent().getExtras();
         String s=getIntent().getExtras().getString("name");
-        String p=getIntent().getExtras().getString("payload");
-        Notifiation notifiation = new Notifiation(s,p);
-        notificationReference = FirebaseDatabase.getInstance().getReference(Constants.NOTIFICATION_DATABASE_PATH_UPLOADS);
-        String Key= notificationReference.push().getKey();
-        notificationReference.child(Key).setValue(notifiation);
         Log.e("TAG",s+" ");
         if(s !=null){
             Intent i = new Intent(this,Home_Page.class);
-            i.putExtra("name",s);
+            i.putExtra("name",getIntent().getExtras().getString("name"));
+            i.putExtra("data",b);
             startActivity(i);
             finish();
         }else{
