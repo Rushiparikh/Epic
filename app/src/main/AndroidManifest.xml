@@ -105,7 +105,9 @@
             android:name=".MainPages.CheckAvailability"
             android:label="@string/title_activity_check_availability"
             android:theme="@style/AppTheme" />
-        <activity android:name=".MainPages.Booking"></activity>
+        <activity android:name=".MainPages.Booking" />
+        <activity android:name=".MainPages.PaymentDetails" />
+        <activity android:name=".MainPages.DestinationClick"></activity>
     </application>
 
 </manifest>

@@ -151,8 +151,8 @@ public class Completed extends Fragment {
                         Activity activity = dataSnapshot1.getValue(Activity.class);
                         for (int i = 0; i < bookedActivityList.size(); i++) {
 
-                            if ((activity.getActivityId().equals( bookedActivityList.get(i).getActId()))){
-                                if( (activity.getOrganizerId().equals( bookedActivityList.get(i).getOrgId()))) {
+                            if ((activity.getId().equals( bookedActivityList.get(i).getId()))){
+
                                     try {
                                         if(currentDate.before(new SimpleDateFormat("dd/MM/yyyy").parse(activity.getActivityDate()))){
                                             activityList.add(activity);
@@ -160,7 +160,7 @@ public class Completed extends Fragment {
                                     } catch (ParseException e) {
                                         e.printStackTrace();
                                     }
-                                }}
+                                }
                         }
                     }
                     myActivityAdapter = new MyActivityAdapter(getActivity(), activityList, sharedPreferences);
@@ -204,18 +204,17 @@ public class Completed extends Fragment {
                         Activity activity = dataSnapshot1.getValue(Activity.class);
                         for (int i = 0; i < bookedActivityList.size(); i++) {
 
-                            if ((activity.getActivityId().equals( bookedActivityList.get(i).getActId()))){
-                                if( (activity.getOrganizerId().equals( bookedActivityList.get(i).getOrgId()))) {
+                            if ((activity.getId().equals( bookedActivityList.get(i).getId()))){
                                     String Date=activity.getActivityDate();
                                     try {
                                         Date activityDate=df.parse(Date);
-                                        if(activityDate.compareTo(currentDate)<0){
+                                        if(activityDate.compareTo(currentDate)>0){
                                             activityList.add(activity);
                                         }
                                     } catch (ParseException e) {
                                         e.printStackTrace();
                                     }
-                                }}
+                                }
                         }
                     }
                     myActivityAdapter = new MyActivityAdapter(getActivity(), activityList, sharedPreferences);

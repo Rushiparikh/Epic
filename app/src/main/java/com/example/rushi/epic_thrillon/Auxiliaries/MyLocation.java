@@ -46,7 +46,7 @@ public class MyLocation {
         }
         timer1=new Timer();
 
-        timer1.schedule(new GetLastLocation(), 5000);
+        timer1.schedule(new GetLastLocation(), 2000);
         return true;
     }
 

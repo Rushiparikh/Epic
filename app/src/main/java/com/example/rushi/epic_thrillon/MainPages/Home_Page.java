@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.location.Location;
 import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Build;
@@ -38,6 +39,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.example.rushi.epic_thrillon.Auxiliaries.CircleTransform;
 import com.example.rushi.epic_thrillon.Auxiliaries.Constants;
+import com.example.rushi.epic_thrillon.Auxiliaries.MyLocation;
 import com.example.rushi.epic_thrillon.Classes.User;
 import com.example.rushi.epic_thrillon.Fragments.Completed;
 import com.example.rushi.epic_thrillon.Fragments.DestinationFragment;
@@ -92,6 +94,7 @@ public class Home_Page extends AppCompatActivity implements NavigationView.OnNav
     private GoogleSignInAccount acct;
     public static int navItemIndex = 0;
     private boolean google;
+
     private static final String TAG_HOME = "home";
     private static final String TAG_NEARBY = "Near By";
     private static final String TAG_DESTINATION = "Dsstination";
@@ -138,14 +141,19 @@ public class Home_Page extends AppCompatActivity implements NavigationView.OnNav
         if( getIntent().getStringExtra("name")!= null){
             fragmentTransaction=getSupportFragmentManager().beginTransaction();
             NotificationFragment notificationFragment = new NotificationFragment();
-            Bundle bundle= new Bundle();
-            bundle.putBundle("DATA",getIntent().getExtras());
-            notificationFragment.setArguments(bundle);
-            fragmentTransaction.replace(R.id.frame,notificationFragment).commit();
+            String s = getIntent().getStringExtra("name");
+            String p = getIntent().getStringExtra("payload");
+            Bundle b = new Bundle();
+            b.putString("name",s);
+            b.putString("payload",p);
 
+            notificationFragment.setArguments(b);
+            fragmentTransaction.replace(R.id.frame,notificationFragment).commit();
+            toolbar.setTitle(TAG_NOTIFICATIONS);
         }else{
             fragmentTransaction=getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.frame,new HomeFragment()).commit();
+            toolbar.setTitle(TAG_HOME);
 
         }
         Login_with =  getIntent().getStringExtra("Login");
@@ -253,6 +261,7 @@ public class Home_Page extends AppCompatActivity implements NavigationView.OnNav
         }
 
     }
+
 
     @Override
     protected void onStart() {
@@ -430,6 +439,11 @@ public class Home_Page extends AppCompatActivity implements NavigationView.OnNav
                             startActivity(intent);
 
                         }
+                        NearByFragment nearByFragment=new NearByFragment();
+                        fragmentTransaction= getSupportFragmentManager().beginTransaction();
+                        fragmentTransaction.replace(R.id.frame,nearByFragment, "Near By");
+                        fragmentTransaction.addToBackStack(null);
+                        fragmentTransaction.commit();
 
 
 

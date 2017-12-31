@@ -9,33 +9,21 @@ import java.util.Map;
 
 public class BookedActivity {
 
-    private String actId;
-    private String orgId;
+
+    private String id;
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
     public BookedActivity(){
         
     }
 
-    public BookedActivity(String actId, String orgId) {
-        this.actId = actId;
-        this.orgId = orgId;
+    public BookedActivity(String id) {
+
+        this.id =id;
+    }
+    public String getId() {
+        return id;
     }
 
-    public String getActId() {
-        return actId;
-    }
-
-    public void setActId(String actId) {
-        this.actId = actId;
-    }
-
-    public String getOrgId() {
-        return orgId;
-    }
-
-    public void setOrgId(String orgId) {
-        this.orgId = orgId;
-    }
 
     public Map<String, Object> getAdditionalProperties() {
         return this.additionalProperties;

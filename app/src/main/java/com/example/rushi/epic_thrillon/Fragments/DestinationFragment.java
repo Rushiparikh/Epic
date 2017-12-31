@@ -1,6 +1,7 @@
 package com.example.rushi.epic_thrillon.Fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
@@ -15,8 +16,10 @@ import android.view.ViewGroup;
 
 import com.example.rushi.epic_thrillon.Adapters.ActivityAdapter;
 import com.example.rushi.epic_thrillon.Auxiliaries.Constants;
+import com.example.rushi.epic_thrillon.Auxiliaries.RecyclerItemClickListener;
 import com.example.rushi.epic_thrillon.Classes.Destination;
 import com.example.rushi.epic_thrillon.MainPages.ActivityClick;
+import com.example.rushi.epic_thrillon.MainPages.DestinationClick;
 import com.example.rushi.epic_thrillon.R;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -93,6 +96,24 @@ public class DestinationFragment extends Fragment {
 
             }
         };
+
+
+        recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(), recyclerView, new RecyclerItemClickListener.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                Intent i = new Intent(getActivity(), DestinationClick.class);
+                i.putExtra("destinationName",destinationList.get(position).getDestName());
+                i.putExtra("destinationImage",destinationList.get(position).getImage());
+
+                startActivity(i);
+            }
+
+            @Override
+            public void onLongItemClick(View view, int position) {
+
+            }
+        }));
+
         return view;
     }
     public class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {
