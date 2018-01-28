@@ -83,7 +83,7 @@ public class Home_Page extends AppCompatActivity implements NavigationView.OnNav
     private ImageView nav_image_view;
     private TextView nav_textview_name,nav_textview_email;
     InputStream is;
-
+    public static boolean flagForLocation = true;
     private String email=null;
     private static final int PERMISSION_REQUEST_CODE = 200;
     String Login_with;
@@ -92,8 +92,8 @@ public class Home_Page extends AppCompatActivity implements NavigationView.OnNav
     public static double longitude,latitude;
 
     @Override
-    protected void onStop() {
-        super.onStop();
+    protected void onDestroy() {
+        super.onDestroy();
         Intent i = new Intent(getApplicationContext(),MyService.class);
         stopService(i);
     }
@@ -101,11 +101,12 @@ public class Home_Page extends AppCompatActivity implements NavigationView.OnNav
     @Override
     protected void onResume() {
         super.onResume();
-        Intent i =new Intent(getApplicationContext(),MyService.class);
-        startService(i);
+
+        Intent intent =new Intent(getApplicationContext(),MyService.class);
+        startService(intent);
 
 
-        if(broadcastReceiver == null){
+
             broadcastReceiver = new BroadcastReceiver() {
                 @Override
                 public void onReceive(Context context, Intent intent) {
@@ -114,7 +115,7 @@ public class Home_Page extends AppCompatActivity implements NavigationView.OnNav
 
                 }
             };
-        }
+
         registerReceiver(broadcastReceiver,new IntentFilter("location_update"));
     }
 
@@ -185,13 +186,6 @@ public class Home_Page extends AppCompatActivity implements NavigationView.OnNav
         if( getIntent().getStringExtra("name")!= null){
             fragmentTransaction=getSupportFragmentManager().beginTransaction();
             NotificationFragment notificationFragment = new NotificationFragment();
-            String s = getIntent().getStringExtra("name");
-            String p = getIntent().getStringExtra("payload");
-            Bundle b = new Bundle();
-            b.putString("name",s);
-            b.putString("payload",p);
-
-            notificationFragment.setArguments(b);
             fragmentTransaction.replace(R.id.frame,notificationFragment).commit();
             toolbar.setTitle(TAG_NOTIFICATIONS);
         }else{

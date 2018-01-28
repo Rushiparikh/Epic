@@ -140,15 +140,17 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.MyView
                             }
                             for(DataSnapshot ds: dataSnapshot1.child("wishlist").getChildren()){
 
-                                Wishlist wishlist = ds.getValue(Wishlist.class);
-                                if(wishlist.getActId().equals(imageList.get(position).getActivityId())){
-                                    if((wishlist.getOrgId().equals(imageList.get(position).getOrganizerId()))&& flag){
-                                        ds.getRef().removeValue();
-                                        flag = false;
-                                        match=position;
-                                        imageList.remove(position);
-                                        notifyItemRemoved(position);
-                                        notifyDataSetChanged();
+                                if(flag){
+                                    Wishlist wishlist = ds.getValue(Wishlist.class);
+                                    if(wishlist.getActId().equals(imageList.get(position).getActivityId())) {
+                                        if ((wishlist.getOrgId().equals(imageList.get(position).getOrganizerId()))) {
+                                            ds.getRef().removeValue();
+                                            flag = false;
+                                            match = position;
+                                            imageList.remove(position);
+                                            notifyItemRemoved(position);
+                                            notifyDataSetChanged();
+                                        }
                                     }
                                 }
                             }

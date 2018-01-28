@@ -53,6 +53,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import static com.example.rushi.epic_thrillon.MainPages.Home_Page.flagForLocation;
 import static com.example.rushi.epic_thrillon.MainPages.Home_Page.latitude;
 import static com.example.rushi.epic_thrillon.MainPages.Home_Page.longitude;
 
@@ -68,7 +69,9 @@ public class HomeFragment extends Fragment {
     List<Activity> nearByActivityList;
     List<Destination> destinationList;
     Date currentDate;
+    private BroadcastReceiver broadcastReceiver;;
     Activity activity;
+
     com.example.rushi.epic_thrillon.Classes.Location location;
 
 
@@ -85,12 +88,30 @@ public class HomeFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        broadcastReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                latitude =intent.getExtras().getDouble("latitude");
+                longitude = intent.getExtras().getDouble("longitude");
+                mdatabse.addValueEventListener(activityValueEventListener);
+            }
+        };
+
+        getActivity().registerReceiver(broadcastReceiver,new IntentFilter("location_update"));
 
         mref.addValueEventListener(valueEventListener);
-        mdatabse.addValueEventListener(activityValueEventListener);
         mdestination.addValueEventListener(destinationValueEventListner);
+        mdatabse.addValueEventListener(activityValueEventListener);
+//        new Handler().postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//
+//            }
+//        },0000);
 
-        statusCheck();
+
+
+
 
     }
 
@@ -105,8 +126,9 @@ public class HomeFragment extends Fragment {
             mref.keepSynced(true);
             mdatabse.keepSynced(true);
             mdestination.keepSynced(true);
-
+            if(flagForLocation){
             statusCheck();
+            }
             currentDate = Calendar.getInstance().getTime();
             SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
              formattedDate = df.format(currentDate);
@@ -186,12 +208,7 @@ public class HomeFragment extends Fragment {
             });
 
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
 
-            }
-        },2000);
         activityValueEventListener=new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -312,12 +329,13 @@ public class HomeFragment extends Fragment {
                 .setCancelable(false)
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(final DialogInterface dialog, final int id) {
+                        flagForLocation = false;
                         startActivity(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS));
                     }
                 })
                 .setNegativeButton("No", new DialogInterface.OnClickListener() {
                     public void onClick(final DialogInterface dialog, final int id) {
-                        statusCheck();
+
                     }
                 });
         final AlertDialog alert = builder.create();

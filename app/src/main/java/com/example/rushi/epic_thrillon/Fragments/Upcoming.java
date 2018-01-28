@@ -156,7 +156,7 @@ public class Upcoming extends Fragment {
                                 String Date=activity.getActivityDate();
                                     try {
                                         Date activityDate=df.parse(Date);
-                                        if(activityDate.compareTo(currentDate)<=0){
+                                        if(activityDate.compareTo(currentDate)>=0){
                                             activityList.add(activity);
                                         }
                                     } catch (ParseException e) {
@@ -212,7 +212,7 @@ public class Upcoming extends Fragment {
                                     String Date=activity.getActivityDate();
                                     try {
                                         Date activityDate=df.parse(Date);
-                                        if(activityDate.compareTo(currentDate)>0){
+                                        if(activityDate.compareTo(currentDate)<0){
                                             activityList.add(activity);
                                         }
                                     } catch (ParseException e) {

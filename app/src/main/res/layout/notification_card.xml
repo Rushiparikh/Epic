@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/actImage"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_margin="15dp" />
+
+        <TextView
+            android:id="@+id/actDestName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/actTiming"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="15dp"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/actName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|center"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/actDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center"
+            android:text="TextView" />
+
+
+    </android.support.v7.widget.CardView>
+
+</RelativeLayout>

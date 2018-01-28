@@ -15,6 +15,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "660944855439-cpft2jb19a66of40t3vkltot0e7uks64.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.rushi.epic_thrillon",
+            "certificate_hash": "8d2ff2bc27c5df2d6d821102ff479f66617a72e6"
+          }
+        },
+        {
+          "client_id": "660944855439-hr1afv4gsqf81rgoeb2luq2f65vk8u93.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.rushi.epic_thrillon",
+            "certificate_hash": "231c8b526b7a1c3bc0abcaa24b804d41afe7901e"
+          }
+        },
+        {
           "client_id": "660944855439-ntnfe2hpl8hghsr2tgqn5n2gar0sf8te.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

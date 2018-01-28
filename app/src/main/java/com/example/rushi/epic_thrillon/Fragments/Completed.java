@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.rushi.epic_thrillon.Adapters.CompletedAdapter;
 import com.example.rushi.epic_thrillon.Adapters.MyActivityAdapter;
 import com.example.rushi.epic_thrillon.Auxiliaries.Constants;
 import com.example.rushi.epic_thrillon.Classes.Activity;
@@ -64,7 +65,7 @@ public class Completed extends Fragment {
     SharedPreferences sharedPreferences;
     List<BookedActivity> bookedActivityList;
     List<Activity> activityList;
-    MyActivityAdapter myActivityAdapter;
+    CompletedAdapter myActivityAdapter;
     private OnFragmentInteractionListener mListener;
 
     public Completed() {
@@ -153,17 +154,19 @@ public class Completed extends Fragment {
 
                             if ((activity.getId().equals( bookedActivityList.get(i).getId()))){
 
-                                    try {
-                                        if(currentDate.before(new SimpleDateFormat("dd/MM/yyyy").parse(activity.getActivityDate()))){
-                                            activityList.add(activity);
-                                        }
-                                    } catch (ParseException e) {
-                                        e.printStackTrace();
+                                String Date=activity.getActivityDate();
+                                try {
+                                    Date activityDate=df.parse(Date);
+                                    if(activityDate.compareTo(currentDate)<0){
+                                        activityList.add(activity);
                                     }
+                                } catch (ParseException e) {
+                                    e.printStackTrace();
+                                }
                                 }
                         }
                     }
-                    myActivityAdapter = new MyActivityAdapter(getActivity(), activityList, sharedPreferences);
+                    myActivityAdapter = new CompletedAdapter(getActivity(), activityList, sharedPreferences);
                     recyclerView.setAdapter(myActivityAdapter);
                 }
 
@@ -208,7 +211,7 @@ public class Completed extends Fragment {
                                     String Date=activity.getActivityDate();
                                     try {
                                         Date activityDate=df.parse(Date);
-                                        if(activityDate.compareTo(currentDate)>0){
+                                        if(activityDate.compareTo(currentDate)<0){
                                             activityList.add(activity);
                                         }
                                     } catch (ParseException e) {
@@ -217,7 +220,7 @@ public class Completed extends Fragment {
                                 }
                         }
                     }
-                    myActivityAdapter = new MyActivityAdapter(getActivity(), activityList, sharedPreferences);
+                    myActivityAdapter = new CompletedAdapter(getActivity(), activityList, sharedPreferences);
                     recyclerView.setAdapter(myActivityAdapter);
                 }
 

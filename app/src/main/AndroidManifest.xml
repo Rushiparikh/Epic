@@ -107,8 +107,13 @@
             android:theme="@style/AppTheme" />
         <activity android:name=".MainPages.Booking" />
         <activity android:name=".MainPages.PaymentDetails" />
-        <activity android:name=".MainPages.DestinationClick"></activity>
-        <service android:name=".Auxiliaries.MyService" android:process=":my_service" />
+        <activity android:name=".MainPages.DestinationClick" />
+
+        <service
+            android:name=".Auxiliaries.MyService"
+            android:process=":my_service" />
+
+        <activity android:name=".MainPages.ReviewActivity"></activity>
     </application>
 
 </manifest>

@@ -7,7 +7,7 @@ package com.example.rushi.epic_thrillon.Classes;
 public class Notifiation {
 
     private String name;
-    private String data;
+    private String id;
 
     public  Notifiation(){
 
@@ -15,13 +15,13 @@ public class Notifiation {
 
     public Notifiation(String name, String data) {
         this.name = name;
-        this.data = data;
+        this.id = data;
     }
 
     public String getName(){
         return name;
     }
-    public String getData(){
-        return data;
+    public String getId(){
+        return id;
     }
 }
