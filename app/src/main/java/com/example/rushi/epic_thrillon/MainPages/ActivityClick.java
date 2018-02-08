@@ -57,18 +57,15 @@ public class ActivityClick extends AppCompatActivity {
     private List<Destination> OrgDestList;
     private List<Destination> unique;
     private DatabaseReference mDatabase,mDest;
-    ValueEventListener valueEventListener;
     String ActivityName;
     String ActivityImage;
-    Uri uri;
-    Query query;
     TextView ActName;
     private static final long GAME_LENGTH_MILLISECONDS = 1000;
     private boolean mGameIsInProgress;
     private long mTimerMilliseconds;
     private InterstitialAd mInterstitialAd;
     private CountDownTimer mCountDownTimer;
-    ChildEventListener childEventListener;
+
 
 
 
@@ -79,25 +76,21 @@ public class ActivityClick extends AppCompatActivity {
         setContentView(R.layout.activity_click);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        ActName= findViewById(R.id.love_music);
         Intent i =getIntent();
         ActivityName= i.getStringExtra("ActivityName");
-
-        ActivityImage=i.getStringExtra("ActivityImage");
-        ActName.setText(ActivityName);
         initCollapsingToolbar();
-        MobileAds.initialize(this, "ca-app-pub-4689037977247733~9439374585");
-        // Create the InterstitialAd and set the adUnitId.
-        mInterstitialAd = new InterstitialAd(this);
-        // Defined in res/values/strings.xml
-        mInterstitialAd.setAdUnitId(getString(R.string.ad_unit_id));
-        startGame();
-        mInterstitialAd.setAdListener(new AdListener() {
-            @Override
-            public void onAdClosed() {
-                startGame();
-            }
-        });
+//        MobileAds.initialize(this, "ca-app-pub-4689037977247733~9439374585");
+//        // Create the InterstitialAd and set the adUnitId.
+//        mInterstitialAd = new InterstitialAd(this);
+//        // Defined in res/values/strings.xml
+//        mInterstitialAd.setAdUnitId(getString(R.string.ad_unit_id));
+//        startGame();
+//        mInterstitialAd.setAdListener(new AdListener() {
+//            @Override
+//            public void onAdClosed() {
+//                startGame();
+//            }
+//        });
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         destinationList = new ArrayList<>();
         OrgDestList = new ArrayList<>();
@@ -120,7 +113,7 @@ public class ActivityClick extends AppCompatActivity {
                 new RecyclerItemClickListener(getApplicationContext(), recyclerView ,new RecyclerItemClickListener.OnItemClickListener() {
                     @Override public void onItemClick(View view, int position) {
                         // do whatever
-                        showInterstitial();
+                      //  showInterstitial();
                         Intent intent=new Intent(ActivityClick.this,DestinationActivity.class);
                         intent.putExtra("ActivityName",ActivityName);
                         intent.putExtra("Destination",unique.get(position).getDestName());
@@ -202,7 +195,7 @@ public class ActivityClick extends AppCompatActivity {
     private void initCollapsingToolbar() {
         final CollapsingToolbarLayout collapsingToolbar =
                 (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
-        collapsingToolbar.setTitle(" ");
+        collapsingToolbar.setTitle(ActivityName);
         AppBarLayout appBarLayout = (AppBarLayout) findViewById(R.id.appbar);
         appBarLayout.setExpanded(true);
 
@@ -222,7 +215,7 @@ public class ActivityClick extends AppCompatActivity {
                     collapsingToolbar.setTitle(ActivityName);
                     isShow = true;
                 } else if (isShow) {
-                    collapsingToolbar.setTitle(" ");
+                    collapsingToolbar.setTitle(ActivityName);
                     getSupportActionBar().setDisplayHomeAsUpEnabled(false);
                     getSupportActionBar().setDisplayShowHomeEnabled(false);
                     isShow = false;
@@ -250,29 +243,29 @@ public class ActivityClick extends AppCompatActivity {
         return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics()));
     }
 
-    private void createTimer(final long milliseconds) {
-        // Create the game timer, which counts down to the end of the level
-        // and shows the "retry" button.
-        if (mCountDownTimer != null) {
-            mCountDownTimer.cancel();
-        }
-
-
-
-        mCountDownTimer = new CountDownTimer(milliseconds, 50) {
-            @Override
-            public void onTick(long millisUnitFinished) {
-                mTimerMilliseconds = millisUnitFinished;
-
-            }
-
-            @Override
-            public void onFinish() {
-                mGameIsInProgress = false;
-
-            }
-        };
-    }
+//    private void createTimer(final long milliseconds) {
+//        // Create the game timer, which counts down to the end of the level
+//        // and shows the "retry" button.
+//        if (mCountDownTimer != null) {
+//            mCountDownTimer.cancel();
+//        }
+//
+//
+//
+//        mCountDownTimer = new CountDownTimer(milliseconds, 50) {
+//            @Override
+//            public void onTick(long millisUnitFinished) {
+//                mTimerMilliseconds = millisUnitFinished;
+//
+//            }
+//
+//            @Override
+//            public void onFinish() {
+//                mGameIsInProgress = false;
+//
+//            }
+//        };
+//    }
 
     @Override
     protected void onStop() {
@@ -285,52 +278,52 @@ public class ActivityClick extends AppCompatActivity {
         // Start or resume the game.
         super.onResume();
 
-        if (mGameIsInProgress) {
-            resumeGame(mTimerMilliseconds);
-        }
+//        if (mGameIsInProgress) {
+//            resumeGame(mTimerMilliseconds);
+//        }
     }
 
     @Override
     public void onPause() {
         // Cancel the timer if the game is paused.
 
-        mCountDownTimer.cancel();
+//        mCountDownTimer.cancel();
         super.onPause();
     }
 
-    private void showInterstitial() {
-        // Show the ad if it's ready. Otherwise toast and restart the game.
-        if (mInterstitialAd != null && mInterstitialAd.isLoaded()) {
-            mInterstitialAd.show();
-        } else {
-           // Toast.makeText(this, "Ad did not load", Toast.LENGTH_SHORT).show();
-            startGame();
-        }
-    }
+//    private void showInterstitial() {
+//        // Show the ad if it's ready. Otherwise toast and restart the game.
+//        if (mInterstitialAd != null && mInterstitialAd.isLoaded()) {
+//            mInterstitialAd.show();
+//        } else {
+//           // Toast.makeText(this, "Ad did not load", Toast.LENGTH_SHORT).show();
+//            startGame();
+//        }
+//    }
 
-    private void startGame() {
-        // Request a new ad if one isn't already loaded, hide the button, and kick off the timer.
-        if (!mInterstitialAd.isLoading() && !mInterstitialAd.isLoaded()) {
-            AdRequest adRequest = new AdRequest.Builder().build();
-            mInterstitialAd.loadAd(adRequest);
-        }
-
-
-        resumeGame(GAME_LENGTH_MILLISECONDS);
-    }
+//    private void startGame() {
+//        // Request a new ad if one isn't already loaded, hide the button, and kick off the timer.
+//        if (!mInterstitialAd.isLoading() && !mInterstitialAd.isLoaded()) {
+//            AdRequest adRequest = new AdRequest.Builder().build();
+//            mInterstitialAd.loadAd(adRequest);
+//        }
+//
+//
+//        resumeGame(GAME_LENGTH_MILLISECONDS);
+//    }
 
     @Override
     protected void onStart() {
         super.onStart();
     }
 
-    private void resumeGame(long milliseconds) {
-        // Create a new timer for the correct length and start it.
-        mGameIsInProgress = true;
-        mTimerMilliseconds = milliseconds;
-        createTimer(milliseconds);
-        mCountDownTimer.start();
-    }
+//    private void resumeGame(long milliseconds) {
+//        // Create a new timer for the correct length and start it.
+//        mGameIsInProgress = true;
+//        mTimerMilliseconds = milliseconds;
+//        createTimer(milliseconds);
+//        mCountDownTimer.start();
+//    }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()){

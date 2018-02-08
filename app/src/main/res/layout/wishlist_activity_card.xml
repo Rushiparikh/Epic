@@ -31,7 +31,6 @@
                 android:scaleType="fitXY" />
 
 
-
             <TextView
                 android:id="@+id/activity_name"
                 android:layout_width="wrap_content"

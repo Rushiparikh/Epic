@@ -101,9 +101,9 @@ public class Home_Page extends AppCompatActivity implements NavigationView.OnNav
     @Override
     protected void onResume() {
         super.onResume();
-
-        Intent intent =new Intent(getApplicationContext(),MyService.class);
-        startService(intent);
+        if(checkPermission()){
+            Intent intent =new Intent(getApplicationContext(),MyService.class);
+            startService(intent);
 
 
 
@@ -116,7 +116,11 @@ public class Home_Page extends AppCompatActivity implements NavigationView.OnNav
                 }
             };
 
-        registerReceiver(broadcastReceiver,new IntentFilter("location_update"));
+            registerReceiver(broadcastReceiver,new IntentFilter("location_update"));
+        }else{
+            requestPermission();
+        }
+
     }
 
     private NavigationView navigationView;

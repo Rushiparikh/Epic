@@ -48,13 +48,11 @@
                     android:gravity="center_horizontal"
                     android:orientation="vertical">
 
-                    <TextView
+                    <ImageView
                         android:id="@+id/love_music"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/backdrop_title"
-                        android:textColor="@android:color/white"
-                        android:textSize="@dimen/backdrop_title" />
+                        android:layout_width="125dp"
+                        android:layout_height="100dp"
+                        android:src="@drawable/ic_whitelogo" />
 
                 </LinearLayout>
             </RelativeLayout>

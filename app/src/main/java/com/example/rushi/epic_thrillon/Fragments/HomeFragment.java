@@ -6,11 +6,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.location.Location;
-import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -20,11 +17,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
-
 import com.example.rushi.epic_thrillon.Adapters.ActivityOfTheDayAdapter;
 import com.example.rushi.epic_thrillon.Adapters.ImageAdapter;
+import com.example.rushi.epic_thrillon.Adapters.NearByYouAdapter;
 import com.example.rushi.epic_thrillon.Adapters.PopularDestinationAdapter;
-import com.example.rushi.epic_thrillon.Auxiliaries.MyLocation;
 import com.example.rushi.epic_thrillon.Auxiliaries.MyService;
 import com.example.rushi.epic_thrillon.Auxiliaries.RecyclerItemClickListener;
 import com.example.rushi.epic_thrillon.Classes.Activities;
@@ -46,13 +42,11 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-
 import static com.example.rushi.epic_thrillon.MainPages.Home_Page.flagForLocation;
 import static com.example.rushi.epic_thrillon.MainPages.Home_Page.latitude;
 import static com.example.rushi.epic_thrillon.MainPages.Home_Page.longitude;
@@ -61,8 +55,6 @@ import static com.example.rushi.epic_thrillon.MainPages.Home_Page.longitude;
 
 public class HomeFragment extends Fragment {
     private RecyclerView recyclerViewfirst,recyclerViewsecond,recyclerViewthird;
-    private AlbumsAdapter adapter;
-    private List<Album> albumList;
     AdView adView;
     List<Activities> activityList;
     List<Activity> activityofthedayList;
@@ -136,29 +128,12 @@ public class HomeFragment extends Fragment {
             View view = inflater.inflate(R.layout.fragment_home, container, false);
             Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
             adView = view.findViewById(R.id.adView);
-            MobileAds.initialize(getActivity(),"ca-app-pub-4689037977247733~9439374585");
-            AdRequest adRequest = new AdRequest.Builder()
-                    .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-                    .build();
-            adView.loadAd(adRequest);
-
-//        MyLocation.LocationResult locationResult = new MyLocation.LocationResult() {
-//            @Override
-//            public void gotLocation(Location location) {
-//                longitude = location.getLongitude();
-//                latitude = location.getLatitude();
-//            }
-//        };
-//        MyLocation myLocation = new MyLocation();
-//        myLocation.getLocation(getActivity(), locationResult);
-
-
-
-
-
-
-            albumList = new ArrayList<>();
-            gridView = (GridView) view.findViewById(R.id.gridview);
+//            MobileAds.initialize(getActivity(),"ca-app-pub-4689037977247733~9439374585");
+//            AdRequest adRequest = new AdRequest.Builder()
+//                    .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+//                    .build();
+//            adView.loadAd(adRequest);
+            gridView = view.findViewById(R.id.gridview);
             activityList = new ArrayList<>();
             activityofthedayList = new ArrayList<>();
             nearByActivityList = new ArrayList<>();
@@ -234,7 +209,7 @@ public class HomeFragment extends Fragment {
 
                 }
                 recyclerViewfirst.setAdapter(new ActivityOfTheDayAdapter(getActivity(), activityofthedayList));
-                ActivityOfTheDayAdapter adapter=new ActivityOfTheDayAdapter(getActivity(),nearByActivityList);
+                NearByYouAdapter adapter=new NearByYouAdapter(getActivity(),nearByActivityList);
                 recyclerViewsecond.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
 
@@ -306,12 +281,6 @@ public class HomeFragment extends Fragment {
 
             }
         }));
-
-
-
-
-
-
 
             return  view;
         }

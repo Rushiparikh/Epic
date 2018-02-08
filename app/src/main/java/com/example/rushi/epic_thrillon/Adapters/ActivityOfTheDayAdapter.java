@@ -23,32 +23,25 @@ import java.util.List;
 public class ActivityOfTheDayAdapter extends  RecyclerView.Adapter<ActivityOfTheDayAdapter.MyViewHolder>{
     private Context mContext;
     private List<Activity> activityList;
-
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView title, count;
         public ImageView thumbnail, overflow;
-
         public MyViewHolder(View view) {
             super(view);
             title = (TextView) view.findViewById(R.id.title);
             thumbnail = (ImageView) view.findViewById(R.id.thumbnail);
         }
     }
-
-
     public ActivityOfTheDayAdapter(Context mContext, List<Activity> activityList) {
         this.mContext = mContext;
         this.activityList = activityList;
     }
-
-
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.activity_dest_card, parent, false);
-       return  new MyViewHolder(itemView);
+        return new MyViewHolder(itemView);
     }
-
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         Activity activity = activityList.get(position);

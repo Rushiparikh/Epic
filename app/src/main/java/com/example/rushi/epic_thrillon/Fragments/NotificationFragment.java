@@ -89,30 +89,30 @@ public class NotificationFragment extends Fragment {
                         Notifiation n = mDataSnapshot1.getValue(Notifiation.class);
                         mNotifiationList.add(n.getId());
                     }
-            }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
+                mActivityReference.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        mActivityList.clear();
 
-            }
-        });
-
-        mActivityReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                mActivityList.clear();
-
-                for (DataSnapshot mDataSnapshot1 : dataSnapshot.getChildren()){
-                    Activity activity = mDataSnapshot1.getValue(Activity.class);
-                    for(int i = 0; i < mNotifiationList.size();i++){
-                        if(activity.getId().equals(mNotifiationList.get(i))){
-                            mActivityList.add(activity);
-                            break;
+                        for (DataSnapshot mDataSnapshot1 : dataSnapshot.getChildren()){
+                            Activity activity = mDataSnapshot1.getValue(Activity.class);
+                            for(int i = 0; i < mNotifiationList.size();i++){
+                                if(activity.getId().equals(mNotifiationList.get(i))){
+                                    mActivityList.add(activity);
+                                    break;
+                                }
+                            }
                         }
+                        mAdapter = new NotificationAdapter(getActivity(),mActivityList);
+                        recyclerView.setAdapter(mAdapter);
                     }
-                }
-                mAdapter = new NotificationAdapter(getActivity(),mActivityList);
-                recyclerView.setAdapter(mAdapter);
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
             }
 
             @Override
@@ -120,6 +120,8 @@ public class NotificationFragment extends Fragment {
 
             }
         });
+
+
 
 
 

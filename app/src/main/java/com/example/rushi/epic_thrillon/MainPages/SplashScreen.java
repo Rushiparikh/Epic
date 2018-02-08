@@ -1,18 +1,14 @@
 package com.example.rushi.epic_thrillon.MainPages;
 
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.location.LocationManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-
 import com.example.rushi.epic_thrillon.Auxiliaries.Constants;
 import com.example.rushi.epic_thrillon.Auxiliaries.DbVisit;
 import com.example.rushi.epic_thrillon.Auxiliaries.DbVisitContract;
-import com.example.rushi.epic_thrillon.Auxiliaries.MyService;
 import com.example.rushi.epic_thrillon.Classes.Notifiation;
 import com.example.rushi.epic_thrillon.R;
 import com.google.firebase.database.DatabaseReference;
@@ -26,7 +22,6 @@ public class SplashScreen extends AppCompatActivity {
 
     long Delay = 1000;
     DbVisit mDbHelper;
-    LocationManager locationManager;
     DatabaseReference mNotification;
     String v= null;
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,11 +29,7 @@ public class SplashScreen extends AppCompatActivity {
         setContentView(R.layout.activity_splash_screen);
         mDbHelper = new DbVisit(this);
         mNotification = FirebaseDatabase.getInstance().getReference(Constants.NOTIFICATION_DATABASE_PATH_UPLOADS);
-        locationManager = (LocationManager) getApplicationContext().getSystemService(Context.LOCATION_SERVICE);
-        if(locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)){
-            Intent intent =new Intent(getApplicationContext(),MyService.class);
-            startService(intent);
-        }
+
         Bundle b = getIntent().getExtras();
         String s=getIntent().getExtras().getString("name");
         Log.e("TAG",s+" ");

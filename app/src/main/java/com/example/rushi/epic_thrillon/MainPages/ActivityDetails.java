@@ -50,9 +50,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class ActivityDetails extends AppCompatActivity implements OnMapReadyCallback{
-    private static ViewPager mPager;
-    private static int currentPage = 0;
-    DbVisit mDbHelper;
+    ViewPager mPager;
     Activity activity;
     Images images;
     Service service;
@@ -66,7 +64,6 @@ public class ActivityDetails extends AppCompatActivity implements OnMapReadyCall
     GoogleMap mMap;
     MapView mapView;
     Button checkavailabily;
-
     double latitude,longitude;
 
     private ArrayList<String> imageLists = new ArrayList<String>();
@@ -77,7 +74,6 @@ public class ActivityDetails extends AppCompatActivity implements OnMapReadyCall
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         initCollapsingToolbar();
-
         final String actId = getIntent().getStringExtra("activityId");
         mActivityReference = FirebaseDatabase.getInstance().getReference(Constants.ACIVITY_DATABASE_PATH_UPLOADS);
         mPager = (ViewPager) findViewById(R.id.pager);
@@ -98,9 +94,7 @@ public class ActivityDetails extends AppCompatActivity implements OnMapReadyCall
         acomodation = findViewById(R.id.actAcomodation);
         checkavailabily = findViewById(R.id.checkavailability);
         mapView.onCreate(savedInstanceState);
-
         MapsInitializer.initialize(getApplicationContext());
-
         mActivityReference.orderByChild("id").equalTo(actId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -113,7 +107,6 @@ public class ActivityDetails extends AppCompatActivity implements OnMapReadyCall
                          location = ds.child("location").getValue(Location.class);
                          service = ds.child("service").getValue(Service.class);
                      }
-
                      imageLists.add(images.getImg1());
                      imageLists.add(images.getImg2());
                      imageLists.add(images.getImg3());
@@ -124,8 +117,6 @@ public class ActivityDetails extends AppCompatActivity implements OnMapReadyCall
                      ratingBar.setRating((float) activity.getRating());
                      ratingBar.isIndicator();
                      activityDate.setText(activity.getActivityDate());
-
-
                      activityTiming.setText(String.valueOf(activity.getActivityTime()));
                      description.setText(activity.getDescription());
                      description.setTrimCollapsedText("Read More");
@@ -152,7 +143,6 @@ public class ActivityDetails extends AppCompatActivity implements OnMapReadyCall
                     }else{
                          travel.setVisibility(View.GONE);
                      }
-
 
 
                 mPager.setAdapter(new ActivityDetailPageAdapter(ActivityDetails.this,imageLists));
@@ -189,7 +179,7 @@ public class ActivityDetails extends AppCompatActivity implements OnMapReadyCall
     private void initCollapsingToolbar() {
         final CollapsingToolbarLayout collapsingToolbar =
                 (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
-        collapsingToolbar.setTitle("");
+        collapsingToolbar.setTitle(" ");
         AppBarLayout appBarLayout = (AppBarLayout) findViewById(R.id.appbar);
         appBarLayout.setExpanded(true);
 
@@ -209,7 +199,7 @@ public class ActivityDetails extends AppCompatActivity implements OnMapReadyCall
                     collapsingToolbar.setTitle(activity.getActivityName());
                     isShow = true;
                 } else if (isShow) {
-                    collapsingToolbar.setTitle(" ");
+                    collapsingToolbar.setTitle(activity.getActivityName());
                     getSupportActionBar().setDisplayHomeAsUpEnabled(false);
                     getSupportActionBar().setDisplayShowHomeEnabled(false);
                     isShow = false;

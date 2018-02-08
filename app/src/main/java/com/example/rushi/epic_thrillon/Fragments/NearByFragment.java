@@ -62,6 +62,7 @@ public class NearByFragment extends Fragment{
 
     ValueEventListener activityValueEventListener;
     DatabaseReference mref;
+    List<Activity> activityList;
     List<com.example.rushi.epic_thrillon.Classes.Location> locationList;
 
 
@@ -80,6 +81,7 @@ public class NearByFragment extends Fragment{
         mref = FirebaseDatabase.getInstance().getReference(Constants.ACIVITY_DATABASE_PATH_UPLOADS);
         mref.keepSynced(true);
         locationList = new ArrayList<>();
+        activityList = new ArrayList<>();
          lm= (LocationManager) getContext().getSystemService(getContext().LOCATION_SERVICE);
         mapView = (MapView) rootView.findViewById(R.id.map);
 
@@ -107,12 +109,8 @@ public class NearByFragment extends Fragment{
                             double longDiff = Math.abs((location.getLongitude()) - longitude);
                             if((latDiff < 20) && (longDiff < 20)){
                                 locationList.add(location);
+                                activityList.add(activity);
                             }
-
-
-
-
-
                         }
 
                                 mapView.getMapAsync(new OnMapReadyCallback() {
@@ -129,7 +127,7 @@ public class NearByFragment extends Fragment{
 
                                         for(int i = 0; i<locationList.size();i++){
                                             LatLng loc = new LatLng(locationList.get(i).getLatitude(),locationList.get(i).getLongitude());
-                                            mMap.addMarker(new MarkerOptions().position(loc).title("Your Location").snippet("You are Here !!!!!!!"));
+                                            mMap.addMarker(new MarkerOptions().position(loc).title(activityList.get(i).getActivityName()).snippet(activityList.get(i).getDestination()));
                                         }
 
                                         // For zooming automatically to the location of the marker
