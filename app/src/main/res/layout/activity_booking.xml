@@ -91,15 +91,6 @@
         />
 
     <EditText
-        android:id="@+id/mobile_no"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:ems="10"
-        android:hint="Mobile Number"
-        android:inputType="number"
-        />
-
-    <EditText
         android:id="@+id/promo_coupon"
         android:layout_width="177dp"
         android:layout_height="wrap_content"

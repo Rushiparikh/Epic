@@ -230,6 +230,58 @@ public class Upcoming extends Fragment {
                 }
             });
 
+        }else if(email){
+            final long mobile=sharedPreferences.getLong("UserMobile",0);
+            Query query = mUser.orderByChild("mobileNo").equalTo(mobile);
+            query.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    bookedActivityList.clear();
+                    for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()){
+                        for(DataSnapshot ds: dataSnapshot1.child("booked_activity").getChildren()){
+                            BookedActivity bookedActivity = ds.getValue(BookedActivity.class);
+                            bookedActivityList.add(bookedActivity);
+                        }
+
+                    }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+
+            mActivity.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    activityList.clear();
+                    for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+                        Activity activity = dataSnapshot1.getValue(Activity.class);
+                        for (int i = 0; i < bookedActivityList.size(); i++) {
+
+                            if ((activity.getId().equals( bookedActivityList.get(i).getId()))){
+
+                                String Date=activity.getActivityDate();
+                                try {
+                                    Date activityDate=df.parse(Date);
+                                    if(activityDate.compareTo(currentDate)<0){
+                                        activityList.add(activity);
+                                    }
+                                } catch (ParseException e) {
+                                    e.printStackTrace();
+                                }
+                            }}
+                    }
+                    myActivityAdapter = new MyActivityAdapter(getActivity(), activityList, sharedPreferences);
+                    recyclerView.setAdapter(myActivityAdapter);
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
         }
 
 

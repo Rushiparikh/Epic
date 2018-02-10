@@ -72,6 +72,8 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 import static com.facebook.FacebookSdk.getApplicationContext;
@@ -151,6 +153,8 @@ public class Home_Page extends AppCompatActivity implements NavigationView.OnNav
     private FragmentTransaction fragmentTransaction;
     public static int i=9;
     private Query query;
+    private DatabaseReference mDatabaseReference;
+    List<User> arrayList=new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -295,11 +299,30 @@ public class Home_Page extends AppCompatActivity implements NavigationView.OnNav
                 }
 
         }else if(email_login) {
+            final long mobile=sharedPreferences.getLong("UserMobile",0);
+            mDatabaseReference = FirebaseDatabase.getInstance().getReference("user");
+            mDatabaseReference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    User user=new User();
+                    for(DataSnapshot userSnapShot : dataSnapshot.getChildren()){
+                        user=userSnapShot.getValue(User.class);
+                        if(mobile==user.getMobileNo()){
+                            arrayList.add(user);
+                        }
 
+                    }
+                    for(i=0;i<arrayList.size();i++){
+                        nav_textview_name.setText(arrayList.get(i).getFirstName()+" "+arrayList.get(i).getLastName());
+                        nav_textview_email.setText(String.valueOf(arrayList.get(i).getMobileNo()));
+                    }
+                }
 
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
 
-
-
+                }
+            });
         }
 
     }

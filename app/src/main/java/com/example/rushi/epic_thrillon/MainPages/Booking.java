@@ -1,6 +1,7 @@
 package com.example.rushi.epic_thrillon.MainPages;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -36,11 +37,13 @@ public class Booking extends AppCompatActivity {
 
     String actId,person;
     Button makepayment;
+    SharedPreferences sharedPreferences;
     TextView actDate,actTime,actName,actPerson,total;
     EditText mobileNo,firstName,lastName,email;
     DatabaseReference mref;
     Activity activity;
     String amount;
+    boolean google,facebook,login;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,11 +58,20 @@ public class Booking extends AppCompatActivity {
         actDate=findViewById(R.id.actName);
         actTime=findViewById(R.id.actTiming);
         actName=findViewById(R.id.actName);
-        mobileNo=findViewById(R.id.mobile_no);
         firstName=findViewById(R.id.first_name);
         lastName=findViewById(R.id.last_name);
         email=findViewById(R.id.email_id);
         actPerson=findViewById(R.id.person);
+        facebook = sharedPreferences.getBoolean("Facebook", false);
+        google = sharedPreferences.getBoolean("Google", false);
+        login = sharedPreferences.getBoolean("Email", false);
+        if(google){
+            email.setHint("Email id");
+        }if(facebook){
+            email.setHint("Email id or mobile number");
+        }else{
+            email.setHint("Mobile number");
+        }
         total=findViewById(R.id.price);
         makepayment = findViewById(R.id.make_payment_button);
         mref= FirebaseDatabase.getInstance().getReference(Constants.ACIVITY_DATABASE_PATH_UPLOADS);
@@ -105,14 +117,32 @@ public class Booking extends AppCompatActivity {
     }
 
     public void processPayment(){
-        String t =String.valueOf(total.getText().toString());
-        double value= (Double.parseDouble(t))/65;
-        amount = String.valueOf(value);
-        PayPalPayment payPalPayment = new PayPalPayment(new BigDecimal(String.valueOf(amount)),"USD","Donate To Dv",PayPalPayment.PAYMENT_INTENT_SALE);
-        Intent intent = new Intent(Booking.this, PaymentActivity.class);
-        intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION,config);
-        intent.putExtra(PaymentActivity.EXTRA_PAYMENT,payPalPayment);
-        startActivityForResult(intent,PAYPAL_REQUEST_CODE);
+
+        if(firstName.length()>0){
+            if(firstName.getText().toString().matches("[a-zA-Z]+")){
+                if(email.length()>0) {
+                    if (email.getText().toString().matches("[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+") || (email.getText().toString().matches("[0-9]+") && email.length() == 10)) {
+                        String t =String.valueOf(total.getText().toString());
+                        double value= (Double.parseDouble(t))/65;
+                        amount = String.valueOf(value);
+                        PayPalPayment payPalPayment = new PayPalPayment(new BigDecimal(String.valueOf(amount)),"USD","Donate To Dv",PayPalPayment.PAYMENT_INTENT_SALE);
+                        Intent intent = new Intent(Booking.this, PaymentActivity.class);
+                        intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION,config);
+                        intent.putExtra(PaymentActivity.EXTRA_PAYMENT,payPalPayment);
+                        startActivityForResult(intent,PAYPAL_REQUEST_CODE);
+                    } else {
+                        Toast.makeText(Booking.this,"email or mobile number not valid",Toast.LENGTH_SHORT).show();
+                    }
+                }else{
+                        Toast.makeText(Booking.this,"email or mobile number empty",Toast.LENGTH_SHORT).show();
+                    }
+            }else{
+                Toast.makeText(Booking.this,"Plz enter valid firstname",Toast.LENGTH_SHORT).show();
+            }
+        }else{
+            Toast.makeText(Booking.this,"Plz enter the firstname",Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     @Override

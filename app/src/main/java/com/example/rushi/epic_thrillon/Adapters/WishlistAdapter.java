@@ -163,7 +163,40 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.MyView
                     }
                 });
             }else{
+                final long mobile=sharedPreferences.getLong("UserMobile",0);
+                Query query = mUser.orderByChild("mobileNo").equalTo(mobile);
+                query.addValueEventListener( new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
 
+                        for (DataSnapshot dataSnapshot1: dataSnapshot.getChildren()){
+                            if(match!=position){
+                                flag=true;
+                            }
+                            for(DataSnapshot ds: dataSnapshot1.child("wishlist").getChildren()){
+
+                                if(flag){
+                                    Wishlist wishlist = ds.getValue(Wishlist.class);
+                                    if(wishlist.getActId().equals(imageList.get(position).getActivityId())) {
+                                        if ((wishlist.getOrgId().equals(imageList.get(position).getOrganizerId()))) {
+                                            ds.getRef().removeValue();
+                                            flag = false;
+                                            match = position;
+                                            imageList.remove(position);
+                                            notifyItemRemoved(position);
+                                            notifyDataSetChanged();
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
 
             }
         }

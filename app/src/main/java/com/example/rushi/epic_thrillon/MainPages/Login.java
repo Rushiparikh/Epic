@@ -66,12 +66,13 @@ public class Login extends AppCompatActivity {
                 String pass_login= password.getText().toString();
                 for(int i=0;i<arrayList.size();i++){
                     User user=arrayList.get(i);
-                    String email_register=user.getEmail();
+                    long email_register=user.getMobileNo();
                     String password_register = user.getPassword();
-                    if(email_login.equals(email_register) && pass_login.equals(password_register)){
+                    if(Long.parseLong(email_login)==email_register && pass_login.equals(password_register)){
                         Intent intent=new Intent(Login.this,Home_Page.class);
                         intent.putExtra("Login","email");
                         editor.putBoolean("Email",true);
+                        editor.putLong("UserMobile",email_register);
                         editor.commit();
                         startActivity(intent);
                         flag =true;

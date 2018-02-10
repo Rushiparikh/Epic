@@ -48,7 +48,7 @@ public class WishListFragment extends Fragment {
     GoogleSignInAccount acct;
     WishlistAdapter wishlistAdapter;
     RecyclerView recyclerView;
-
+    List<User> arrayList=new ArrayList<>();
     boolean facebook,google,email;
     public WishListFragment() {
         // Required empty public constructor
@@ -176,11 +176,57 @@ public class WishListFragment extends Fragment {
                 }
             });
 
+        }else if(email){
+            final long mobile=sharedPreferences.getLong("UserMobile",0);
+            Query query = mUser.orderByChild("mobileNo").equalTo(mobile);
+            query.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    wishlists.clear();
+                    for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()){
+                        for(DataSnapshot ds: dataSnapshot1.child("wishlist").getChildren()){
+                            Wishlist wishlist = ds.getValue(Wishlist.class);
+                            wishlists.add(wishlist);
+                        }
+
+                    }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+
+            mActivity.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    activityList.clear();
+                    for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+                        Activity activity = dataSnapshot1.getValue(Activity.class);
+                        for (int i = 0; i < wishlists.size(); i++) {
+
+                            if ((activity.getActivityId().equals( wishlists.get(i).getActId()))){
+                                if( (activity.getOrganizerId().equals( wishlists.get(i).getOrgId()))) {
+                                    activityList.add(activity);
+                                }}
+                        }
+                    }
+                    wishlistAdapter = new WishlistAdapter(getActivity(), activityList, sharedPreferences);
+                    recyclerView.setAdapter(wishlistAdapter);
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
         }
-            return view;
-        }
+        return view;
 
     }
+
+}
 
 
 

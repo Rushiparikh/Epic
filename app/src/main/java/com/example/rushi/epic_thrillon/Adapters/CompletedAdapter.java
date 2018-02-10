@@ -195,9 +195,53 @@ public class CompletedAdapter extends RecyclerView.Adapter<CompletedAdapter.MyVi
 
                     }
                 });
-            }else{
+            }else if(email){
+                final long mobile=sharedPreferences.getLong("UserMobile",0);
+                Query query = mUser.orderByChild("email").equalTo(mobile);
+                query.addValueEventListener( new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
 
 
+                        for (DataSnapshot dataSnapshot1: dataSnapshot.getChildren()){
+                            if(match!=position){
+                                flag=true;
+                            }
+                            for(DataSnapshot ds: dataSnapshot1.child("wishlist").getChildren()){
+
+                                Wishlist wishlist = ds.getValue(Wishlist.class);
+                                if(wishlist.getActId().equals(imageList.get(position).getActivityId())){
+                                    if((wishlist.getOrgId().equals(imageList.get(position).getOrganizerId()))){
+                                        Toast.makeText(mContext,"already added",Toast.LENGTH_SHORT).show();
+
+                                        flag = false;
+                                        match=position;
+                                        break;
+                                    }
+                                }
+                            }
+//                            String id=imageList.get(position).getActivityId()+""+imageList.get(position).getOrganizerId();
+                            if( flag) {
+                                Wishlist wishlist = new Wishlist(imageList.get(position).getActivityId(), imageList.get(position).getOrganizerId());
+                                String Key = mUser.push().getKey();
+                                mUser.child(dataSnapshot1.getKey()).child("wishlist").child(Key).setValue(wishlist);
+                                heart.setImageTintList(ColorStateList.valueOf(Color.RED));
+                                Toast.makeText(mContext," added to wishlist",Toast.LENGTH_SHORT).show();
+
+                                // fullId = imageList.get(position).getActivityId() + "" + imageList.get(position).getOrganizerId();
+                                flag=false;
+                                match=position;
+                            }else{
+                                //Toast.makeText(getApplicationContext(),"Already addedd wishlist",Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
             }
 
         }
