@@ -103,7 +103,7 @@ public class Activity_DestinationAdapter extends RecyclerView.Adapter<Activity_D
                             for(DataSnapshot ds: dataSnapshot1.child("wishlist").getChildren()){
 
                                 Wishlist wishlist = ds.getValue(Wishlist.class);
-                                if(wishlist.getActId().equals(imageList.get(position).getActivityId())){
+                                if(wishlist.getActId().equals(imageList.get(position).getActivityId())&& flag){
                                     if((wishlist.getOrgId().equals(imageList.get(position).getOrganizerId()))){
                                         Toast.makeText(mContext,"already added",Toast.LENGTH_SHORT).show();
                                         flag = false;
@@ -149,7 +149,7 @@ public class Activity_DestinationAdapter extends RecyclerView.Adapter<Activity_D
                             for(DataSnapshot ds: dataSnapshot1.child("wishlist").getChildren()){
 
                                 Wishlist wishlist = ds.getValue(Wishlist.class);
-                                if(wishlist.getActId().equals(imageList.get(position).getActivityId())){
+                                if(wishlist.getActId().equals(imageList.get(position).getActivityId()) && flag){
                                     if((wishlist.getOrgId().equals(imageList.get(position).getOrganizerId()))){
                                         Toast.makeText(mContext,"already added",Toast.LENGTH_SHORT).show();
                                         flag = false;
@@ -195,7 +195,7 @@ public class Activity_DestinationAdapter extends RecyclerView.Adapter<Activity_D
                             for(DataSnapshot ds: dataSnapshot1.child("wishlist").getChildren()){
 
                                 Wishlist wishlist = ds.getValue(Wishlist.class);
-                                if(wishlist.getActId().equals(imageList.get(position).getActivityId())){
+                                if(wishlist.getActId().equals(imageList.get(position).getActivityId()) && flag){
                                     if((wishlist.getOrgId().equals(imageList.get(position).getOrganizerId()))){
                                         Toast.makeText(mContext,"already added",Toast.LENGTH_SHORT).show();
                                         flag = false;

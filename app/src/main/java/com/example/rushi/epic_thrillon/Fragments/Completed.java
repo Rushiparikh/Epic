@@ -255,7 +255,7 @@ public class Completed extends Fragment {
             mActivity.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
-                    bookedActivityList.clear();
+                    activityList.clear();
                     for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
                         Activity activity = dataSnapshot1.getValue(Activity.class);
                         for (int i = 0; i < bookedActivityList.size(); i++) {
