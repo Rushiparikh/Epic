@@ -25,8 +25,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class CheckAvailability extends AppCompatActivity {
-    TextView actTiming,actName;
-    EditText actDate,actPerson;
+    TextView actTiming,actName,actDate;
+    EditText actPerson;
     ImageButton plus,minus;
     DatabaseReference mDatabaseReference,mref;
     Activity activity;
@@ -50,6 +50,7 @@ public class CheckAvailability extends AppCompatActivity {
         plus = findViewById(R.id.plus);
         minus = findViewById(R.id.minus);
         next = findViewById(R.id.next);
+        actPerson.setEnabled(false);
         final String Id = getIntent().getStringExtra("activityId");
         mDatabaseReference = FirebaseDatabase.getInstance().getReference(Constants.ACIVITY_DATABASE_PATH_UPLOADS);
         mref = FirebaseDatabase.getInstance().getReference(Constants.ORGANZIER_DATABASE_PATH_UPLOADS);

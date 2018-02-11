@@ -76,10 +76,10 @@ public class CompletedAdapter extends RecyclerView.Adapter<CompletedAdapter.MyVi
 //            overflow = (ImageView) view.findViewById(R.id.overflow);
             ratingBar=view.findViewById(R.id.actRating);
             review=view.findViewById(R.id.review);
-            heart = view.findViewById(R.id.heart);
+
             mUser = FirebaseDatabase.getInstance().getReference(Constants.USERS_DATABASE_PATH_UPLOADS);
             acct = GoogleSignIn.getLastSignedInAccount(getApplicationContext());
-            heart.setOnClickListener(this);
+
             review.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

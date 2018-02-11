@@ -54,7 +54,7 @@ public class NearByYouAdapter extends  RecyclerView.Adapter<NearByYouAdapter.MyV
         holder.actName.setText(activity.getActivityName());
         holder.actDest.setText(activity.getDestination());
         holder.actPrice.setText(String.valueOf( activity.getPrice()));
-        holder.actRatingBar.setRating((int) activity.getRating());
+        holder.actRatingBar.setRating((float) activity.getRating());
         //Glide.with(mContext).load(activityList.get(position).getImages().getImg2()).into(holder.thumbnail);
 
         Glide

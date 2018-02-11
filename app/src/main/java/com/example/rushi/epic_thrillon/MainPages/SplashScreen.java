@@ -20,7 +20,7 @@ import java.util.TimerTask;
 public class SplashScreen extends AppCompatActivity {
 
 
-    long Delay = 1000;
+    long Delay = 3000;
     DbVisit mDbHelper;
     DatabaseReference mNotification;
     String v= null;

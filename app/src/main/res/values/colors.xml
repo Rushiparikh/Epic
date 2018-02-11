@@ -2,10 +2,10 @@
 <resources>
     <color name="colorPrimary">#1911AA</color>
     <color name="colorPrimaryDark">#1911AA</color>
-    <color name="colorAccent">#ffffff</color>
+    <color name="colorAccent">#1911AA</color>
     <color name="viewBg">#f1f5f8</color>
     <color name="album_title">#ffffff</color>
-    <color name="appColor">#1911AA</color>
+    <color name="appColor">#1911aa</color>
     <color name="duskYellow">#dfc97a</color>
     <color name="lightGrey">#b6b4ac</color>
 

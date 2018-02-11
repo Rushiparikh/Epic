@@ -1,5 +1,6 @@
 package com.example.rushi.epic_thrillon.MainPages;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
@@ -62,6 +63,7 @@ public class Booking extends AppCompatActivity {
         lastName=findViewById(R.id.last_name);
         email=findViewById(R.id.email_id);
         actPerson=findViewById(R.id.person);
+        sharedPreferences = getSharedPreferences(AskForSignin.My_pref, Context.MODE_PRIVATE);
         facebook = sharedPreferences.getBoolean("Facebook", false);
         google = sharedPreferences.getBoolean("Google", false);
         login = sharedPreferences.getBoolean("Email", false);

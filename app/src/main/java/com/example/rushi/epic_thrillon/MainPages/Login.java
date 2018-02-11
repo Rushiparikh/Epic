@@ -82,7 +82,7 @@ public class Login extends AppCompatActivity {
                 }
                 if(!flag)
                 {
-                    Toast.makeText(Login.this,"Enter valid Emain and Password ",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Login.this,"Enter valid Email and Password ",Toast.LENGTH_SHORT).show();
                 }
             }
         });

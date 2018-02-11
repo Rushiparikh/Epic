@@ -122,7 +122,7 @@
                             android:id="@+id/email_editText"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="@string/email_signup"
+                            android:hint="Email"
                             android:inputType="textEmailAddress"
                             android:singleLine="true"
                             android:textColor="@color/cardview_light_background"

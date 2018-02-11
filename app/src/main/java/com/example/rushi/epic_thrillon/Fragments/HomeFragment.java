@@ -140,7 +140,6 @@ public class HomeFragment extends Fragment {
             destinationList=new ArrayList<>();
 
 
-
             recyclerViewfirst = (RecyclerView) view.findViewById(R.id.recycler_view_first);
             recyclerViewfirst.setHasFixedSize(true);
             recyclerViewfirst.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
@@ -208,7 +207,7 @@ public class HomeFragment extends Fragment {
 
 
                 }
-                recyclerViewfirst.setAdapter(new ActivityOfTheDayAdapter(getActivity(), activityofthedayList));
+                recyclerViewfirst.setAdapter(new NearByYouAdapter(getActivity(), activityofthedayList));
                 NearByYouAdapter adapter=new NearByYouAdapter(getActivity(),nearByActivityList);
                 recyclerViewsecond.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
